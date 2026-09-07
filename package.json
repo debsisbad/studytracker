@@ -1,6 +1,6 @@
 {
   "name": "study-tracker",
-  "version": "67.0.0",
+  "version": "68.0.0",
   "author": "Debs",
   "description": "Study Tracker",
   "main": "main.js",
@@ -52,11 +52,17 @@
       "shortcutName": "Study Tracker",
       "installerIcon": "build/icon.ico",
       "uninstallerIcon": "build/icon.ico"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "debsisbad",
+      "repo": "studytracker"
     }
   },
   "type": "commonjs",
   "dependencies": {
     "mammoth": "^1.11.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "electron-updater": "^6.6.2"
   }
 }

@@ -20,13 +20,28 @@ fs.writeFileSync(
   "utf8"
 );
 
-if (fs.existsSync(swPath)) {
-  let sw = fs.readFileSync(swPath, "utf8");
-  sw = sw.replace(
-    /const CACHE_NAME = "study-tracker-v[^"]+";/,
-    `const CACHE_NAME = "study-tracker-v${version}";`
-  );
-  fs.writeFileSync(swPath, sw, "utf8");
+if (!fs.existsSync(swPath)) {
+  console.error("service-worker.js não encontrado.");
+  process.exit(1);
 }
+
+let sw = fs.readFileSync(swPath, "utf8");
+
+if (!sw.trim()) {
+  console.error("service-worker.js está vazio. Restaure o arquivo antes do build.");
+  process.exit(1);
+}
+
+if (!/const CACHE_NAME = "study-tracker-v[^"]+";/.test(sw)) {
+  console.error("CACHE_NAME não encontrado no service-worker.js.");
+  process.exit(1);
+}
+
+sw = sw.replace(
+  /const CACHE_NAME = "study-tracker-v[^"]+";/,
+  `const CACHE_NAME = "study-tracker-v${version}";`
+);
+
+fs.writeFileSync(swPath, sw, "utf8");
 
 console.log(`Versão sincronizada: ${version}`);

@@ -5,6 +5,7 @@ const path = require("path");
 const fs = require("fs");
 const XLSX = require("xlsx");
 const mammoth = require("mammoth");
+const { autoUpdater } = require("electron-updater");
 
 function ensureBackupsDir() {
   const base = app.getPath("userData");
@@ -200,6 +201,56 @@ ipcMain.handle("studyio:getAppVersion", () => {
   return app.getVersion(); // vem do package.json -> "version"
 });
 
+
+// -----------------------------
+// Atualização automática via GitHub Releases
+// -----------------------------
+function setupAutoUpdater() {
+  if (!app.isPackaged) return;
+
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
+
+  autoUpdater.on("error", (error) => {
+    console.error("Erro no auto-update:", error);
+  });
+
+  autoUpdater.on("update-available", (info) => {
+    console.log(`Nova versão disponível: ${info.version}`);
+  });
+
+  autoUpdater.on("update-not-available", (info) => {
+    console.log(`Study Tracker já está atualizado: ${info.version}`);
+  });
+
+  autoUpdater.on("download-progress", (progress) => {
+    console.log(`Baixando atualização: ${Math.round(progress.percent || 0)}%`);
+  });
+
+  autoUpdater.on("update-downloaded", async (info) => {
+    const result = await dialog.showMessageBox({
+      type: "info",
+      title: "Atualização pronta",
+      message: `Study Tracker ${info.version} foi baixado.`,
+      detail: "Deseja reiniciar o programa agora para instalar a atualização?",
+      buttons: ["Reiniciar e instalar", "Depois"],
+      defaultId: 0,
+      cancelId: 1,
+      noLink: true
+    });
+
+    if (result.response === 0) {
+      setImmediate(() => autoUpdater.quitAndInstall(false, true));
+    }
+  });
+
+  setTimeout(() => {
+    autoUpdater.checkForUpdates().catch((error) => {
+      console.error("Não foi possível verificar atualizações:", error);
+    });
+  }, 4000);
+}
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
@@ -217,6 +268,8 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
+  setupAutoUpdater();
+
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
