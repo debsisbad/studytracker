@@ -380,9 +380,17 @@
         /* =============================
            Mobile experience (<= 767px)
            ============================= */
-        .mobile-only { display: none; }
-        #mobile-bottom-nav { display: none; }
-        .mobile-card-action { min-height: 44px; }
+        .mobile-only {
+            display: none;
+        }
+
+        #mobile-bottom-nav {
+            display: none;
+        }
+
+        .mobile-card-action {
+            min-height: 44px;
+        }
 
         /* Uma única interface: desktop a partir de 768px, mobile abaixo disso. */
         @media (min-width: 768px) {
@@ -392,88 +400,326 @@
         }
 
         @media (max-width: 767px) {
-            html { scrollbar-gutter: auto; }
-            body { padding-bottom: calc(86px + env(safe-area-inset-bottom)); font-size: 17px; }
-            .mobile-only { display: block; }
-            .desktop-only-mobile-hide { display: none !important; }
-            #desktop-overview { display: none !important; }
-            #table-view-section { display: none !important; }
-            #subject-tabs-wrapper { display: none !important; }
-
-            body > .max-w-6xl { padding: 12px 12px 24px !important; }
-            header { margin-bottom: 14px !important; gap: 10px !important; align-items: stretch !important; }
-            header > div:first-child { align-items: flex-start !important; }
-            header h1 { font-size: 1.75rem !important; line-height: 2.1rem; }
-            #app-subtitle { font-size: .9rem; line-height: 1.25rem; }
-            header > div:last-child { width: 100%; gap: 8px !important; justify-content: space-between; flex-wrap: wrap; }
-            header > div:last-child > button[onclick="startRandomTest()"] { display: none; }
-            header > div:last-child > button[onclick="toggleDarkMode()"] { order: 2; width: 42px; height: 42px; padding: 8px; }
-            header > div:last-child > div:last-child {
-                order: 1; flex: 1 1 calc(100% - 54px); padding: 10px 12px !important; gap: 10px !important;
-                justify-content: space-around; min-width: 0;
+            html {
+                scrollbar-gutter: auto;
             }
-            header > div:last-child > div:last-child .h-10 { height: 32px; }
-            header > div:last-child > div:last-child .text-2xl { font-size: 1.4rem; line-height: 1.7rem; }
-            #exam-countdown-mobile { display: block; }
 
-            #dashboard-toolbar { display: none !important; }
-            #dashboard-container { gap: 12px !important; margin-bottom: 88px !important; }
-            #dashboard-container > div { border-radius: 16px; }
-            #dashboard-container .subject-card { min-height: 120px; padding: 14px; }
-            #dashboard-container .subject-card:hover { transform: none; }
+            body {
+                padding-bottom: calc(86px + env(safe-area-inset-bottom));
+                font-size: 17px;
+            }
 
-            #settings-section { margin-bottom: 88px !important; }
-            #settings-section > div { padding: 16px !important; border-radius: 16px; }
+            .mobile-only {
+                display: block;
+            }
 
-            #mobile-view-container { display: block; margin-bottom: 88px; }
+            .desktop-only-mobile-hide {
+                display: none !important;
+            }
+
+            #desktop-overview {
+                display: none !important;
+            }
+
+            #table-view-section {
+                display: none !important;
+            }
+
+            #subject-tabs-wrapper {
+                display: none !important;
+            }
+
+            body > .max-w-6xl {
+                padding: 12px 12px 24px !important;
+            }
+
+            header {
+                margin-bottom: 14px !important;
+                gap: 10px !important;
+                align-items: stretch !important;
+            }
+
+                header > div:first-child {
+                    align-items: flex-start !important;
+                }
+
+                header h1 {
+                    font-size: 1.75rem !important;
+                    line-height: 2.1rem;
+                }
+
+            #app-subtitle {
+                font-size: .9rem;
+                line-height: 1.25rem;
+            }
+
+            header > div:last-child {
+                width: 100%;
+                gap: 8px !important;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+                header > div:last-child > button[onclick="startRandomTest()"] {
+                    display: none;
+                }
+
+                header > div:last-child > button[onclick="toggleDarkMode()"] {
+                    order: 2;
+                    width: 42px;
+                    height: 42px;
+                    padding: 8px;
+                }
+
+                header > div:last-child > div:last-child {
+                    order: 1;
+                    flex: 1 1 calc(100% - 54px);
+                    padding: 10px 12px !important;
+                    gap: 10px !important;
+                    justify-content: space-around;
+                    min-width: 0;
+                }
+
+                    header > div:last-child > div:last-child .h-10 {
+                        height: 32px;
+                    }
+
+                    header > div:last-child > div:last-child .text-2xl {
+                        font-size: 1.4rem;
+                        line-height: 1.7rem;
+                    }
+
+            #exam-countdown-mobile {
+                display: block;
+            }
+
+            #dashboard-toolbar {
+                display: none !important;
+            }
+
+            #dashboard-container {
+                gap: 12px !important;
+                margin-bottom: 88px !important;
+            }
+
+                #dashboard-container > div {
+                    border-radius: 16px;
+                }
+
+                #dashboard-container .subject-card {
+                    min-height: 120px;
+                    padding: 14px;
+                }
+
+                    #dashboard-container .subject-card:hover {
+                        transform: none;
+                    }
+
+            #settings-section {
+                margin-bottom: 88px !important;
+            }
+
+                #settings-section > div {
+                    padding: 16px !important;
+                    border-radius: 16px;
+                }
+
+            #mobile-view-container {
+                display: block;
+                margin-bottom: 88px;
+            }
+
             .mobile-study-card {
-                background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 14px;
+                background: white;
+                border: 1px solid #e5e7eb;
+                border-radius: 16px;
+                padding: 14px;
                 box-shadow: 0 1px 3px rgba(0,0,0,.06);
             }
-            .dark .mobile-study-card { background: #111827; border-color: #374151; }
-            .mobile-section-title { font-size: 1.18rem; line-height: 1.55rem; font-weight: 800; color: #312e81; }
-            .dark .mobile-section-title { color: #c7d2fe; }
-            .mobile-muted { font-size: .86rem; line-height: 1.25rem; color: #6b7280; }
-            .dark .mobile-muted { color: #94a3b8; }
+
+            .dark .mobile-study-card {
+                background: #111827;
+                border-color: #374151;
+            }
+
+            .mobile-section-title {
+                font-size: 1.18rem;
+                line-height: 1.55rem;
+                font-weight: 800;
+                color: #312e81;
+            }
+
+            .dark .mobile-section-title {
+                color: #c7d2fe;
+            }
+
+            .mobile-muted {
+                font-size: .86rem;
+                line-height: 1.25rem;
+                color: #6b7280;
+            }
+
+            .dark .mobile-muted {
+                color: #94a3b8;
+            }
 
             /* Fonte mobile ampliada: aumenta também textos gerados com utilitários Tailwind. */
-            #mobile-view-container .text-xs { font-size: .88rem !important; line-height: 1.25rem !important; }
-            #mobile-view-container .text-sm { font-size: 1rem !important; line-height: 1.45rem !important; }
-            #mobile-view-container .text-base { font-size: 1.08rem !important; line-height: 1.55rem !important; }
-            #mobile-view-container [class*="text-[9px]"] { font-size: .72rem !important; line-height: 1rem !important; }
-            #mobile-view-container [class*="text-[10px]"] { font-size: .76rem !important; line-height: 1.05rem !important; }
-            #mobile-view-container [class*="text-[11px]"] { font-size: .8rem !important; line-height: 1.1rem !important; }
-            #exam-countdown-mobile { font-size: .95rem !important; line-height: 1.3rem; }
-            header [class*="text-[9px]"], header [class*="text-[10px]"] { font-size: .72rem !important; line-height: 1rem !important; }
-            .mobile-btn {
-                min-height: 48px; border-radius: 12px; padding: 10px 13px; font-size: .88rem; line-height: 1.2rem; font-weight: 800;
-                display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            #mobile-view-container .text-xs {
+                font-size: .88rem !important;
+                line-height: 1.25rem !important;
             }
-            .mobile-topic-title { font-size: 1.05rem; line-height: 1.5rem; font-weight: 700; overflow-wrap: anywhere; }
-            .mobile-subject-label { font-size: .76rem; line-height: 1.05rem; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; color: #6366f1; }
-            .dark .mobile-subject-label { color: #a5b4fc; }
-            .mobile-scroll-row { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-            .mobile-scroll-row::-webkit-scrollbar { display:none; }
+
+            #mobile-view-container .text-sm {
+                font-size: 1rem !important;
+                line-height: 1.45rem !important;
+            }
+
+            #mobile-view-container .text-base {
+                font-size: 1.08rem !important;
+                line-height: 1.55rem !important;
+            }
+
+            #mobile-view-container [class*="text-[9px]"] {
+                font-size: .72rem !important;
+                line-height: 1rem !important;
+            }
+
+            #mobile-view-container [class*="text-[10px]"] {
+                font-size: .76rem !important;
+                line-height: 1.05rem !important;
+            }
+
+            #mobile-view-container [class*="text-[11px]"] {
+                font-size: .8rem !important;
+                line-height: 1.1rem !important;
+            }
+
+            #exam-countdown-mobile {
+                font-size: .95rem !important;
+                line-height: 1.3rem;
+            }
+
+            header [class*="text-[9px]"], header [class*="text-[10px]"] {
+                font-size: .72rem !important;
+                line-height: 1rem !important;
+            }
+
+            .mobile-btn {
+                min-height: 48px;
+                border-radius: 12px;
+                padding: 10px 13px;
+                font-size: .88rem;
+                line-height: 1.2rem;
+                font-weight: 800;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+            }
+
+            .mobile-topic-title {
+                font-size: 1.05rem;
+                line-height: 1.5rem;
+                font-weight: 700;
+                overflow-wrap: anywhere;
+            }
+
+            .mobile-subject-label {
+                font-size: .76rem;
+                line-height: 1.05rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: .03em;
+                color: #6366f1;
+            }
+
+            .dark .mobile-subject-label {
+                color: #a5b4fc;
+            }
+
+            .mobile-scroll-row {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+
+                .mobile-scroll-row::-webkit-scrollbar {
+                    display: none;
+                }
 
             #mobile-bottom-nav {
-                display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: fixed;
-                left: 0; right: 0; bottom: 0; z-index: 900; padding: 7px 7px calc(7px + env(safe-area-inset-bottom));
-                background: rgba(255,255,255,.96); border-top: 1px solid #e5e7eb; backdrop-filter: blur(14px);
+                display: grid;
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 900;
+                padding: 7px 7px calc(7px + env(safe-area-inset-bottom));
+                background: rgba(255,255,255,.96);
+                border-top: 1px solid #e5e7eb;
+                backdrop-filter: blur(14px);
                 box-shadow: 0 -8px 24px rgba(15,23,42,.08);
             }
-            .dark #mobile-bottom-nav { background: rgba(17,24,39,.96); border-color: #374151; }
-            .mobile-nav-btn {
-                min-height: 54px; border-radius: 12px; display:flex; flex-direction:column; align-items:center; justify-content:center;
-                gap: 4px; color:#6b7280; font-size:11px; line-height: 1rem; font-weight:800; position:relative;
-            }
-            .mobile-nav-btn svg { width: 22px; height: 22px; }
-            .dark .mobile-nav-btn { color:#94a3b8; }
-            .mobile-nav-btn.active { color:#4f46e5; background:#eef2ff; }
-            .dark .mobile-nav-btn.active { color:#c7d2fe; background:#312e81; }
-            .mobile-nav-dot { position:absolute; top:7px; right:22%; width:8px; height:8px; border-radius:999px; background:#ef4444; }
 
-            #custom-modal > div { max-height: 88vh; overflow-y: auto; padding: 18px !important; }
-            input, select, textarea, button { touch-action: manipulation; }
+            .dark #mobile-bottom-nav {
+                background: rgba(17,24,39,.96);
+                border-color: #374151;
+            }
+
+            .mobile-nav-btn {
+                min-height: 54px;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                color: #6b7280;
+                font-size: 11px;
+                line-height: 1rem;
+                font-weight: 800;
+                position: relative;
+            }
+
+                .mobile-nav-btn svg {
+                    width: 22px;
+                    height: 22px;
+                }
+
+            .dark .mobile-nav-btn {
+                color: #94a3b8;
+            }
+
+            .mobile-nav-btn.active {
+                color: #4f46e5;
+                background: #eef2ff;
+            }
+
+            .dark .mobile-nav-btn.active {
+                color: #c7d2fe;
+                background: #312e81;
+            }
+
+            .mobile-nav-dot {
+                position: absolute;
+                top: 7px;
+                right: 22%;
+                width: 8px;
+                height: 8px;
+                border-radius: 999px;
+                background: #ef4444;
+            }
+
+            #custom-modal > div {
+                max-height: 88vh;
+                overflow-y: auto;
+                padding: 18px !important;
+            }
+
+            input, select, textarea, button {
+                touch-action: manipulation;
+            }
         }
     </style>
 </head>
@@ -786,20 +1032,20 @@
 
     <nav id="mobile-bottom-nav" aria-label="Navegação principal no celular">
         <button type="button" class="mobile-nav-btn" data-mobile-view="dashboard" onclick="setViewMode('dashboard')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/></svg><span>Hoje</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12 12 3l9 9" /><path d="M5 10v10h14V10" /></svg><span>Hoje</span>
         </button>
         <button type="button" class="mobile-nav-btn" data-mobile-view="cycle" onclick="setViewMode('cycle')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h7"/><path d="m17 15 3 3-3 3"/></svg><span>Ciclo</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h7" /><path d="m17 15 3 3-3 3" /></svg><span>Ciclo</span>
         </button>
         <button type="button" class="mobile-nav-btn" data-mobile-view="history" onclick="setViewMode('history')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg><span>Agenda</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" /></svg><span>Agenda</span>
         </button>
         <button type="button" class="mobile-nav-btn" data-mobile-view="subject" onclick="setViewMode('subject')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V4Z"/></svg><span>Matérias</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V4Z" /></svg><span>Matérias</span>
         </button>
         <button type="button" class="mobile-nav-btn" data-mobile-view="more" onclick="showMobileMoreMenu()">
             <span id="mobile-more-dot" class="mobile-nav-dot hidden"></span>
-            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg><span>Mais</span>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="19" cy="12" r="2" /></svg><span>Mais</span>
         </button>
     </nav>
 
@@ -829,17 +1075,17 @@
             const scheduledReview = presetType === 'review' && typeof afterSave === 'function';
             const sessionTypeBlock = scheduledReview
                 ? `<div class="p-3 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-900/30">
-                    <div class="text-[10px] font-bold uppercase tracking-wider text-indigo-500">Tipo de sessão</div>
-                    <div class="text-sm font-bold text-indigo-800 dark:text-indigo-200 mt-1">Revisão programada pela Agenda</div>
-                  </div>`
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-indigo-500">Tipo de sessão</div>
+                        <div class="text-sm font-bold text-indigo-800 dark:text-indigo-200 mt-1">Revisão programada pela Agenda</div>
+                      </div>`
                 : `<fieldset class="p-3 rounded-xl border border-gray-200 dark:border-gray-700">
-                    <legend class="px-1 text-xs font-bold text-gray-600 dark:text-slate-300">Tipo de sessão</legend>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-xs font-semibold text-gray-700 dark:text-slate-200">
-                      <label class="flex items-center gap-2"><input type="radio" name="session-type" value="first" class="accent-indigo-600" /> Primeiro contato</label>
-                      <label class="flex items-center gap-2"><input type="radio" name="session-type" value="questions" class="accent-indigo-600" /> Questões</label>
-                      <label class="flex items-center gap-2"><input type="radio" name="session-type" value="random" class="accent-indigo-600" /> Teste aleatório</label>
-                    </div>
-                  </fieldset>`;
+                        <legend class="px-1 text-xs font-bold text-gray-600 dark:text-slate-300">Tipo de sessão</legend>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-xs font-semibold text-gray-700 dark:text-slate-200">
+                          <label class="flex items-center gap-2"><input type="radio" name="session-type" value="first" class="accent-indigo-600" /> Primeiro contato</label>
+                          <label class="flex items-center gap-2"><input type="radio" name="session-type" value="questions" class="accent-indigo-600" /> Questões</label>
+                          <label class="flex items-center gap-2"><input type="radio" name="session-type" value="random" class="accent-indigo-600" /> Teste aleatório</label>
+                        </div>
+                      </fieldset>`;
             const modal = document.getElementById('custom-modal');
             const title = document.getElementById('modal-title');
             const message = document.getElementById('modal-message');
@@ -848,30 +1094,30 @@
 
             title.innerText = 'Registrar sessão de estudo';
             message.innerHTML = `
-        <div class="space-y-3 max-h-[65vh] overflow-y-auto pr-1">
-          <div class="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
-            <div class="text-[10px] font-bold uppercase text-indigo-500">${escapeHtml(subject.materia)}</div>
-            <div class="text-sm font-semibold text-gray-800 dark:text-slate-100">${escapeHtml(topic)}</div>
-          </div>
-          ${sessionTypeBlock}
-          <div class="grid grid-cols-2 gap-3">
-            <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Questões
-              <input id="session-questions" type="number" min="0" value="0" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
-            </label>
-            <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Acertos
-              <input id="session-correct" type="number" min="0" value="0" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
-            </label>
-          </div>
-          <label class="flex items-center gap-2 text-xs font-semibold text-gray-600 dark:text-slate-300"><input id="session-consulted" type="checkbox" class="accent-indigo-600" /> Consultei o material antes de responder</label>
-          <fieldset class="p-3 rounded-xl border border-gray-200 dark:border-gray-700">
-            <legend class="px-1 text-xs font-bold text-gray-600 dark:text-slate-300">Caderno de erros</legend>
-            <label class="flex items-center gap-2 pt-1 text-xs font-semibold text-gray-700 dark:text-slate-200">
-              <input id="include-error-notebook" type="checkbox" class="accent-indigo-600" />
-              Incluir no caderno de erros?
-            </label>
-            <p class="mt-2 text-[10px] text-gray-500 dark:text-slate-400">Ao incluir, a primeira revisão será agendada automaticamente para daqui a 3 dias.</p>
-          </fieldset>
-        </div>`;
+            <div class="space-y-3 max-h-[65vh] overflow-y-auto pr-1">
+              <div class="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
+                <div class="text-[10px] font-bold uppercase text-indigo-500">${escapeHtml(subject.materia)}</div>
+                <div class="text-sm font-semibold text-gray-800 dark:text-slate-100">${escapeHtml(topic)}</div>
+              </div>
+              ${sessionTypeBlock}
+              <div class="grid grid-cols-2 gap-3">
+                <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Questões
+                  <input id="session-questions" type="number" min="0" value="0" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
+                </label>
+                <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Acertos
+                  <input id="session-correct" type="number" min="0" value="0" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
+                </label>
+              </div>
+              <label class="flex items-center gap-2 text-xs font-semibold text-gray-600 dark:text-slate-300"><input id="session-consulted" type="checkbox" class="accent-indigo-600" /> Consultei o material antes de responder</label>
+              <fieldset class="p-3 rounded-xl border border-gray-200 dark:border-gray-700">
+                <legend class="px-1 text-xs font-bold text-gray-600 dark:text-slate-300">Caderno de erros</legend>
+                <label class="flex items-center gap-2 pt-1 text-xs font-semibold text-gray-700 dark:text-slate-200">
+                  <input id="include-error-notebook" type="checkbox" class="accent-indigo-600" />
+                  Incluir no caderno de erros?
+                </label>
+                <p class="mt-2 text-[10px] text-gray-500 dark:text-slate-400">Ao incluir, a primeira revisão será agendada automaticamente para daqui a 3 dias.</p>
+              </fieldset>
+            </div>`;
             const allowedSessionTypes = scheduledReview ? ['review'] : ['first', 'questions', 'random'];
             const selectedSessionType = allowedSessionTypes.includes(presetType) ? presetType : 'questions';
             const presetRadio = document.querySelector(`input[name="session-type"][value="${selectedSessionType}"]`);
@@ -1077,28 +1323,28 @@
                 const encodedTag = encodeURIComponent(tag);
 
                 return `
-          <button
-            type="button"
-            onclick="setCycleTagFilter(decodeURIComponent('${encodedTag}'))"
-            class="cycle-tag-filter ${active ? 'active' : ''}"
-            title="Mostrar somente matérias com a tag ${escapeHtmlAttr(tag)}"
-          >
-            ${escapeHtml(tag)} <span class="opacity-70">(${count})</span>
-          </button>
-        `;
+              <button
+                type="button"
+                onclick="setCycleTagFilter(decodeURIComponent('${encodedTag}'))"
+                class="cycle-tag-filter ${active ? 'active' : ''}"
+                title="Mostrar somente matérias com a tag ${escapeHtmlAttr(tag)}"
+              >
+                ${escapeHtml(tag)} <span class="opacity-70">(${count})</span>
+              </button>
+            `;
             }).join('');
 
             return `
-        <button
-          type="button"
-          onclick="setCycleTagFilter('')"
-          class="cycle-tag-filter ${allActive ? 'active' : ''}"
-          title="Mostrar todas as matérias"
-        >
-          Todas
-        </button>
-        ${buttons}
-      `;
+            <button
+              type="button"
+              onclick="setCycleTagFilter('')"
+              class="cycle-tag-filter ${allActive ? 'active' : ''}"
+              title="Mostrar todas as matérias"
+            >
+              Todas
+            </button>
+            ${buttons}
+          `;
         }
 
         function normalizeLine(s) {
@@ -1569,31 +1815,31 @@
 
             title.innerText = 'Resultado da revisão';
             message.innerHTML = `
-        <div class="space-y-4">
-          <div class="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
-            <div class="text-[10px] font-bold uppercase text-indigo-500">${escapeHtml(subject.materia)}</div>
-            <div class="text-sm font-semibold text-gray-800 dark:text-slate-100">${escapeHtml(topic)}</div>
-          </div>
-          <div class="grid grid-cols-2 gap-3">
-            <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Questões feitas
-              <input id="error-result-total" type="number" min="1" value="1" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
-            </label>
-            <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Acertos
-              <input id="error-result-correct" type="number" min="0" value="1" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
-            </label>
-          </div>
-          <label id="error-next-review-field" class="text-xs font-bold text-gray-600 dark:text-slate-300 block">Próxima revisão
-            <select id="error-result-next-days" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm">
-              <option value="3">Daqui a 3 dias</option>
-              <option value="10" selected>Daqui a 10 dias</option>
-              <option value="25">Daqui a 25 dias</option>
-            </select>
-          </label>
-          <label class="flex items-center gap-2 p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-slate-200">
-            <input id="error-result-no-repeat" type="checkbox" class="accent-indigo-600" />
-            Não repetir
-          </label>
-        </div>`;
+            <div class="space-y-4">
+              <div class="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
+                <div class="text-[10px] font-bold uppercase text-indigo-500">${escapeHtml(subject.materia)}</div>
+                <div class="text-sm font-semibold text-gray-800 dark:text-slate-100">${escapeHtml(topic)}</div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Questões feitas
+                  <input id="error-result-total" type="number" min="1" value="1" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
+                </label>
+                <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Acertos
+                  <input id="error-result-correct" type="number" min="0" value="1" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
+                </label>
+              </div>
+              <label id="error-next-review-field" class="text-xs font-bold text-gray-600 dark:text-slate-300 block">Próxima revisão
+                <select id="error-result-next-days" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm">
+                  <option value="3">Daqui a 3 dias</option>
+                  <option value="10" selected>Daqui a 10 dias</option>
+                  <option value="25">Daqui a 25 dias</option>
+                </select>
+              </label>
+              <label class="flex items-center gap-2 p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-slate-200">
+                <input id="error-result-no-repeat" type="checkbox" class="accent-indigo-600" />
+                Não repetir
+              </label>
+            </div>`;
 
             footer.innerHTML = '';
             const noRepeatInput = document.getElementById('error-result-no-repeat');
@@ -2264,15 +2510,15 @@
 
             if (p) {
                 p.innerHTML = `
-          <div class="space-y-2">
-            <div class="text-sm text-gray-600 dark:text-slate-300 whitespace-pre-line">${escapeHtml(msg)}</div>
-            <textarea id="modal-textarea"
-              class="w-full mt-2 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
-              rows="${opts.rows || 10}"
-              placeholder="${escapeHtmlAttr(placeholder)}">${escapeHtml(defaultValue || '')}</textarea>
-            ${hint ? `<p class="text-[11px] text-gray-500 dark:text-slate-400">${escapeHtml(hint)}</p>` : ``}
-          </div>
-        `;
+              <div class="space-y-2">
+                <div class="text-sm text-gray-600 dark:text-slate-300 whitespace-pre-line">${escapeHtml(msg)}</div>
+                <textarea id="modal-textarea"
+                  class="w-full mt-2 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                  rows="${opts.rows || 10}"
+                  placeholder="${escapeHtmlAttr(placeholder)}">${escapeHtml(defaultValue || '')}</textarea>
+                ${hint ? `<p class="text-[11px] text-gray-500 dark:text-slate-400">${escapeHtml(hint)}</p>` : ``}
+              </div>
+            `;
             }
 
             if (f) f.innerHTML = '';
@@ -2320,16 +2566,16 @@
 
             if (p) {
                 p.innerHTML = `
-              <div class="space-y-2">
-                <div class="text-sm text-gray-600 dark:text-slate-300 whitespace-pre-line">${escapeHtml(msg)}</div>
-                <input id="modal-input"
-                  type="${escapeHtmlAttr(inputType)}"
-                  class="w-full mt-2 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
-                  value="${escapeHtmlAttr(defaultValue || '')}"
-                  placeholder="${escapeHtmlAttr(placeholder)}" />
-                ${hint ? `<p class="text-[11px] text-gray-500 dark:text-slate-400">${escapeHtml(hint)}</p>` : ``}
-              </div>
-            `;
+                  <div class="space-y-2">
+                    <div class="text-sm text-gray-600 dark:text-slate-300 whitespace-pre-line">${escapeHtml(msg)}</div>
+                    <input id="modal-input"
+                      type="${escapeHtmlAttr(inputType)}"
+                      class="w-full mt-2 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                      value="${escapeHtmlAttr(defaultValue || '')}"
+                      placeholder="${escapeHtmlAttr(placeholder)}" />
+                    ${hint ? `<p class="text-[11px] text-gray-500 dark:text-slate-400">${escapeHtml(hint)}</p>` : ``}
+                  </div>
+                `;
             }
 
             if (f) f.innerHTML = '';
@@ -2490,8 +2736,8 @@
                     const button = document.createElement('button');
                     button.type = 'button';
                     button.className = `text-xs font-bold px-3 py-2 rounded-full border transition ${active
-                            ? 'bg-indigo-600 text-white border-indigo-600'
-                            : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border-gray-200 dark:border-gray-700 hover:border-indigo-400'
+                        ? 'bg-indigo-600 text-white border-indigo-600'
+                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border-gray-200 dark:border-gray-700 hover:border-indigo-400'
                         }`;
                     button.innerText = `${tag} (${count})`;
                     button.title = active ? `Remover a tag ${tag}` : `Adicionar a tag ${tag}`;
@@ -2553,18 +2799,18 @@
             box.innerHTML = tags.map(({ tag, count }) => {
                 const encoded = encodeURIComponent(tag);
                 return `
-              <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700">
-                <span class="text-xs font-bold text-gray-700 dark:text-slate-200">${escapeHtml(tag)}</span>
-                <span class="text-[10px] text-gray-400">${count}</span>
-                <button
-                  type="button"
-                  onclick="deleteTagEverywhere(decodeURIComponent('${encoded}'))"
-                  class="w-6 h-6 rounded-full flex items-center justify-center text-red-500 hover:bg-red-100 dark:hover:bg-red-950/50"
-                  title="Excluir a tag ${escapeHtmlAttr(tag)} de todas as matérias"
-                  aria-label="Excluir a tag ${escapeHtmlAttr(tag)}"
-                >×</button>
-              </div>
-            `;
+                  <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700">
+                    <span class="text-xs font-bold text-gray-700 dark:text-slate-200">${escapeHtml(tag)}</span>
+                    <span class="text-[10px] text-gray-400">${count}</span>
+                    <button
+                      type="button"
+                      onclick="deleteTagEverywhere(decodeURIComponent('${encoded}'))"
+                      class="w-6 h-6 rounded-full flex items-center justify-center text-red-500 hover:bg-red-100 dark:hover:bg-red-950/50"
+                      title="Excluir a tag ${escapeHtmlAttr(tag)} de todas as matérias"
+                      aria-label="Excluir a tag ${escapeHtmlAttr(tag)}"
+                    >×</button>
+                  </div>
+                `;
             }).join('');
         }
 
@@ -2837,11 +3083,40 @@
             syncWindowTitle();
         }
 
-        const APP_VERSION = "1.2.0";
+        const FALLBACK_APP_VERSION = "62.0.0";
 
-        function renderAppVersion() {
+        async function renderAppVersion() {
             const el = document.getElementById('app-version');
-            if (el) el.innerText = `V${APP_VERSION}`;
+            if (!el) return;
+
+            let version = FALLBACK_APP_VERSION;
+
+            // No programa instalado, a versão vem do package.json do Electron.
+            try {
+                if (window.studyIO?.getAppVersion) {
+                    const electronVersion = await window.studyIO.getAppVersion();
+                    if (electronVersion) {
+                        version = String(electronVersion).trim();
+                        el.innerText = `V${version}`;
+                        return;
+                    }
+                }
+            } catch (error) {
+                console.warn('Não foi possível ler a versão do Electron.', error);
+            }
+
+            // No GitHub Pages/PWA, a versão vem de version.json.
+            try {
+                const response = await fetch(`./version.json?t=${Date.now()}`, { cache: 'no-store' });
+                if (response.ok) {
+                    const info = await response.json();
+                    if (info?.version) version = String(info.version).trim();
+                }
+            } catch (error) {
+                console.warn('Não foi possível ler version.json; usando a versão de fallback.', error);
+            }
+
+            el.innerText = `V${version}`;
         }
 
         function renderSettings() {
@@ -2918,84 +3193,84 @@
                 });
 
             const headerButton = (key, label, widthClass = 'w-20') => `
-        <button type="button" onclick="toggleSubjectSettingsSort('${key}')" class="${widthClass} flex items-center ${key === 'name' ? 'justify-start' : 'justify-center'} gap-1 text-[10px] font-bold text-indigo-600 dark:text-indigo-300 hover:text-indigo-800 dark:hover:text-indigo-100" title="Ordenar por ${label}">
-          ${label} ${subjectSettingsSortIndicator(key)}
-        </button>`;
+            <button type="button" onclick="toggleSubjectSettingsSort('${key}')" class="${widthClass} flex items-center ${key === 'name' ? 'justify-start' : 'justify-center'} gap-1 text-[10px] font-bold text-indigo-600 dark:text-indigo-300 hover:text-indigo-800 dark:hover:text-indigo-100" title="Ordenar por ${label}">
+              ${label} ${subjectSettingsSortIndicator(key)}
+            </button>`;
 
             box.innerHTML = `
-        <div class="flex items-center gap-3 px-3 py-2 min-w-[700px] border-b border-gray-200 dark:border-gray-700">
-          ${headerButton('name', 'MATÉRIA', 'flex-1')}
-          ${headerButton('order', 'ORDEM')}
-          ${headerButton('questions', 'QUESTÕES')}
-          ${headerButton('weight', 'PESO')}
-          ${headerButton('points', 'PONTOS', 'min-w-[74px]')}
-          <span class="min-w-[118px] text-center text-[10px] font-bold text-gray-400">VISIBILIDADE</span>
-        </div>
-      ` + arr.map(({ s, idx }) => `
-        <div class="flex items-center gap-3 p-3 min-w-[700px] rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950">
-          <div class="flex-1">
-            <div class="text-xs font-bold text-gray-800 dark:text-slate-100">${escapeHtml(s.materia)}</div>
-            <div class="text-[10px] text-gray-500 dark:text-slate-400">${(s.priority === "important") ? "IMPORTANTE" :
+            <div class="flex items-center gap-3 px-3 py-2 min-w-[700px] border-b border-gray-200 dark:border-gray-700">
+              ${headerButton('name', 'MATÉRIA', 'flex-1')}
+              ${headerButton('order', 'ORDEM')}
+              ${headerButton('questions', 'QUESTÕES')}
+              ${headerButton('weight', 'PESO')}
+              ${headerButton('points', 'PONTOS', 'min-w-[74px]')}
+              <span class="min-w-[118px] text-center text-[10px] font-bold text-gray-400">VISIBILIDADE</span>
+            </div>
+          ` + arr.map(({ s, idx }) => `
+            <div class="flex items-center gap-3 p-3 min-w-[700px] rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950">
+              <div class="flex-1">
+                <div class="text-xs font-bold text-gray-800 dark:text-slate-100">${escapeHtml(s.materia)}</div>
+                <div class="text-[10px] text-gray-500 dark:text-slate-400">${(s.priority === "important") ? "IMPORTANTE" :
                     (s.priority === "secondary") ? "SECUNDÁRIO" :
                         "PRINCIPAL"
                 }</div>
-          </div>
+              </div>
 
-          <label class="flex flex-col gap-1 text-[10px] font-bold text-gray-500 dark:text-slate-400">
-            ORDEM
-            <input
-              type="number"
-              min="1"
-              max="100"
-              step="1"
-              value="${Math.min(100, Math.max(1, Math.round(s.order ?? 50)))}"
-              data-subject-index="${idx}"
-              class="w-20 px-3 py-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-indigo-500"
-              title="Ordem (1 a 100)"
-            />
-          </label>
-          <label class="flex flex-col gap-1 text-[10px] font-bold text-gray-500 dark:text-slate-400">
-            QUESTÕES
-            <input
-              type="number"
-              min="0"
-              max="200"
-              step="1"
-              value="${Math.max(0, Math.round(Number(s.examQuestions) || 0))}"
-              data-subject-questions-index="${idx}"
-              class="w-20 px-3 py-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-indigo-500"
-              title="Quantidade de questões da matéria na prova"
-            />
-          </label>
-          <label class="flex flex-col gap-1 text-[10px] font-bold text-gray-500 dark:text-slate-400">
-            PESO
-            <input
-              type="number"
-              min="0.1"
-              max="10"
-              step="0.1"
-              value="${Number.isFinite(Number(s.weight)) && Number(s.weight) > 0 ? Number(s.weight) : 1}"
-              data-subject-weight-index="${idx}"
-              class="w-20 px-3 py-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-indigo-500"
-              title="Peso da matéria (0,1 a 10)"
-            />
-          </label>
-          <div class="min-w-[74px] text-center px-2 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800" title="Questões × peso">
-            <div class="text-[9px] font-bold text-indigo-500">PONTOS</div>
-            <div class="text-xs font-bold text-indigo-700 dark:text-indigo-200">${((Math.max(0, Number(s.examQuestions) || 0)) * (Math.max(0.1, Number(s.weight) || 1))).toLocaleString('pt-BR')}</div>
-          </div>
-          <button
-            type="button"
-            onclick="toggleHiddenEverywhere(${idx})"
-            class="min-w-[118px] text-[10px] font-bold px-3 py-2 rounded-lg border ${s.hiddenEverywhere
+              <label class="flex flex-col gap-1 text-[10px] font-bold text-gray-500 dark:text-slate-400">
+                ORDEM
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  step="1"
+                  value="${Math.min(100, Math.max(1, Math.round(s.order ?? 50)))}"
+                  data-subject-index="${idx}"
+                  class="w-20 px-3 py-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-indigo-500"
+                  title="Ordem (1 a 100)"
+                />
+              </label>
+              <label class="flex flex-col gap-1 text-[10px] font-bold text-gray-500 dark:text-slate-400">
+                QUESTÕES
+                <input
+                  type="number"
+                  min="0"
+                  max="200"
+                  step="1"
+                  value="${Math.max(0, Math.round(Number(s.examQuestions) || 0))}"
+                  data-subject-questions-index="${idx}"
+                  class="w-20 px-3 py-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-indigo-500"
+                  title="Quantidade de questões da matéria na prova"
+                />
+              </label>
+              <label class="flex flex-col gap-1 text-[10px] font-bold text-gray-500 dark:text-slate-400">
+                PESO
+                <input
+                  type="number"
+                  min="0.1"
+                  max="10"
+                  step="0.1"
+                  value="${Number.isFinite(Number(s.weight)) && Number(s.weight) > 0 ? Number(s.weight) : 1}"
+                  data-subject-weight-index="${idx}"
+                  class="w-20 px-3 py-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-indigo-500"
+                  title="Peso da matéria (0,1 a 10)"
+                />
+              </label>
+              <div class="min-w-[74px] text-center px-2 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800" title="Questões × peso">
+                <div class="text-[9px] font-bold text-indigo-500">PONTOS</div>
+                <div class="text-xs font-bold text-indigo-700 dark:text-indigo-200">${((Math.max(0, Number(s.examQuestions) || 0)) * (Math.max(0.1, Number(s.weight) || 1))).toLocaleString('pt-BR')}</div>
+              </div>
+              <button
+                type="button"
+                onclick="toggleHiddenEverywhere(${idx})"
+                class="min-w-[118px] text-[10px] font-bold px-3 py-2 rounded-lg border ${s.hiddenEverywhere
                     ? 'bg-indigo-600 text-white border-indigo-600'
                     : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-slate-300 border-gray-200 dark:border-gray-700 hover:border-indigo-400'}"
-            title="${s.hiddenEverywhere ? 'Reexibir esta matéria em todos os menus' : 'Ocultar esta matéria de todos os menus'}"
-          >
-            ${s.hiddenEverywhere ? 'REEXIBIR EM TUDO' : 'OCULTAR DE TUDO'}
-          </button>
-        </div>
-      `).join("");
+                title="${s.hiddenEverywhere ? 'Reexibir esta matéria em todos os menus' : 'Ocultar esta matéria de todos os menus'}"
+              >
+                ${s.hiddenEverywhere ? 'REEXIBIR EM TUDO' : 'OCULTAR DE TUDO'}
+              </button>
+            </div>
+          `).join("");
         }
 
         function toggleHiddenEverywhere(idx) {
@@ -3215,19 +3490,19 @@
             const message = document.getElementById('modal-message');
             const footer = document.getElementById('modal-footer');
             if (!modal || !title || !message || !footer) return;
-            const dueErrors = getErrorNotebookItems().filter(item => !item.done && item.dueAt <= new Date().setHours(23,59,59,999)).length;
+            const dueErrors = getErrorNotebookItems().filter(item => !item.done && item.dueAt <= new Date().setHours(23, 59, 59, 999)).length;
             title.innerText = 'Mais';
             message.innerHTML = `
-              <div class="grid grid-cols-1 gap-2">
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; setViewMode('upcoming')" class="mobile-btn w-full justify-between bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-slate-100">
-                  <span>Caderno de erros</span><span class="${dueErrors ? 'text-red-500' : 'text-gray-400'}">${dueErrors ? dueErrors + ' pendente' + (dueErrors === 1 ? '' : 's') : 'em dia'}</span>
-                </button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; startRandomTest()" class="mobile-btn w-full bg-[#7667a8] text-white">Teste aleatório</button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; setViewMode('settings')" class="mobile-btn w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-slate-100">Configurações</button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; importWithPicker()" class="mobile-btn w-full bg-indigo-600 text-white">Importar XLSX</button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; exportToXLSX()" class="mobile-btn w-full bg-white dark:bg-gray-800 border border-indigo-500 text-indigo-600 dark:text-indigo-300">Exportar backup</button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; showStudyCloudPanel()" class="mobile-btn w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-slate-100 justify-center gap-2"><span data-cloud-sync-dot class="inline-block w-2 h-2 rounded-full bg-gray-400"></span><span data-cloud-sync-label>Nuvem: desconectado</span></button>
-              </div>`;
+                  <div class="grid grid-cols-1 gap-2">
+                    <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; setViewMode('upcoming')" class="mobile-btn w-full justify-between bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-slate-100">
+                      <span>Caderno de erros</span><span class="${dueErrors ? 'text-red-500' : 'text-gray-400'}">${dueErrors ? dueErrors + ' pendente' + (dueErrors === 1 ? '' : 's') : 'em dia'}</span>
+                    </button>
+                    <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; startRandomTest()" class="mobile-btn w-full bg-[#7667a8] text-white">Teste aleatório</button>
+                    <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; setViewMode('settings')" class="mobile-btn w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-slate-100">Configurações</button>
+                    <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; importWithPicker()" class="mobile-btn w-full bg-indigo-600 text-white">Importar XLSX</button>
+                    <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; exportToXLSX()" class="mobile-btn w-full bg-white dark:bg-gray-800 border border-indigo-500 text-indigo-600 dark:text-indigo-300">Exportar backup</button>
+                    <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; showStudyCloudPanel()" class="mobile-btn w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-slate-100 justify-center gap-2"><span data-cloud-sync-dot class="inline-block w-2 h-2 rounded-full bg-gray-400"></span><span data-cloud-sync-label>Nuvem: desconectado</span></button>
+                  </div>`;
             footer.innerHTML = '<button type="button" class="mobile-btn bg-gray-100 text-gray-700" onclick="document.getElementById(\'custom-modal\').style.display=\'none\'">Fechar</button>';
             modal.style.display = 'flex';
             syncMobileNavigation();
@@ -3243,7 +3518,7 @@
             expanded.forEach(sIdx => {
                 if (orderedTopics[sIdx]) return;
                 let order = getTopicQueueForSubject(sIdx).slice();
-                order.sort((a,b) => {
+                order.sort((a, b) => {
                     if (learningConfig.mode !== 'final' || !isLearningStatusEnabled('fragile')) return 0;
                     const pa = recentTopicPercent(userProgress[`ST_${sIdx}_${a}`]);
                     const pb = recentTopicPercent(userProgress[`ST_${sIdx}_${b}`]);
@@ -3264,7 +3539,7 @@
                         const tIdx = order[pointers[sIdx]++];
                         const st = userProgress[`ST_${sIdx}_${tIdx}`];
                         if (hideDoneTopicsInCycle && st?.q === true) continue;
-                        out.push({sIdx,tIdx,materia:edital[sIdx].materia,topico:edital[sIdx].topicos[tIdx]});
+                        out.push({ sIdx, tIdx, materia: edital[sIdx].materia, topico: edital[sIdx].topicos[tIdx] });
                         added = true;
                         break;
                     }
@@ -3279,7 +3554,7 @@
             if (!st?.aulaAt) return -1;
             const days = getAgendaReviewDays(!!st.dominated);
             const done = normalizeAgendaDone(st.agendaDone);
-            for (let i=0;i<days.length;i++) if (days[i] !== null && !done[i]) return i;
+            for (let i = 0; i < days.length; i++) if (days[i] !== null && !done[i]) return i;
             return -1;
         }
 
@@ -3297,73 +3572,73 @@
             if (viewMode === 'cycle') {
                 const items = getMobileCycleItems();
                 box.innerHTML = `
-                  <div class="flex items-center justify-between gap-2 mb-3">
-                    <div><div class="mobile-section-title">Ciclo intercalado</div><div class="mobile-muted">A próxima ação primeiro, sem tabela.</div></div>
-                    <button type="button" onclick="startRandomTest()" class="mobile-btn bg-[#7667a8] text-white">Teste</button>
-                  </div>
-                  <div class="mobile-scroll-row flex gap-2 mb-3">${renderCycleTagFilters()}</div>
-                  <label class="mobile-study-card flex items-center justify-between gap-3 mb-3 text-xs font-bold text-gray-700 dark:text-slate-200">
-                    <span>${hideDoneTopicsInCycle ? 'Tópicos concluídos ocultos' : 'Mostrar tópicos concluídos'}</span>
-                    <input type="checkbox" class="checkbox-custom accent-indigo-600" ${hideDoneTopicsInCycle ? 'checked' : ''} onchange="toggleHideDoneTopicsInCycle()" />
-                  </label>
-                  <div class="space-y-3">${items.length ? items.map((item,index) => {
-                    const k=`ST_${item.sIdx}_${item.tIdx}`, st=userProgress[k]||{};
-                    return `<article class="mobile-study-card ${index===0 ? 'ring-2 ring-indigo-400 dark:ring-indigo-600' : ''}">
-                      ${index===0 ? '<div class="text-[10px] font-black uppercase tracking-wider text-indigo-500 mb-2">Próximo do ciclo</div>' : ''}
-                      <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="mobile-subject-label text-left">${escapeHtml(item.materia)}</button>
-                      <div class="mobile-topic-title mt-1 mb-2">${escapeHtml(item.topico)}</div>
-                      ${mobileStatusHtml(st)}
-                      <div class="grid grid-cols-3 gap-2 mt-3">
-                        <button type="button" onclick="toggleConcluido('${k}')" class="mobile-btn ${st.q ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-600 text-white'}">${st.q ? 'Concluído' : 'Estudei'}</button>
-                        <button type="button" onclick="showSessionModal('${k}','questions')" class="mobile-btn bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-slate-200">Questões</button>
-                        <button type="button" onclick="skipCycleItem(null,${item.sIdx},${item.tIdx})" class="mobile-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-slate-300">Pular</button>
+                      <div class="flex items-center justify-between gap-2 mb-3">
+                        <div><div class="mobile-section-title">Ciclo intercalado</div><div class="mobile-muted">A próxima ação primeiro, sem tabela.</div></div>
+                        <button type="button" onclick="startRandomTest()" class="mobile-btn bg-[#7667a8] text-white">Teste</button>
                       </div>
-                    </article>`;
-                  }).join('') : '<div class="mobile-study-card text-sm text-gray-500">Nenhum tópico disponível com o filtro atual.</div>'}</div>`;
+                      <div class="mobile-scroll-row flex gap-2 mb-3">${renderCycleTagFilters()}</div>
+                      <label class="mobile-study-card flex items-center justify-between gap-3 mb-3 text-xs font-bold text-gray-700 dark:text-slate-200">
+                        <span>${hideDoneTopicsInCycle ? 'Tópicos concluídos ocultos' : 'Mostrar tópicos concluídos'}</span>
+                        <input type="checkbox" class="checkbox-custom accent-indigo-600" ${hideDoneTopicsInCycle ? 'checked' : ''} onchange="toggleHideDoneTopicsInCycle()" />
+                      </label>
+                      <div class="space-y-3">${items.length ? items.map((item, index) => {
+                    const k = `ST_${item.sIdx}_${item.tIdx}`, st = userProgress[k] || {};
+                    return `<article class="mobile-study-card ${index === 0 ? 'ring-2 ring-indigo-400 dark:ring-indigo-600' : ''}">
+                          ${index === 0 ? '<div class="text-[10px] font-black uppercase tracking-wider text-indigo-500 mb-2">Próximo do ciclo</div>' : ''}
+                          <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="mobile-subject-label text-left">${escapeHtml(item.materia)}</button>
+                          <div class="mobile-topic-title mt-1 mb-2">${escapeHtml(item.topico)}</div>
+                          ${mobileStatusHtml(st)}
+                          <div class="grid grid-cols-3 gap-2 mt-3">
+                            <button type="button" onclick="toggleConcluido('${k}')" class="mobile-btn ${st.q ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-600 text-white'}">${st.q ? 'Concluído' : 'Estudei'}</button>
+                            <button type="button" onclick="showSessionModal('${k}','questions')" class="mobile-btn bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-slate-200">Questões</button>
+                            <button type="button" onclick="skipCycleItem(null,${item.sIdx},${item.tIdx})" class="mobile-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-slate-300">Pular</button>
+                          </div>
+                        </article>`;
+                }).join('') : '<div class="mobile-study-card text-sm text-gray-500">Nenhum tópico disponível com o filtro atual.</div>'}</div>`;
                 return;
             }
 
             if (viewMode === 'history') {
-                const rows=[];
-                edital.forEach((s,sIdx)=>{ if(isHiddenInAgenda(s)) return; s.topicos.forEach((t,tIdx)=>{ const st=userProgress[`ST_${sIdx}_${tIdx}`]; if(st?.aulaAt) rows.push({s,sIdx,t,tIdx,st,next:getNextPendingAgendaDate(st)}); }); });
-                rows.sort((a,b)=>(a.next??Number.MAX_SAFE_INTEGER)-(b.next??Number.MAX_SAFE_INTEGER));
-                box.innerHTML=`<div class="mb-3"><div class="mobile-section-title">Agenda</div><div class="mobile-muted">Revisões mais próximas aparecem primeiro.</div></div><div class="space-y-3">${rows.length ? rows.map(r=>{
-                    const k=`ST_${r.sIdx}_${r.tIdx}`, idx=nextAgendaIndex(r.st), days=getAgendaReviewDays(!!r.st.dominated), due=idx>=0?addDays(r.st.aulaAt,days[idx]):null;
-                    const overdue=due && new Date(due).setHours(0,0,0,0)<new Date().setHours(0,0,0,0);
+                const rows = [];
+                edital.forEach((s, sIdx) => { if (isHiddenInAgenda(s)) return; s.topicos.forEach((t, tIdx) => { const st = userProgress[`ST_${sIdx}_${tIdx}`]; if (st?.aulaAt) rows.push({ s, sIdx, t, tIdx, st, next: getNextPendingAgendaDate(st) }); }); });
+                rows.sort((a, b) => (a.next ?? Number.MAX_SAFE_INTEGER) - (b.next ?? Number.MAX_SAFE_INTEGER));
+                box.innerHTML = `<div class="mb-3"><div class="mobile-section-title">Agenda</div><div class="mobile-muted">Revisões mais próximas aparecem primeiro.</div></div><div class="space-y-3">${rows.length ? rows.map(r => {
+                    const k = `ST_${r.sIdx}_${r.tIdx}`, idx = nextAgendaIndex(r.st), days = getAgendaReviewDays(!!r.st.dominated), due = idx >= 0 ? addDays(r.st.aulaAt, days[idx]) : null;
+                    const overdue = due && new Date(due).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
                     return `<article class="mobile-study-card">
-                      <button type="button" onclick="openSubjectByIndex(${r.sIdx})" class="mobile-subject-label text-left">${escapeHtml(r.s.materia)}</button>
-                      <div class="mobile-topic-title mt-1">${escapeHtml(r.t)}</div>
-                      <div class="grid grid-cols-2 gap-2 mt-3 text-xs"><div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-950"><span class="mobile-muted block">Aula</span><b>${fmtTs(r.st.aulaAt)}</b></div><div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-950"><span class="mobile-muted block">Próxima</span><b class="${overdue?'text-red-500':''}">${due?fmtTs(due):'Concluída'}</b></div></div>
-                      ${idx>=0 ? `<button type="button" onclick="toggleAgendaReview('${k}',${idx})" class="mobile-btn w-full mt-3 bg-indigo-600 text-white">Marcar ${idx+1}ª revisão como feita</button>` : '<div class="mt-3 text-xs font-bold text-emerald-600">Todas as revisões previstas concluídas.</div>'}
-                    </article>`;
+                          <button type="button" onclick="openSubjectByIndex(${r.sIdx})" class="mobile-subject-label text-left">${escapeHtml(r.s.materia)}</button>
+                          <div class="mobile-topic-title mt-1">${escapeHtml(r.t)}</div>
+                          <div class="grid grid-cols-2 gap-2 mt-3 text-xs"><div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-950"><span class="mobile-muted block">Aula</span><b>${fmtTs(r.st.aulaAt)}</b></div><div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-950"><span class="mobile-muted block">Próxima</span><b class="${overdue ? 'text-red-500' : ''}">${due ? fmtTs(due) : 'Concluída'}</b></div></div>
+                          ${idx >= 0 ? `<button type="button" onclick="toggleAgendaReview('${k}',${idx})" class="mobile-btn w-full mt-3 bg-indigo-600 text-white">Marcar ${idx + 1}ª revisão como feita</button>` : '<div class="mt-3 text-xs font-bold text-emerald-600">Todas as revisões previstas concluídas.</div>'}
+                        </article>`;
                 }).join('') : '<div class="mobile-study-card text-sm text-gray-500">Nenhuma revisão cadastrada.</div>'}</div>`;
                 return;
             }
 
             if (viewMode === 'upcoming') {
-                const items=getErrorNotebookItems(); const today=new Date(); today.setHours(0,0,0,0);
-                box.innerHTML=`<div class="mb-3"><div class="mobile-section-title">Caderno de erros</div><div class="mobile-muted">Revisões vencidas e de hoje primeiro.</div></div><div class="space-y-3">${items.length ? items.map(item=>{
-                    const due=new Date(item.dueAt); due.setHours(0,0,0,0); const overdue=!item.done&&due<today; const dueToday=!item.done&&due.getTime()===today.getTime();
-                    return `<article class="mobile-study-card ${overdue?'border-red-300 dark:border-red-800':''} ${item.done?'opacity-60':''}">
-                      <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="mobile-subject-label text-left">${escapeHtml(item.materia)}</button>
-                      <div class="mobile-topic-title mt-1">${escapeHtml(item.topico)}</div>
-                      <div class="flex items-center justify-between gap-3 mt-3"><div class="text-xs"><span class="mobile-muted block">Revisão</span><b class="${overdue?'text-red-500':dueToday?'text-amber-500':''}">${fmtTs(item.dueAt)}${overdue?' · atrasada':dueToday?' · hoje':''}</b></div><input type="checkbox" class="checkbox-custom accent-indigo-600" ${item.done?'checked':''} onclick="toggleErrorNotebookReview('${item.storageKey}','${escapeHtmlAttr(item.sessionId)}',${item.days},'${escapeHtmlAttr(item.retryId||'')}')" /></div>
-                    </article>`;
+                const items = getErrorNotebookItems(); const today = new Date(); today.setHours(0, 0, 0, 0);
+                box.innerHTML = `<div class="mb-3"><div class="mobile-section-title">Caderno de erros</div><div class="mobile-muted">Revisões vencidas e de hoje primeiro.</div></div><div class="space-y-3">${items.length ? items.map(item => {
+                    const due = new Date(item.dueAt); due.setHours(0, 0, 0, 0); const overdue = !item.done && due < today; const dueToday = !item.done && due.getTime() === today.getTime();
+                    return `<article class="mobile-study-card ${overdue ? 'border-red-300 dark:border-red-800' : ''} ${item.done ? 'opacity-60' : ''}">
+                          <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="mobile-subject-label text-left">${escapeHtml(item.materia)}</button>
+                          <div class="mobile-topic-title mt-1">${escapeHtml(item.topico)}</div>
+                          <div class="flex items-center justify-between gap-3 mt-3"><div class="text-xs"><span class="mobile-muted block">Revisão</span><b class="${overdue ? 'text-red-500' : dueToday ? 'text-amber-500' : ''}">${fmtTs(item.dueAt)}${overdue ? ' · atrasada' : dueToday ? ' · hoje' : ''}</b></div><input type="checkbox" class="checkbox-custom accent-indigo-600" ${item.done ? 'checked' : ''} onclick="toggleErrorNotebookReview('${item.storageKey}','${escapeHtmlAttr(item.sessionId)}',${item.days},'${escapeHtmlAttr(item.retryId || '')}')" /></div>
+                        </article>`;
                 }).join('') : '<div class="mobile-study-card text-sm text-gray-500">Nenhum item no caderno de erros.</div>'}</div>`;
                 return;
             }
 
             if (viewMode === 'subject') {
-                let sIdx=edital.findIndex(s=>s.materia===currentSubject && !isHiddenEverywhere(s));
-                if(sIdx<0) sIdx=edital.findIndex(s=>!isHiddenEverywhere(s));
-                if(sIdx<0){ box.innerHTML='<div class="mobile-study-card">Nenhuma matéria cadastrada.</div>'; return; }
-                currentSubject=edital[sIdx].materia; const subject=edital[sIdx];
-                const options=getSubjectOrderAlphabetical().map(idx=>`<option value="${escapeHtmlAttr(edital[idx].materia)}" ${idx===sIdx?'selected':''}>${escapeHtml(edital[idx].materia)}</option>`).join('');
-                let topicIndexes=getTopicOrderForSubject(sIdx);
-                if(subjectTopicSortMode==='pct') topicIndexes=topicIndexes.slice().sort((a,b)=>{const pa=recentTopicPercent(userProgress[`ST_${sIdx}_${a}`]);const pb=recentTopicPercent(userProgress[`ST_${sIdx}_${b}`]);return ((pa===null?101:pa)-(pb===null?101:pb))||(a-b);});
-                box.innerHTML=`
-                  <div class="mobile-study-card mb-3"><label class="mobile-muted font-bold block mb-1">Matéria</label><select class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-sm font-bold" onchange="switchSubject(this.value)">${options}</select><div class="flex gap-2 mt-3"><button type="button" onclick="setSubjectTopicSortMode('pct')" class="mobile-btn flex-1 ${subjectTopicSortMode==='pct'?'bg-indigo-600 text-white':'bg-gray-100 dark:bg-gray-800'}">Mais fracos</button><button type="button" onclick="setSubjectTopicSortMode('manual')" class="mobile-btn flex-1 ${subjectTopicSortMode==='manual'?'bg-indigo-600 text-white':'bg-gray-100 dark:bg-gray-800'}">Ordem manual</button></div></div>
-                  <div class="space-y-3">${topicIndexes.map(tIdx=>{const k=`ST_${sIdx}_${tIdx}`,st=userProgress[k]||{},tot=topicQuestionTotals(st);return `<article class="mobile-study-card"><div class="mobile-topic-title">${escapeHtml(subject.topicos[tIdx])}</div><div class="mt-2">${mobileStatusHtml(st)}</div><div class="flex items-center justify-between mt-3 text-xs"><span class="mobile-muted">${tot.questions} questões · ${tot.correct} acertos</span><label class="flex items-center gap-2 font-bold">Estudado <input type="checkbox" class="checkbox-custom accent-indigo-600" ${st.q?'checked':''} onchange="toggleConcluido('${k}')" /></label></div><div class="grid grid-cols-2 gap-2 mt-3"><button type="button" onclick="showSessionModal('${k}','questions')" class="mobile-btn bg-indigo-600 text-white">Registrar questões</button><button type="button" onclick="editTopicQuestionTotals('${k}')" class="mobile-btn bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-slate-200">Editar totais</button></div></article>`;}).join('')}</div>`;
+                let sIdx = edital.findIndex(s => s.materia === currentSubject && !isHiddenEverywhere(s));
+                if (sIdx < 0) sIdx = edital.findIndex(s => !isHiddenEverywhere(s));
+                if (sIdx < 0) { box.innerHTML = '<div class="mobile-study-card">Nenhuma matéria cadastrada.</div>'; return; }
+                currentSubject = edital[sIdx].materia; const subject = edital[sIdx];
+                const options = getSubjectOrderAlphabetical().map(idx => `<option value="${escapeHtmlAttr(edital[idx].materia)}" ${idx === sIdx ? 'selected' : ''}>${escapeHtml(edital[idx].materia)}</option>`).join('');
+                let topicIndexes = getTopicOrderForSubject(sIdx);
+                if (subjectTopicSortMode === 'pct') topicIndexes = topicIndexes.slice().sort((a, b) => { const pa = recentTopicPercent(userProgress[`ST_${sIdx}_${a}`]); const pb = recentTopicPercent(userProgress[`ST_${sIdx}_${b}`]); return ((pa === null ? 101 : pa) - (pb === null ? 101 : pb)) || (a - b); });
+                box.innerHTML = `
+                      <div class="mobile-study-card mb-3"><label class="mobile-muted font-bold block mb-1">Matéria</label><select class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-sm font-bold" onchange="switchSubject(this.value)">${options}</select><div class="flex gap-2 mt-3"><button type="button" onclick="setSubjectTopicSortMode('pct')" class="mobile-btn flex-1 ${subjectTopicSortMode === 'pct' ? 'bg-indigo-600 text-white' : 'bg-gray-100 dark:bg-gray-800'}">Mais fracos</button><button type="button" onclick="setSubjectTopicSortMode('manual')" class="mobile-btn flex-1 ${subjectTopicSortMode === 'manual' ? 'bg-indigo-600 text-white' : 'bg-gray-100 dark:bg-gray-800'}">Ordem manual</button></div></div>
+                      <div class="space-y-3">${topicIndexes.map(tIdx => { const k = `ST_${sIdx}_${tIdx}`, st = userProgress[k] || {}, tot = topicQuestionTotals(st); return `<article class="mobile-study-card"><div class="mobile-topic-title">${escapeHtml(subject.topicos[tIdx])}</div><div class="mt-2">${mobileStatusHtml(st)}</div><div class="flex items-center justify-between mt-3 text-xs"><span class="mobile-muted">${tot.questions} questões · ${tot.correct} acertos</span><label class="flex items-center gap-2 font-bold">Estudado <input type="checkbox" class="checkbox-custom accent-indigo-600" ${st.q ? 'checked' : ''} onchange="toggleConcluido('${k}')" /></label></div><div class="grid grid-cols-2 gap-2 mt-3"><button type="button" onclick="showSessionModal('${k}','questions')" class="mobile-btn bg-indigo-600 text-white">Registrar questões</button><button type="button" onclick="editTopicQuestionTotals('${k}')" class="mobile-btn bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-slate-200">Editar totais</button></div></article>`; }).join('')}</div>`;
                 return;
             }
         }
@@ -3619,35 +3894,35 @@
         function renderNextActionPanel(actions) {
             if (!actions.length) {
                 return `
-                  <div class="col-span-full p-5 rounded-2xl border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/30 flex flex-col items-center justify-center text-center">
-                    <div class="text-[10px] uppercase tracking-wider font-bold text-green-600">Próxima ação</div>
-                    <div class="text-lg font-bold text-green-800 dark:text-green-200 mt-1">Nenhuma pendência crítica agora</div>
-                    <div class="text-xs text-green-700 dark:text-green-300 mt-1">Continue pelo Ciclo Intercalado ou faça um teste aleatório.</div>
-                    <div class="flex justify-center gap-2 mt-3 flex-wrap">
-                      <button type="button" onclick="setViewMode('cycle')" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold">Abrir ciclo</button>
-                      <button type="button" onclick="startRandomTest()" class="px-4 py-2 rounded-xl bg-[#7667a8] text-white text-xs font-bold">Teste aleatório</button>
-                    </div>
-                  </div>`;
+                      <div class="col-span-full p-5 rounded-2xl border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/30 flex flex-col items-center justify-center text-center">
+                        <div class="text-[10px] uppercase tracking-wider font-bold text-green-600">Próxima ação</div>
+                        <div class="text-lg font-bold text-green-800 dark:text-green-200 mt-1">Nenhuma pendência crítica agora</div>
+                        <div class="text-xs text-green-700 dark:text-green-300 mt-1">Continue pelo Ciclo Intercalado ou faça um teste aleatório.</div>
+                        <div class="flex justify-center gap-2 mt-3 flex-wrap">
+                          <button type="button" onclick="setViewMode('cycle')" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold">Abrir ciclo</button>
+                          <button type="button" onclick="startRandomTest()" class="px-4 py-2 rounded-xl bg-[#7667a8] text-white text-xs font-bold">Teste aleatório</button>
+                        </div>
+                      </div>`;
             }
 
             const primary = actions[0];
             const secondary = actions.slice(1);
             return `
-              <div class="col-span-full p-5 rounded-2xl border border-indigo-200 dark:border-indigo-800 bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-950/50 dark:to-gray-900 shadow-sm">
-                <div class="flex items-start justify-between gap-4 flex-wrap">
-                  <div class="min-w-0 flex-1">
-                    <div class="text-[10px] uppercase tracking-wider font-bold text-indigo-500">O que fazer agora?</div>
-                    <div class="flex items-center gap-2 flex-wrap mt-2">
-                      <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-indigo-600 text-white">${escapeHtml(primary.badge)}</span>
-                      <span class="text-[10px] font-bold uppercase text-indigo-500">${escapeHtml(primary.materia)}</span>
+                  <div class="col-span-full p-5 rounded-2xl border border-indigo-200 dark:border-indigo-800 bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-950/50 dark:to-gray-900 shadow-sm">
+                    <div class="flex items-start justify-between gap-4 flex-wrap">
+                      <div class="min-w-0 flex-1">
+                        <div class="text-[10px] uppercase tracking-wider font-bold text-indigo-500">O que fazer agora?</div>
+                        <div class="flex items-center gap-2 flex-wrap mt-2">
+                          <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-indigo-600 text-white">${escapeHtml(primary.badge)}</span>
+                          <span class="text-[10px] font-bold uppercase text-indigo-500">${escapeHtml(primary.materia)}</span>
+                        </div>
+                        <div class="text-lg font-bold text-gray-900 dark:text-white mt-2">${escapeHtml(primary.topico)}</div>
+                        <div class="text-xs text-gray-600 dark:text-slate-300 mt-1">${escapeHtml(primary.reason)}</div>
+                      </div>
+                      <button type="button" onclick="${decisionActionOnclick(primary)}" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm">Ir para ação</button>
                     </div>
-                    <div class="text-lg font-bold text-gray-900 dark:text-white mt-2">${escapeHtml(primary.topico)}</div>
-                    <div class="text-xs text-gray-600 dark:text-slate-300 mt-1">${escapeHtml(primary.reason)}</div>
-                  </div>
-                  <button type="button" onclick="${decisionActionOnclick(primary)}" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm">Ir para ação</button>
-                </div>
-                ${secondary.length ? `<div class="mt-4 pt-4 border-t border-indigo-100 dark:border-indigo-900"><div class="text-[10px] uppercase tracking-wider font-bold text-gray-400 mb-2">Depois</div><div class="grid md:grid-cols-3 gap-2">${secondary.map(action => `<button type="button" onclick="${decisionActionOnclick(action)}" class="text-left p-3 rounded-xl bg-white/70 dark:bg-gray-950/60 border border-gray-200 dark:border-gray-800 hover:border-indigo-400"><div class="text-[9px] font-bold text-indigo-500">${escapeHtml(action.badge)}</div><div class="text-xs font-bold text-gray-800 dark:text-slate-100 mt-1 topic-title-clamp">${escapeHtml(action.topico)}</div><div class="text-[10px] text-gray-500 mt-1">${escapeHtml(action.materia)}</div></button>`).join('')}</div></div>` : ''}
-              </div>`;
+                    ${secondary.length ? `<div class="mt-4 pt-4 border-t border-indigo-100 dark:border-indigo-900"><div class="text-[10px] uppercase tracking-wider font-bold text-gray-400 mb-2">Depois</div><div class="grid md:grid-cols-3 gap-2">${secondary.map(action => `<button type="button" onclick="${decisionActionOnclick(action)}" class="text-left p-3 rounded-xl bg-white/70 dark:bg-gray-950/60 border border-gray-200 dark:border-gray-800 hover:border-indigo-400"><div class="text-[9px] font-bold text-indigo-500">${escapeHtml(action.badge)}</div><div class="text-xs font-bold text-gray-800 dark:text-slate-100 mt-1 topic-title-clamp">${escapeHtml(action.topico)}</div><div class="text-[10px] text-gray-500 mt-1">${escapeHtml(action.materia)}</div></button>`).join('')}</div></div>` : ''}
+                  </div>`;
         }
 
         function renderDesktopNextActionPanel() {
@@ -3667,10 +3942,10 @@
 
             if (order.length === 0) {
                 container.innerHTML = `
-        <div class="col-span-full bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 text-sm text-gray-500 dark:text-slate-400">
-          Nenhuma matéria cadastrada.
-        </div>
-      `;
+            <div class="col-span-full bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 text-sm text-gray-500 dark:text-slate-400">
+              Nenhuma matéria cadastrada.
+            </div>
+          `;
                 return;
             }
 
@@ -3699,34 +3974,34 @@
             const risks = getSubjectRiskAlerts();
             const riskPreview = risks.slice(0, 6);
             const summary = `
-      <div class="col-span-full bg-white dark:bg-gray-900 p-5 rounded-2xl shadow-sm border border-indigo-100 dark:border-indigo-800">
-        <div class="flex items-center justify-between gap-3 flex-wrap mb-4">
-          <div><div class="text-[10px] uppercase tracking-wider font-bold text-indigo-500">Aprendizagem ativa ${learningConfig.activeTag ? '• ' + escapeHtml(learningConfig.activeTag) : ''}</div><h3 class="font-bold text-gray-800 dark:text-slate-100">${learningConfig.mode === 'final' ? 'Reta final' : 'Método 25/50 dias'}</h3></div>
-          <button type="button" onclick="startRandomTest()" class="px-4 py-2 rounded-xl bg-[#7667a8] hover:bg-[#655792] text-white text-xs font-bold">Iniciar teste aleatório</button>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-center">
-          <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-indigo-600">${coveragePct}%</div><div class="text-[10px] text-gray-500">Cobertura do edital</div></div>
-          <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-indigo-600">${recentPct === null ? '—' : recentPct + '%'}</div><div class="text-[10px] text-gray-500">Desempenho ponderado · 30 dias</div></div>
-          <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-indigo-600">${recentQ}</div><div class="text-[10px] text-gray-500">Questões registradas</div></div>
-          <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-red-500">${fragile === null ? '—' : fragile}</div><div class="text-[10px] text-gray-500">${fragile === null ? 'Status frágil desativado' : 'Tópicos frágeis'}</div></div>
-          <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-green-600">${probable === null ? '—' : probable}</div><div class="text-[10px] text-gray-500">${probable === null ? 'Status forte desativado' : 'Domínios prováveis'}</div></div>
-          <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-[#8b7abb]">${daysLeft === null ? '—' : Math.max(0, daysLeft)}</div><div class="text-[10px] text-gray-500">Dias para a prova</div></div>
-        </div>
-        ${risks.length ? `
-          <div class="mt-4 p-4 rounded-xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/30">
-            <div class="flex items-center justify-between gap-3 mb-2">
-              <div class="text-xs font-bold text-red-700 dark:text-red-300">⚠ ${risks.length} matéria${risks.length === 1 ? '' : 's'} em risco</div>
-              <div class="text-[10px] text-red-500">priorizadas por pontuação da prova</div>
+          <div class="col-span-full bg-white dark:bg-gray-900 p-5 rounded-2xl shadow-sm border border-indigo-100 dark:border-indigo-800">
+            <div class="flex items-center justify-between gap-3 flex-wrap mb-4">
+              <div><div class="text-[10px] uppercase tracking-wider font-bold text-indigo-500">Aprendizagem ativa ${learningConfig.activeTag ? '• ' + escapeHtml(learningConfig.activeTag) : ''}</div><h3 class="font-bold text-gray-800 dark:text-slate-100">${learningConfig.mode === 'final' ? 'Reta final' : 'Método 25/50 dias'}</h3></div>
+              <button type="button" onclick="startRandomTest()" class="px-4 py-2 rounded-xl bg-[#7667a8] hover:bg-[#655792] text-white text-xs font-bold">Iniciar teste aleatório</button>
             </div>
-            <div class="grid md:grid-cols-2 gap-2">
-              ${riskPreview.map(risk => `<div class="text-[10px] text-red-700 dark:text-red-200"><b>${escapeHtml(risk.materia)}:</b> ${escapeHtml(risk.reasons.join(' · '))}</div>`).join('')}
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-center">
+              <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-indigo-600">${coveragePct}%</div><div class="text-[10px] text-gray-500">Cobertura do edital</div></div>
+              <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-indigo-600">${recentPct === null ? '—' : recentPct + '%'}</div><div class="text-[10px] text-gray-500">Desempenho ponderado · 30 dias</div></div>
+              <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-indigo-600">${recentQ}</div><div class="text-[10px] text-gray-500">Questões registradas</div></div>
+              <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-red-500">${fragile === null ? '—' : fragile}</div><div class="text-[10px] text-gray-500">${fragile === null ? 'Status frágil desativado' : 'Tópicos frágeis'}</div></div>
+              <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-green-600">${probable === null ? '—' : probable}</div><div class="text-[10px] text-gray-500">${probable === null ? 'Status forte desativado' : 'Domínios prováveis'}</div></div>
+              <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-950"><div class="text-xl font-bold text-[#8b7abb]">${daysLeft === null ? '—' : Math.max(0, daysLeft)}</div><div class="text-[10px] text-gray-500">Dias para a prova</div></div>
             </div>
-            ${risks.length > riskPreview.length ? `<div class="text-[10px] text-red-500 mt-2">+ ${risks.length - riskPreview.length} outra${risks.length - riskPreview.length === 1 ? '' : 's'}</div>` : ''}
-          </div>` : `
-          <div class="mt-4 p-3 rounded-xl border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/30 text-xs font-bold text-green-700 dark:text-green-300">
-            Nenhuma matéria em risco pelos critérios atuais.
-          </div>`}
-      </div>`;
+            ${risks.length ? `
+              <div class="mt-4 p-4 rounded-xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/30">
+                <div class="flex items-center justify-between gap-3 mb-2">
+                  <div class="text-xs font-bold text-red-700 dark:text-red-300">⚠ ${risks.length} matéria${risks.length === 1 ? '' : 's'} em risco</div>
+                  <div class="text-[10px] text-red-500">priorizadas por pontuação da prova</div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-2">
+                  ${riskPreview.map(risk => `<div class="text-[10px] text-red-700 dark:text-red-200"><b>${escapeHtml(risk.materia)}:</b> ${escapeHtml(risk.reasons.join(' · '))}</div>`).join('')}
+                </div>
+                ${risks.length > riskPreview.length ? `<div class="text-[10px] text-red-500 mt-2">+ ${risks.length - riskPreview.length} outra${risks.length - riskPreview.length === 1 ? '' : 's'}</div>` : ''}
+              </div>` : `
+              <div class="mt-4 p-3 rounded-xl border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/30 text-xs font-bold text-green-700 dark:text-green-300">
+                Nenhuma matéria em risco pelos critérios atuais.
+              </div>`}
+          </div>`;
 
             container.innerHTML = nextActionPanel + summary + order.map((sIdx) => {
                 const s = edital[sIdx];
@@ -3743,52 +4018,52 @@
                 const percent = Math.round((points / (Math.max(s.topicos.length, 1) * 2)) * 100);
 
                 return `
-          <div class="subject-card" onclick="openSubject('${escapeHtmlAttr(s.materia)}')">
-            <div>
-              <div class="flex justify-between items-start mb-2 gap-2">
-      <h3 class="font-bold text-gray-800 dark:text-slate-100 text-sm leading-tight pr-2">
-        ${escapeHtml(s.materia)}
-      </h3>
+              <div class="subject-card" onclick="openSubject('${escapeHtmlAttr(s.materia)}')">
+                <div>
+                  <div class="flex justify-between items-start mb-2 gap-2">
+          <h3 class="font-bold text-gray-800 dark:text-slate-100 text-sm leading-tight pr-2">
+            ${escapeHtml(s.materia)}
+          </h3>
 
-      <div class="flex items-center gap-2">
-        <span class="text-[10px] px-2 py-1 rounded-lg font-bold bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-200 border border-indigo-100 dark:border-indigo-800" title="Peso usado no Ciclo e no percentual geral">
-          ${subjectExamQuestions(s) ? `${subjectExamQuestions(s)}Q · ${subjectExamPoints(s).toLocaleString('pt-BR')} PTS` : (learningConfig.useSubjectWeights === false ? 'PESOS DESATIVADOS' : `PESO ${effectiveSubjectWeight(s).toLocaleString('pt-BR')}`)}
-        </span>
-        <button
-          onclick="toggleHiddenInCycle(event, ${sIdx})"
-          class="text-[10px] px-3 py-1.5 rounded-lg font-bold bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border border-gray-200 dark:border-gray-700"
-          type="button"
-          title="${s.hiddenInCycle ? 'Reexibir no Ciclo Intercalado' : 'Ocultar do Ciclo Intercalado'}"
-        >
-          ${s.hiddenInCycle ? 'REEXIBIR' : 'OCULTAR'}
-        </button>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] px-2 py-1 rounded-lg font-bold bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-200 border border-indigo-100 dark:border-indigo-800" title="Peso usado no Ciclo e no percentual geral">
+              ${subjectExamQuestions(s) ? `${subjectExamQuestions(s)}Q · ${subjectExamPoints(s).toLocaleString('pt-BR')} PTS` : (learningConfig.useSubjectWeights === false ? 'PESOS DESATIVADOS' : `PESO ${effectiveSubjectWeight(s).toLocaleString('pt-BR')}`)}
+            </span>
+            <button
+              onclick="toggleHiddenInCycle(event, ${sIdx})"
+              class="text-[10px] px-3 py-1.5 rounded-lg font-bold bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border border-gray-200 dark:border-gray-700"
+              type="button"
+              title="${s.hiddenInCycle ? 'Reexibir no Ciclo Intercalado' : 'Ocultar do Ciclo Intercalado'}"
+            >
+              ${s.hiddenInCycle ? 'REEXIBIR' : 'OCULTAR'}
+            </button>
 
-          <button
-            onclick="toggleCardPriority(event, ${sIdx})"
-            class="priority-toggle ${(s.priority === 'important') ? 'priority-imp' :
+              <button
+                onclick="toggleCardPriority(event, ${sIdx})"
+                class="priority-toggle ${(s.priority === 'important') ? 'priority-imp' :
                         (s.priority === 'secondary') ? 'priority-sec' :
                             'priority-main'
                     }"
-            type="button"
-          >
-            ${(s.priority === 'important') ? 'IMPORTANTE' :
+                type="button"
+              >
+                ${(s.priority === 'important') ? 'IMPORTANTE' :
                         (s.priority === 'secondary') ? 'SECUNDÁRIO' :
                             'PRINCIPAL'
                     }
-          </button>
-      </div>
+              </button>
+          </div>
 </div>
 
-              <div class="flex flex-wrap gap-1 mb-2">${renderTagChips(s.tags)}</div>
-            </div>
+                  <div class="flex flex-wrap gap-1 mb-2">${renderTagChips(s.tags)}</div>
+                </div>
 
-            <div>
-              <div class="progress-bar-bg">
-                <div class="progress-bar-fill" style="width: ${percent}%"></div>
+                <div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: ${percent}%"></div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        `;
+            `;
             }).join('');
         }
         function openSubject(name) {
@@ -3853,12 +4128,12 @@
 
                 const isSel = currentSubject === s.materia;
                 return `
-              <button onclick="switchSubject('${escapeHtmlAttr(s.materia)}')" ondblclick="(function(e){e.preventDefault();e.stopPropagation();promptRenameSubject(${sIdx});})(event)" type="button"
-                class="px-5 py-4 rounded-2xl whitespace-nowrap text-xs font-bold transition-all shadow-sm
-                ${isSel ? 'bg-indigo-600 text-white scale-105 z-10' : 'bg-white dark:bg-gray-800 text-gray-500 border border-gray-100 dark:border-gray-700'}">
-                ${escapeHtml(s.materia)}
-              </button>
-            `;
+                  <button onclick="switchSubject('${escapeHtmlAttr(s.materia)}')" ondblclick="(function(e){e.preventDefault();e.stopPropagation();promptRenameSubject(${sIdx});})(event)" type="button"
+                    class="px-5 py-4 rounded-2xl whitespace-nowrap text-xs font-bold transition-all shadow-sm
+                    ${isSel ? 'bg-indigo-600 text-white scale-105 z-10' : 'bg-white dark:bg-gray-800 text-gray-500 border border-gray-100 dark:border-gray-700'}">
+                    ${escapeHtml(s.materia)}
+                  </button>
+                `;
             }).join('');
         }
 
@@ -3889,44 +4164,44 @@
                 const visible = getAgendaVisibleIndexes();
 
                 thead.innerHTML = `
-        <tr>
-          <th style="width:15%" class="p-3 text-sm font-semibold text-indigo-900 dark:text-indigo-200 whitespace-nowrap">Matéria</th>
-          <th style="width:29%" class="p-3 text-sm font-semibold text-indigo-900 dark:text-indigo-200">Conteúdo</th>
-          <th style="width:10%" class="p-3 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center">Aula</th>
+            <tr>
+              <th style="width:15%" class="p-3 text-sm font-semibold text-indigo-900 dark:text-indigo-200 whitespace-nowrap">Matéria</th>
+              <th style="width:29%" class="p-3 text-sm font-semibold text-indigo-900 dark:text-indigo-200">Conteúdo</th>
+              <th style="width:10%" class="p-3 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center">Aula</th>
 
-          ${visible.map((idx, pos) => `
-            <th style="width:9.2%" class="p-2 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center whitespace-nowrap">
-              <div class="flex items-center justify-center gap-2 whitespace-nowrap">
-                <span class="whitespace-nowrap">
-                  ${agendaReviewTitle(idx)}
-                </span>
-              </div>
-            </th>
-          `).join('')}
-        </tr>
-      `;
+              ${visible.map((idx, pos) => `
+                <th style="width:9.2%" class="p-2 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center whitespace-nowrap">
+                  <div class="flex items-center justify-center gap-2 whitespace-nowrap">
+                    <span class="whitespace-nowrap">
+                      ${agendaReviewTitle(idx)}
+                    </span>
+                  </div>
+                </th>
+              `).join('')}
+            </tr>
+          `;
             } else if (viewMode === 'upcoming') {
                 thead.innerHTML = `
-              <tr>
-                <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 w-36">Matéria</th>
-                <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200">Conteúdo</th>
-                <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-28">Inclusão</th>
-                <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-28">Revisão</th>
-                <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-28">Feito</th>
-              </tr>
-            `;
+                  <tr>
+                    <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 w-36">Matéria</th>
+                    <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200">Conteúdo</th>
+                    <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-28">Inclusão</th>
+                    <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-28">Revisão</th>
+                    <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-28">Feito</th>
+                  </tr>
+                `;
             } else {
                 const showDoneCol = (viewMode === 'cycle' || viewMode === 'subject');
                 const showRevisionCol = viewMode !== 'cycle';
                 thead.innerHTML = `
-              <tr>
-                <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 w-24 whitespace-nowrap">Matéria</th>
-                <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200">Conteúdo</th>
-                ${showDoneCol ? `<th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-28">Concluído</th>` : ''}
-                ${showRevisionCol ? `<th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-48">Revisão</th>` : ''}
-                <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-32">Ação</th>
-              </tr>
-            `;
+                  <tr>
+                    <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 w-24 whitespace-nowrap">Matéria</th>
+                    <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200">Conteúdo</th>
+                    ${showDoneCol ? `<th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-28">Concluído</th>` : ''}
+                    ${showRevisionCol ? `<th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-48">Revisão</th>` : ''}
+                    <th class="p-4 text-sm font-semibold text-indigo-900 dark:text-indigo-200 text-center w-32">Ação</th>
+                  </tr>
+                `;
             }
 
             if (viewMode === 'subject') {
@@ -3945,55 +4220,55 @@
 
                 toolbar.classList.remove('hidden');
                 toolbar.innerHTML = `
-      <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-2xl border border-indigo-100 dark:border-indigo-800 flex items-center justify-between gap-3 flex-wrap">
-        <div class="flex flex-col">
-          <div class="flex items-center gap-2">
-            <h2 class="text-xl font-bold text-indigo-900 dark:text-indigo-200" title="Nome da matéria">
-              ${escapeHtml(edital[sIdx].materia)}
-            </h2>
+          <div class="bg-indigo-50 dark:bg-indigo-900/30 p-4 rounded-2xl border border-indigo-100 dark:border-indigo-800 flex items-center justify-between gap-3 flex-wrap">
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <h2 class="text-xl font-bold text-indigo-900 dark:text-indigo-200" title="Nome da matéria">
+                  ${escapeHtml(edital[sIdx].materia)}
+                </h2>
 
-            <button type="button" onclick="promptRenameSubject(${sIdx})"
-              class="p-2 rounded-lg border border-indigo-200 dark:border-indigo-800 bg-white/60 dark:bg-gray-800/60 hover:bg-white dark:hover:bg-gray-800 text-indigo-700 dark:text-indigo-200"
-              title="Renomear matéria" aria-label="Renomear matéria">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 20h9"/>
-                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
-              </svg>
-            </button>
+                <button type="button" onclick="promptRenameSubject(${sIdx})"
+                  class="p-2 rounded-lg border border-indigo-200 dark:border-indigo-800 bg-white/60 dark:bg-gray-800/60 hover:bg-white dark:hover:bg-gray-800 text-indigo-700 dark:text-indigo-200"
+                  title="Renomear matéria" aria-label="Renomear matéria">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="flex flex-wrap gap-1 mt-1">${renderTagChips(edital[sIdx].tags)}</div>
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <button
+                type="button"
+                onclick="setSubjectTopicSortMode('pct')"
+                class="text-[10px] px-3 py-1.5 rounded-lg font-bold ${subjectTopicSortMode === 'pct'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border border-gray-200 dark:border-gray-700'
+                    }"
+              >
+                Mais fracos primeiro
+              </button>
+
+              <button
+                type="button"
+                onclick="setSubjectTopicSortMode('manual')"
+                class="text-[10px] px-3 py-1.5 rounded-lg font-bold ${subjectTopicSortMode === 'manual'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border border-gray-200 dark:border-gray-700'
+                    }"
+              >
+                Ordem manual
+              </button>
+
+              <button onclick="editSubjectTags(${sIdx})" type="button"
+                class="text-[10px] px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold">
+                TAGS
+              </button>
+            </div>
           </div>
-
-          <div class="flex flex-wrap gap-1 mt-1">${renderTagChips(edital[sIdx].tags)}</div>
-        </div>
-
-        <div class="flex items-center gap-2 flex-wrap">
-          <button
-            type="button"
-            onclick="setSubjectTopicSortMode('pct')"
-            class="text-[10px] px-3 py-1.5 rounded-lg font-bold ${subjectTopicSortMode === 'pct'
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border border-gray-200 dark:border-gray-700'
-                    }"
-          >
-            Mais fracos primeiro
-          </button>
-
-          <button
-            type="button"
-            onclick="setSubjectTopicSortMode('manual')"
-            class="text-[10px] px-3 py-1.5 rounded-lg font-bold ${subjectTopicSortMode === 'manual'
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border border-gray-200 dark:border-gray-700'
-                    }"
-          >
-            Ordem manual
-          </button>
-
-          <button onclick="editSubjectTags(${sIdx})" type="button"
-            class="text-[10px] px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold">
-            TAGS
-          </button>
-        </div>
-      </div>
 `;
 
                 const manualOrder = getTopicOrderForSubject(sIdx);
@@ -4030,76 +4305,76 @@
 
                     toolbar.classList.remove('hidden');
                     toolbar.innerHTML = `
-                <div class="bg-indigo-50 dark:bg-indigo-900/30 p-3 rounded-2xl border border-indigo-100 dark:border-indigo-800 flex items-center justify-between gap-3 flex-wrap">
-                  <button
-                    type="button"
-                    onclick="showHiddenAgendaSubjects()"
-                    class="text-xs font-bold px-4 py-2 rounded-lg border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border-gray-200 dark:border-gray-700 hover:border-indigo-400 dark:hover:border-indigo-500"
-                    title="Reexibir todas as matérias ocultas na Agenda"
-                  >
-                    Mostrar matérias ocultas${hiddenAgendaCount ? ` (${hiddenAgendaCount})` : ''}
-                  </button>
-                  <div class="flex items-center justify-end gap-2">
-                    <button
-                      type="button"
-                      onclick="setAgendaReviewPage(0)"
-                      class="w-9 h-9 rounded-full border border-indigo-300 dark:border-indigo-600 flex items-center justify-center font-bold hover:bg-indigo-100 dark:hover:bg-indigo-800 disabled:opacity-30 disabled:cursor-not-allowed"
-                      title="Ver revisões anteriores"
-                      ${agendaReviewPage === 0 ? 'disabled' : ''}
-                    >←</button>
-                    <span class="text-xs font-bold text-indigo-700 dark:text-indigo-200">
-                      ${agendaReviewPage === 0 ? 'Revisões 1 a 5' : 'Revisões 5 a 9'}
-                    </span>
-                    <button
-                      type="button"
-                      onclick="setAgendaReviewPage(1)"
-                      class="w-9 h-9 rounded-full border border-indigo-300 dark:border-indigo-600 flex items-center justify-center font-bold hover:bg-indigo-100 dark:hover:bg-indigo-800 disabled:opacity-30 disabled:cursor-not-allowed"
-                      title="Ver próximas revisões"
-                      ${agendaReviewPage === 1 ? 'disabled' : ''}
-                    >→</button>
-                  </div>
-                </div>
-              `;
+                    <div class="bg-indigo-50 dark:bg-indigo-900/30 p-3 rounded-2xl border border-indigo-100 dark:border-indigo-800 flex items-center justify-between gap-3 flex-wrap">
+                      <button
+                        type="button"
+                        onclick="showHiddenAgendaSubjects()"
+                        class="text-xs font-bold px-4 py-2 rounded-lg border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border-gray-200 dark:border-gray-700 hover:border-indigo-400 dark:hover:border-indigo-500"
+                        title="Reexibir todas as matérias ocultas na Agenda"
+                      >
+                        Mostrar matérias ocultas${hiddenAgendaCount ? ` (${hiddenAgendaCount})` : ''}
+                      </button>
+                      <div class="flex items-center justify-end gap-2">
+                        <button
+                          type="button"
+                          onclick="setAgendaReviewPage(0)"
+                          class="w-9 h-9 rounded-full border border-indigo-300 dark:border-indigo-600 flex items-center justify-center font-bold hover:bg-indigo-100 dark:hover:bg-indigo-800 disabled:opacity-30 disabled:cursor-not-allowed"
+                          title="Ver revisões anteriores"
+                          ${agendaReviewPage === 0 ? 'disabled' : ''}
+                        >←</button>
+                        <span class="text-xs font-bold text-indigo-700 dark:text-indigo-200">
+                          ${agendaReviewPage === 0 ? 'Revisões 1 a 5' : 'Revisões 5 a 9'}
+                        </span>
+                        <button
+                          type="button"
+                          onclick="setAgendaReviewPage(1)"
+                          class="w-9 h-9 rounded-full border border-indigo-300 dark:border-indigo-600 flex items-center justify-center font-bold hover:bg-indigo-100 dark:hover:bg-indigo-800 disabled:opacity-30 disabled:cursor-not-allowed"
+                          title="Ver próximas revisões"
+                          ${agendaReviewPage === 1 ? 'disabled' : ''}
+                        >→</button>
+                      </div>
+                    </div>
+                  `;
                 }
 
                 if (viewMode === 'cycle') {
                     toolbar.classList.remove('hidden');
                     toolbar.innerHTML = `
-      <div class="bg-indigo-50 dark:bg-indigo-900/30 p-3 rounded-2xl border border-indigo-100 dark:border-indigo-800">
-        <div class="flex items-end justify-between gap-4 flex-wrap">
-          <div class="flex-1 min-w-[260px]">
-            <div class="flex items-center gap-3 flex-wrap mb-2">
-              <span class="text-[10px] uppercase tracking-wider font-bold text-gray-500 dark:text-slate-400">
-                Filtrar por tag
-              </span>
-              ${cycleTagFilter ? `
-                <span class="text-[10px] font-bold text-indigo-700 dark:text-indigo-200">
-                  Filtro ativo: ${escapeHtml(cycleTagFilter)}
-                </span>
-              ` : ''}
-            </div>
-            <div class="flex flex-wrap gap-2">
-              ${renderCycleTagFilters()}
-            </div>
-          </div>
+          <div class="bg-indigo-50 dark:bg-indigo-900/30 p-3 rounded-2xl border border-indigo-100 dark:border-indigo-800">
+            <div class="flex items-end justify-between gap-4 flex-wrap">
+              <div class="flex-1 min-w-[260px]">
+                <div class="flex items-center gap-3 flex-wrap mb-2">
+                  <span class="text-[10px] uppercase tracking-wider font-bold text-gray-500 dark:text-slate-400">
+                    Filtrar por tag
+                  </span>
+                  ${cycleTagFilter ? `
+                    <span class="text-[10px] font-bold text-indigo-700 dark:text-indigo-200">
+                      Filtro ativo: ${escapeHtml(cycleTagFilter)}
+                    </span>
+                  ` : ''}
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  ${renderCycleTagFilters()}
+                </div>
+              </div>
 
-          <div class="flex items-center justify-end gap-2 flex-wrap shrink-0">
-            <button type="button" onclick="startRandomTest()" class="text-xs font-bold px-3 py-2 rounded-lg bg-[#7667a8] hover:bg-[#655792] text-white border border-[#7667a8]">
-              Teste aleatório
-            </button>
-            <button
-              type="button"
-              onclick="toggleHideDoneTopicsInCycle()"
-              class="text-xs font-bold px-3 py-2 rounded-lg border ${hideDoneTopicsInCycle
+              <div class="flex items-center justify-end gap-2 flex-wrap shrink-0">
+                <button type="button" onclick="startRandomTest()" class="text-xs font-bold px-3 py-2 rounded-lg bg-[#7667a8] hover:bg-[#655792] text-white border border-[#7667a8]">
+                  Teste aleatório
+                </button>
+                <button
+                  type="button"
+                  onclick="toggleHideDoneTopicsInCycle()"
+                  class="text-xs font-bold px-3 py-2 rounded-lg border ${hideDoneTopicsInCycle
                             ? 'bg-indigo-600 text-white border-indigo-600'
                             : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border-gray-200 dark:border-gray-700'
                         }"
-            >
-              ${hideDoneTopicsInCycle ? 'Mostrar tópicos concluídos' : 'Esconder tópicos concluídos'}
-            </button>
+                >
+                  ${hideDoneTopicsInCycle ? 'Mostrar tópicos concluídos' : 'Esconder tópicos concluídos'}
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 `;
                     const subjectOrder = getSubjectOrderForCycle()
                         .filter((sIdx) => !isHiddenInCycle(edital[sIdx]))
@@ -4180,12 +4455,12 @@
                                 : 'Nenhuma matéria disponível no Ciclo Intercalado.');
 
                         body.innerHTML = `
-                  <tr>
-                    <td class="p-6 text-sm text-gray-500 dark:text-slate-400" colspan="5">
-                      ${message}
-                    </td>
-                  </tr>
-                `;
+                      <tr>
+                        <td class="p-6 text-sm text-gray-500 dark:text-slate-400" colspan="5">
+                          ${message}
+                        </td>
+                      </tr>
+                    `;
                         return;
                     }
                 }
@@ -4195,12 +4470,12 @@
 
                     if (list.length === 0) {
                         body.innerHTML = `
-                  <tr>
-                    <td class="p-6 text-sm text-gray-500 dark:text-slate-400" colspan="5">
-                      Nenhuma revisão no caderno de erros. Ao registrar uma sessão, marque “Incluir no caderno de erros?”; a primeira revisão será criada para 3 dias.
-                    </td>
-                  </tr>
-                `;
+                      <tr>
+                        <td class="p-6 text-sm text-gray-500 dark:text-slate-400" colspan="5">
+                          Nenhuma revisão no caderno de erros. Ao registrar uma sessão, marque “Incluir no caderno de erros?”; a primeira revisão será criada para 3 dias.
+                        </td>
+                      </tr>
+                    `;
                         return;
                     }
 
@@ -4231,14 +4506,14 @@
                     if (list.length === 0) {
                         const hiddenAgendaCount = edital.filter(s => isHiddenInAgenda(s)).length;
                         body.innerHTML = `
-          <tr>
-            <td class="p-6 text-sm text-gray-500 dark:text-slate-400" colspan="8">
-              ${hiddenAgendaCount
+              <tr>
+                <td class="p-6 text-sm text-gray-500 dark:text-slate-400" colspan="8">
+                  ${hiddenAgendaCount
                                 ? 'Todas as matérias com revisões estão ocultas na Agenda. Use o botão acima para reexibi-las.'
                                 : 'Nenhuma revisão cadastrada na Agenda.'}
-            </td>
-          </tr>
-        `;
+                </td>
+              </tr>
+            `;
                         return;
                     }
                 }
@@ -4289,68 +4564,68 @@
                         const disabled = (!allow || !hasPlanned);
 
                         return `
-                  <td class="p-2 text-center align-middle">
-      <div class="flex items-center justify-center gap-2 flex-wrap">
+                      <td class="p-2 text-center align-middle">
+          <div class="flex items-center justify-center gap-2 flex-wrap">
 
-                      <span>${label}</span>
-                      <input
-                        type="checkbox"
-                        class="checkbox-custom accent-indigo-600"
-                        ${checked ? "checked" : ""}
-                        ${disabled ? "disabled" : ""}
-                        onclick="toggleAgendaReview('${storageKey}', ${i})"
-                        title="${disabled ? "Indisponível" : "Marcar como feito"}"
-                      />
-                    </div>
-                  </td>
-                `;
+                          <span>${label}</span>
+                          <input
+                            type="checkbox"
+                            class="checkbox-custom accent-indigo-600"
+                            ${checked ? "checked" : ""}
+                            ${disabled ? "disabled" : ""}
+                            onclick="toggleAgendaReview('${storageKey}', ${i})"
+                            title="${disabled ? "Indisponível" : "Marcar como feito"}"
+                          />
+                        </div>
+                      </td>
+                    `;
                     }
 
                     return `
-                <tr class="topic-row">
+                    <tr class="topic-row">
 <td class="p-3 text-[10px] uppercase font-bold align-middle">
-      <div class="flex items-center min-w-[150px]">
-        <button
-          type="button"
-          onclick="openSubjectByIndex(${item.sIdx})"
-          class="text-[#a5b4fc] text-left hover:underline hover:text-indigo-300 transition-colors flex-1"
-          title="Abrir ${escapeHtmlAttr(item.materia)} em Matérias"
-        >
-          ${escapeHtml(item.materia)}
-        </button>
-      </div>
+          <div class="flex items-center min-w-[150px]">
+            <button
+              type="button"
+              onclick="openSubjectByIndex(${item.sIdx})"
+              class="text-[#a5b4fc] text-left hover:underline hover:text-indigo-300 transition-colors flex-1"
+              title="Abrir ${escapeHtmlAttr(item.materia)} em Matérias"
+            >
+              ${escapeHtml(item.materia)}
+            </button>
+          </div>
 </td>
-                  <td class="p-3 text-sm align-middle">
-                    ${parentLabel ? `<span class="parent-label">${escapeHtml(parentLabel)}</span>` : ''}
-                    <div class="flex items-center gap-2">
-                      <span class="topic-title-clamp min-w-0 font-medium text-gray-700 dark:text-slate-200 flex-1" title="${escapeHtmlAttr(item.topico)}">${escapeHtml(item.topico)}</span>
-                      ${status ? `<span class="learning-badge ${status.cls}">${status.label}</span>` : ''}
-                      <button
-                        type="button"
-                        onclick="copyTopicReference(${item.sIdx}, ${item.tIdx}, this)"
-                        class="shrink-0 p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600"
-                        title="Copiar matéria e tópico"
-                        aria-label="Copiar matéria e tópico"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                      </button>
-                    </div>
-                  </td>
+                      <td class="p-3 text-sm align-middle">
+                        ${parentLabel ? `<span class="parent-label">${escapeHtml(parentLabel)}</span>` : ''}
+                        <div class="flex items-center gap-2">
+                          <span class="topic-title-clamp min-w-0 font-medium text-gray-700 dark:text-slate-200 flex-1" title="${escapeHtmlAttr(item.topico)}">${escapeHtml(item.topico)}</span>
+                          ${status ? `<span class="learning-badge ${status.cls}">${status.label}</span>` : ''}
+                          <button
+                            type="button"
+                            onclick="copyTopicReference(${item.sIdx}, ${item.tIdx}, this)"
+                            class="shrink-0 p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600"
+                            title="Copiar matéria e tópico"
+                            aria-label="Copiar matéria e tópico"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                          </button>
+                        </div>
+                      </td>
 
-                  <td class="p-2 text-center align-middle text-xs font-mono">
-      <button
-        type="button"
-        onclick="editAulaDate('${storageKey}')"
-        class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200"
-        title="Editar data da aula"
-      >
-        ${fmtTs(aula)}
-      </button>
+                      <td class="p-2 text-center align-middle text-xs font-mono">
+          <button
+            type="button"
+            onclick="editAulaDate('${storageKey}')"
+            class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200"
+            title="Editar data da aula"
+          >
+            ${fmtTs(aula)}
+          </button>
 </td>
 
-                  ${visible.map(i => cellHtml(i)).join('')}
-                </tr>
-              `;
+                      ${visible.map(i => cellHtml(i)).join('')}
+                    </tr>
+                  `;
                 }
 
                 // ============================
@@ -4364,31 +4639,31 @@
                     const dateClass = overdue ? 'text-red-500 font-bold' : (dueToday ? 'text-amber-500 font-bold' : 'text-gray-600 dark:text-slate-300');
                     const dateLabel = overdue ? `${fmtTs(item.dueAt)} · atrasada` : (dueToday ? `${fmtTs(item.dueAt)} · hoje` : fmtTs(item.dueAt));
                     return `
-                <tr class="topic-row ${item.done ? 'opacity-60' : ''}">
-                  <td class="p-4 text-[10px] uppercase font-bold align-middle">
-                    <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="text-[#a5b4fc] text-left hover:underline hover:text-indigo-300 transition-colors">${escapeHtml(item.materia)}</button>
-                  </td>
-                  <td class="p-4 text-sm align-middle">
-                    <div class="flex items-center gap-2">
-                      <span class="topic-title-clamp min-w-0 font-medium text-gray-700 dark:text-slate-200 flex-1" title="${escapeHtmlAttr(item.topico)}">${escapeHtml(item.topico)}</span>
-                      <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-200">${item.days} DIAS</span>
-                      ${item.corrected ? `<span class="text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300">ERRO CORRIGIDO</span>` : ''}
-                      <button type="button" onclick="copyTopicReference(${item.sIdx}, ${item.tIdx}, this)" class="shrink-0 p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600" title="Copiar matéria e tópico" aria-label="Copiar matéria e tópico">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                      </button>
-                    </div>
-                  </td>
-                  <td class="p-4 text-center text-xs font-mono">
-                    <span class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 cursor-default" title="Data de inclusão no caderno de erros">
-                      ${fmtTs(item.includedAt)}
-                    </span>
-                  </td>
-                  <td class="p-4 text-center text-xs ${dateClass}">${dateLabel}</td>
-                  <td class="p-4 text-center">
-                    <input type="checkbox" class="checkbox-custom accent-indigo-600" ${item.done ? 'checked' : ''} onclick="toggleErrorNotebookReview('${item.storageKey}', '${escapeHtmlAttr(item.sessionId)}', ${item.days}, '${escapeHtmlAttr(item.retryId || '')}')" title="Marcar revisão do caderno de erros como feita" />
-                  </td>
-                </tr>
-              `;
+                    <tr class="topic-row ${item.done ? 'opacity-60' : ''}">
+                      <td class="p-4 text-[10px] uppercase font-bold align-middle">
+                        <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="text-[#a5b4fc] text-left hover:underline hover:text-indigo-300 transition-colors">${escapeHtml(item.materia)}</button>
+                      </td>
+                      <td class="p-4 text-sm align-middle">
+                        <div class="flex items-center gap-2">
+                          <span class="topic-title-clamp min-w-0 font-medium text-gray-700 dark:text-slate-200 flex-1" title="${escapeHtmlAttr(item.topico)}">${escapeHtml(item.topico)}</span>
+                          <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-200">${item.days} DIAS</span>
+                          ${item.corrected ? `<span class="text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300">ERRO CORRIGIDO</span>` : ''}
+                          <button type="button" onclick="copyTopicReference(${item.sIdx}, ${item.tIdx}, this)" class="shrink-0 p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600" title="Copiar matéria e tópico" aria-label="Copiar matéria e tópico">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                          </button>
+                        </div>
+                      </td>
+                      <td class="p-4 text-center text-xs font-mono">
+                        <span class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 cursor-default" title="Data de inclusão no caderno de erros">
+                          ${fmtTs(item.includedAt)}
+                        </span>
+                      </td>
+                      <td class="p-4 text-center text-xs ${dateClass}">${dateLabel}</td>
+                      <td class="p-4 text-center">
+                        <input type="checkbox" class="checkbox-custom accent-indigo-600" ${item.done ? 'checked' : ''} onclick="toggleErrorNotebookReview('${item.storageKey}', '${escapeHtmlAttr(item.sessionId)}', ${item.days}, '${escapeHtmlAttr(item.retryId || '')}')" title="Marcar revisão do caderno de erros como feita" />
+                      </td>
+                    </tr>
+                  `;
                 }
 
                 let urgency = "text-gray-400", displayDate = "Sem revisão pendente";
@@ -4403,128 +4678,128 @@
                 const showRevisionCol = viewMode !== 'cycle';
 
                 return `
-              <tr class="topic-row ${state.dominated ? 'dominated-row' : ''}">
+                  <tr class="topic-row ${state.dominated ? 'dominated-row' : ''}">
 
-                <td class="p-4 text-[10px] uppercase font-bold align-middle">
-      <button
-        type="button"
-        onclick="openSubjectByIndex(${item.sIdx})"
-        class="text-[#a5b4fc] text-left hover:underline hover:text-indigo-300 transition-colors"
-        title="Abrir ${escapeHtmlAttr(item.materia)} em Matérias"
-      >
-        ${escapeHtml(item.materia)}
-      </button>
+                    <td class="p-4 text-[10px] uppercase font-bold align-middle">
+          <button
+            type="button"
+            onclick="openSubjectByIndex(${item.sIdx})"
+            class="text-[#a5b4fc] text-left hover:underline hover:text-indigo-300 transition-colors"
+            title="Abrir ${escapeHtmlAttr(item.materia)} em Matérias"
+          >
+            ${escapeHtml(item.materia)}
+          </button>
 </td>
 
-               <td class="p-4 text-sm align-middle">
-      ${parentLabel ? `<span class="parent-label">${escapeHtml(parentLabel)}</span>` : ''}
-      <div class="flex items-center gap-2">
-        <span class="${viewMode === 'subject' ? '' : 'topic-title-clamp'} min-w-0 font-medium text-gray-700 dark:text-slate-200 flex-1" title="${escapeHtmlAttr(item.topico)}">${escapeHtml(item.topico)}</span>
-        ${status ? `<span class="learning-badge ${status.cls}">${status.label}</span>` : ''}
-        <button
-          type="button"
-          onclick="copyTopicReference(${item.sIdx}, ${item.tIdx}, this)"
-          class="shrink-0 p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600"
-          title="Copiar matéria e tópico"
-          aria-label="Copiar matéria e tópico"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        </button>
-
-        ${viewMode === 'subject' ? `
-          <div class="shrink-0 flex items-center gap-1.5">
+                   <td class="p-4 text-sm align-middle">
+          ${parentLabel ? `<span class="parent-label">${escapeHtml(parentLabel)}</span>` : ''}
+          <div class="flex items-center gap-2">
+            <span class="${viewMode === 'subject' ? '' : 'topic-title-clamp'} min-w-0 font-medium text-gray-700 dark:text-slate-200 flex-1" title="${escapeHtmlAttr(item.topico)}">${escapeHtml(item.topico)}</span>
+            ${status ? `<span class="learning-badge ${status.cls}">${status.label}</span>` : ''}
             <button
               type="button"
-              onclick="promptRenameTopic(${item.sIdx}, ${item.tIdx})"
-              class="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600 hover:border-indigo-300 dark:hover:border-indigo-500 transition-colors"
-              title="Editar nome do tópico"
-              aria-label="Editar nome do tópico"
+              onclick="copyTopicReference(${item.sIdx}, ${item.tIdx}, this)"
+              class="shrink-0 p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600"
+              title="Copiar matéria e tópico"
+              aria-label="Copiar matéria e tópico"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 20h9"/>
-                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             </button>
 
-            <button
-              type="button"
-              onclick="confirmDeleteTopic(${item.sIdx}, ${item.tIdx})"
-              class="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-red-600 hover:border-red-300 dark:hover:border-red-500 transition-colors"
-              title="Excluir tópico"
-              aria-label="Excluir tópico"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 6h18"/>
-                <path d="M8 6V4h8v2"/>
-                <path d="M19 6l-1 14H6L5 6"/>
-                <path d="M10 11v5"/>
-                <path d="M14 11v5"/>
-              </svg>
-            </button>
+            ${viewMode === 'subject' ? `
+              <div class="shrink-0 flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onclick="promptRenameTopic(${item.sIdx}, ${item.tIdx})"
+                  class="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600 hover:border-indigo-300 dark:hover:border-indigo-500 transition-colors"
+                  title="Editar nome do tópico"
+                  aria-label="Editar nome do tópico"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                  </svg>
+                </button>
+
+                <button
+                  type="button"
+                  onclick="confirmDeleteTopic(${item.sIdx}, ${item.tIdx})"
+                  class="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-red-600 hover:border-red-300 dark:hover:border-red-500 transition-colors"
+                  title="Excluir tópico"
+                  aria-label="Excluir tópico"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18"/>
+                    <path d="M8 6V4h8v2"/>
+                    <path d="M19 6l-1 14H6L5 6"/>
+                    <path d="M10 11v5"/>
+                    <path d="M14 11v5"/>
+                  </svg>
+                </button>
+              </div>
+            ` : ''}
           </div>
-        ` : ''}
-      </div>
 </td>
 
-                ${showDoneCol ? `
-                  <td class="p-4 text-center align-middle">
-                    <input
-                      type="checkbox"
-                      class="checkbox-custom accent-indigo-600"
-                      ${state.q ? 'checked' : ''}
-                      onclick="toggleConcluido('${storageKey}')"
-                      title="Marcar como concluído (define a data da aula)"
-                    />
-                  </td>
-                ` : ''}
+                    ${showDoneCol ? `
+                      <td class="p-4 text-center align-middle">
+                        <input
+                          type="checkbox"
+                          class="checkbox-custom accent-indigo-600"
+                          ${state.q ? 'checked' : ''}
+                          onclick="toggleConcluido('${storageKey}')"
+                          title="Marcar como concluído (define a data da aula)"
+                        />
+                      </td>
+                    ` : ''}
 
-                ${showRevisionCol ? `<td class="p-4 text-center align-middle">
-                  <div class="flex flex-col items-center justify-center gap-1.5">
-                    <span class="text-xs font-bold text-gray-700 dark:text-slate-200">${state.countR || 0} revisão${(state.countR || 0) === 1 ? '' : 'ões'} feita${(state.countR || 0) === 1 ? '' : 's'}</span>
-                    <span class="text-xs font-mono font-bold ${urgency}">${displayDate}</span>
-                    <div class="flex items-center gap-1.5 mt-1">
-                      <button type="button" onclick="setViewMode('history')" class="rev-badge border bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-200" title="Abrir Agenda para registrar revisões">AGENDA</button>
-                      ${viewMode === 'subject' ? `<button type="button" onclick="resetRevision('${storageKey}')" class="rev-badge border bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300" title="Zerar dados de estudo deste tópico">ZERAR</button>` : ''}
-                    </div>
-                  </div>
-                </td>` : ''}
+                    ${showRevisionCol ? `<td class="p-4 text-center align-middle">
+                      <div class="flex flex-col items-center justify-center gap-1.5">
+                        <span class="text-xs font-bold text-gray-700 dark:text-slate-200">${state.countR || 0} revisão${(state.countR || 0) === 1 ? '' : 'ões'} feita${(state.countR || 0) === 1 ? '' : 's'}</span>
+                        <span class="text-xs font-mono font-bold ${urgency}">${displayDate}</span>
+                        <div class="flex items-center gap-1.5 mt-1">
+                          <button type="button" onclick="setViewMode('history')" class="rev-badge border bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-200" title="Abrir Agenda para registrar revisões">AGENDA</button>
+                          ${viewMode === 'subject' ? `<button type="button" onclick="resetRevision('${storageKey}')" class="rev-badge border bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300" title="Zerar dados de estudo deste tópico">ZERAR</button>` : ''}
+                        </div>
+                      </div>
+                    </td>` : ''}
 
-                <td class="p-4 text-center align-middle">
-      <div class="flex items-center justify-center gap-2 flex-wrap">
-        <button type="button" onclick="showSessionModal('${storageKey}', 'questions')" class="rev-badge border bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-200" title="Registrar uma sessão de estudo">SESSÃO</button>
-        ${viewMode === 'subject' ? `
-          <button
-            type="button"
-            onclick="editTopicQuestionTotals('${storageKey}')"
-            class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200"
-            title="Ver e editar o total de questões e acertos"
-          >${questionTotals.questions}Q · ${questionTotals.correct}A</button>
-        ` : ''}
-        ${viewMode === 'subject' && subjectTopicSortMode === 'manual' ? `
-          <button
-            type="button"
-            onclick="moveTopicUpInSubject(${item.sIdx}, ${item.tIdx})"
-            class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200"
-            title="Subir tópico"
-          >↑</button>
+                    <td class="p-4 text-center align-middle">
+          <div class="flex items-center justify-center gap-2 flex-wrap">
+            <button type="button" onclick="showSessionModal('${storageKey}', 'questions')" class="rev-badge border bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-200" title="Registrar uma sessão de estudo">SESSÃO</button>
+            ${viewMode === 'subject' ? `
+              <button
+                type="button"
+                onclick="editTopicQuestionTotals('${storageKey}')"
+                class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200"
+                title="Ver e editar o total de questões e acertos"
+              >${questionTotals.questions}Q · ${questionTotals.correct}A</button>
+            ` : ''}
+            ${viewMode === 'subject' && subjectTopicSortMode === 'manual' ? `
+              <button
+                type="button"
+                onclick="moveTopicUpInSubject(${item.sIdx}, ${item.tIdx})"
+                class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200"
+                title="Subir tópico"
+              >↑</button>
 
-          <button
-            type="button"
-            onclick="moveTopicDownInSubject(${item.sIdx}, ${item.tIdx})"
-            class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200"
-            title="Descer tópico"
-          >↓</button>
-        ` : ''}
+              <button
+                type="button"
+                onclick="moveTopicDownInSubject(${item.sIdx}, ${item.tIdx})"
+                class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200"
+                title="Descer tópico"
+              >↓</button>
+            ` : ''}
 
-                    <button onclick="toggleDominated('${storageKey}')" type="button"
-                      class="rev-badge border ${state.dominated ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}">
-                      ${state.dominated ? 'DOMINADO' : 'DOMÍNIO?'}
-                    </button>
-                  </div>
-                </td>
+                        <button onclick="toggleDominated('${storageKey}')" type="button"
+                          class="rev-badge border ${state.dominated ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}">
+                          ${state.dominated ? 'DOMINADO' : 'DOMÍNIO?'}
+                        </button>
+                      </div>
+                    </td>
 
-              </tr>
-            `;
+                  </tr>
+                `;
             }).join('');
         }
 
@@ -5239,21 +5514,21 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
 
             title.innerText = 'Questões do tópico';
             message.innerHTML = `
-            <div class="space-y-4">
-              <div class="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
-                <div class="text-[10px] font-bold uppercase text-indigo-500">${escapeHtml(subject?.materia || '')}</div>
-                <div class="text-sm font-semibold text-gray-800 dark:text-slate-100">${escapeHtml(topic)}</div>
-              </div>
-              <div class="grid grid-cols-2 gap-3">
-                <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Questões totais
-                  <input id="topic-total-questions" type="number" min="0" value="${totals.questions}" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
-                </label>
-                <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Acertos totais
-                  <input id="topic-total-correct" type="number" min="0" value="${totals.correct}" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
-                </label>
-              </div>
-              <p class="text-xs text-gray-500 dark:text-slate-400">A tag será recalculada pelo percentual de acertos. A partir de 80%, o tópico ficará Forte; entre 70% e 79%, Consolidando; abaixo de 70%, Frágil.</p>
-            </div>`;
+                <div class="space-y-4">
+                  <div class="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
+                    <div class="text-[10px] font-bold uppercase text-indigo-500">${escapeHtml(subject?.materia || '')}</div>
+                    <div class="text-sm font-semibold text-gray-800 dark:text-slate-100">${escapeHtml(topic)}</div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-3">
+                    <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Questões totais
+                      <input id="topic-total-questions" type="number" min="0" value="${totals.questions}" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
+                    </label>
+                    <label class="text-xs font-bold text-gray-600 dark:text-slate-300">Acertos totais
+                      <input id="topic-total-correct" type="number" min="0" value="${totals.correct}" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm" />
+                    </label>
+                  </div>
+                  <p class="text-xs text-gray-500 dark:text-slate-400">A tag será recalculada pelo percentual de acertos. A partir de 80%, o tópico ficará Forte; entre 70% e 79%, Consolidando; abaixo de 70%, Frágil.</p>
+                </div>`;
 
             footer.innerHTML = '';
             if (totals.manual) {
@@ -5446,7 +5721,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             if (studyCloudUser) scheduleCloudSync(1800);
         }
 
-        Storage.prototype.setItem = function(key, value) {
+        Storage.prototype.setItem = function (key, value) {
             const before = this === localStorage ? this.getItem(key) : null;
             _studyStorageSetItem.call(this, key, value);
             if (this === localStorage && studyShouldSyncKey(key) && before !== String(value)) {
@@ -5454,14 +5729,14 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             }
         };
 
-        Storage.prototype.removeItem = function(key) {
+        Storage.prototype.removeItem = function (key) {
             const existed = this === localStorage ? this.getItem(key) !== null : false;
             _studyStorageRemoveItem.call(this, key);
             if (this === localStorage && existed && studyShouldSyncKey(key)) studyMarkLocalDirty();
         };
 
-        Storage.prototype.clear = function() {
-            const hadStudyData = this === localStorage && Array.from({length: this.length}, (_, i) => this.key(i)).some(studyShouldSyncKey);
+        Storage.prototype.clear = function () {
+            const hadStudyData = this === localStorage && Array.from({ length: this.length }, (_, i) => this.key(i)).some(studyShouldSyncKey);
             _studyStorageClear.call(this);
             if (hadStudyData) studyMarkLocalDirty();
         };
@@ -5502,7 +5777,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             try {
                 const progress = JSON.parse(localStorage.getItem('study_tracker_v3') || '{}');
                 if (progress && Object.keys(progress).length) return true;
-            } catch {}
+            } catch { }
             try {
                 const subjects = JSON.parse(localStorage.getItem('study_edital_names_v2') || '[]');
                 if (Array.isArray(subjects) && subjects.length) {
@@ -5510,7 +5785,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                     const name = String(subjects[0]?.materia || '').trim().toLowerCase();
                     if (name && name !== 'materia lorem ipsum') return true;
                 }
-            } catch {}
+            } catch { }
             return false;
         }
 
@@ -5550,17 +5825,17 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             document.querySelectorAll('[data-cloud-sync-dot]').forEach(el => {
                 el.className = 'inline-block w-2 h-2 rounded-full ' + (
                     status === 'synced' ? 'bg-emerald-500' :
-                    status === 'pending' ? 'bg-amber-500' :
-                    status === 'syncing' ? 'bg-indigo-500 animate-pulse' :
-                    status === 'offline' ? 'bg-gray-400' :
-                    status === 'error' ? 'bg-red-500' : 'bg-gray-400'
+                        status === 'pending' ? 'bg-amber-500' :
+                            status === 'syncing' ? 'bg-indigo-500 animate-pulse' :
+                                status === 'offline' ? 'bg-gray-400' :
+                                    status === 'error' ? 'bg-red-500' : 'bg-gray-400'
                 );
             });
         }
 
         function scheduleCloudSync(delay = 1500) {
             clearTimeout(studyCloudTimer);
-            studyCloudTimer = setTimeout(() => syncStudyCloud({interactive:false}), delay);
+            studyCloudTimer = setTimeout(() => syncStudyCloud({ interactive: false }), delay);
         }
 
         async function studyFetchRemote() {
@@ -5599,8 +5874,8 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                 ? 'Há dados neste dispositivo e também na nuvem. Escolha qual versão deve prevalecer.<br><br><strong>Usar este dispositivo</strong> envia os dados atuais para a nuvem. <strong>Usar nuvem</strong> substitui os dados locais.'
                 : 'Este dispositivo e a nuvem foram alterados desde a última sincronização. Escolha qual versão deve prevalecer.';
             footer.innerHTML = `
-                <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-slate-200 text-sm font-bold" onclick="resolveStudyCloudConflict('cloud')">Usar nuvem</button>
-                <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="resolveStudyCloudConflict('local')">Usar este dispositivo</button>`;
+                    <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-slate-200 text-sm font-bold" onclick="resolveStudyCloudConflict('cloud')">Usar nuvem</button>
+                    <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="resolveStudyCloudConflict('local')">Usar este dispositivo</button>`;
             modal.style.display = 'flex';
         }
 
@@ -5624,7 +5899,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             }
         }
 
-        async function syncStudyCloud({interactive = true} = {}) {
+        async function syncStudyCloud({ interactive = true } = {}) {
             if (!studyCloudClient || !studyCloudUser || studyCloudBusy) return;
             if (!navigator.onLine) {
                 updateCloudSyncUI('offline');
@@ -5700,25 +5975,25 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             if (!studyCloudUser) {
                 title.innerText = 'Entrar na nuvem';
                 message.innerHTML = `
-                    <p class="mb-4">Use a mesma conta no PC e no celular para sincronizar seus dados.</p>
-                    <label class="block text-xs font-bold mb-1">E-mail</label>
-                    <input id="study-cloud-email" type="email" autocomplete="email" class="w-full p-3 mb-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700" placeholder="seu@email.com">
-                    <label class="block text-xs font-bold mb-1">Senha</label>
-                    <input id="study-cloud-password" type="password" autocomplete="current-password" class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700" placeholder="Sua senha">
-                    <p class="mt-3 text-xs text-gray-500 dark:text-slate-400">A conta é criada por você no painel do Supabase. A senha não fica salva no código do Study Tracker.</p>`;
+                        <p class="mb-4">Use a mesma conta no PC e no celular para sincronizar seus dados.</p>
+                        <label class="block text-xs font-bold mb-1">E-mail</label>
+                        <input id="study-cloud-email" type="email" autocomplete="email" class="w-full p-3 mb-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700" placeholder="seu@email.com">
+                        <label class="block text-xs font-bold mb-1">Senha</label>
+                        <input id="study-cloud-password" type="password" autocomplete="current-password" class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700" placeholder="Sua senha">
+                        <p class="mt-3 text-xs text-gray-500 dark:text-slate-400">A conta é criada por você no painel do Supabase. A senha não fica salva no código do Study Tracker.</p>`;
                 footer.innerHTML = `
-                    <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm" onclick="document.getElementById('custom-modal').style.display='none'">Cancelar</button>
-                    <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="studyCloudSignIn()">Entrar</button>`;
+                        <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm" onclick="document.getElementById('custom-modal').style.display='none'">Cancelar</button>
+                        <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="studyCloudSignIn()">Entrar</button>`;
             } else {
                 title.innerText = 'Sincronização';
                 const pending = localStorage.getItem(STUDY_SYNC_DIRTY_KEY) === '1';
                 message.innerHTML = `
-                    <p class="mb-2"><strong>${escapeHtml(studyCloudUser.email || 'Conta conectada')}</strong></p>
-                    <p class="text-sm">Status: ${pending ? 'há alterações locais pendentes' : 'dados sincronizados'}.</p>
-                    <p class="mt-3 text-xs text-gray-500 dark:text-slate-400">O Study Tracker continua salvando localmente mesmo sem internet.</p>`;
+                        <p class="mb-2"><strong>${escapeHtml(studyCloudUser.email || 'Conta conectada')}</strong></p>
+                        <p class="text-sm">Status: ${pending ? 'há alterações locais pendentes' : 'dados sincronizados'}.</p>
+                        <p class="mt-3 text-xs text-gray-500 dark:text-slate-400">O Study Tracker continua salvando localmente mesmo sem internet.</p>`;
                 footer.innerHTML = `
-                    <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm" onclick="studyCloudSignOut()">Sair</button>
-                    <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="document.getElementById('custom-modal').style.display='none'; syncStudyCloud({interactive:true})">Sincronizar agora</button>`;
+                        <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm" onclick="studyCloudSignOut()">Sair</button>
+                        <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="document.getElementById('custom-modal').style.display='none'; syncStudyCloud({interactive:true})">Sincronizar agora</button>`;
             }
             modal.style.display = 'flex';
         }
@@ -5737,7 +6012,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                 studyCloudUser = data.user;
                 document.getElementById('custom-modal').style.display = 'none';
                 updateCloudSyncUI('pending');
-                await syncStudyCloud({interactive:true});
+                await syncStudyCloud({ interactive: true });
             } catch (err) {
                 updateCloudSyncUI('disconnected');
                 showModal('Não foi possível entrar', err?.message || 'Confira o e-mail e a senha.');
@@ -5769,17 +6044,17 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                     studyCloudUser = session?.user || null;
                     updateCloudSyncUI(studyCloudUser ? (localStorage.getItem(STUDY_SYNC_DIRTY_KEY) === '1' ? 'pending' : 'synced') : 'disconnected');
                 });
-                if (studyCloudUser) setTimeout(() => syncStudyCloud({interactive:false}), 300);
+                if (studyCloudUser) setTimeout(() => syncStudyCloud({ interactive: false }), 300);
             } catch (err) {
                 console.error('Falha ao iniciar Supabase:', err);
                 updateCloudSyncUI('error');
             }
         }
 
-        window.addEventListener('online', () => { if (studyCloudUser) syncStudyCloud({interactive:false}); });
+        window.addEventListener('online', () => { if (studyCloudUser) syncStudyCloud({ interactive: false }); });
         window.addEventListener('offline', () => updateCloudSyncUI('offline'));
         document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible' && studyCloudUser) syncStudyCloud({interactive:false});
+            if (document.visibilityState === 'visible' && studyCloudUser) syncStudyCloud({ interactive: false });
         });
 
 
@@ -5885,11 +6160,11 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
     </script>
 
     <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./service-worker.js').catch(err => console.error('Service Worker:', err));
-        });
-    }
+        if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js').catch(err => console.error('Service Worker:', err));
+            });
+        }
     </script>
 </body>
 </html>
