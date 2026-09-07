@@ -1,0 +1,62 @@
+{
+  "name": "study-tracker",
+  "version": "67.0.0",
+  "author": "Debs",
+  "description": "Study Tracker",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "sync-version": "node scripts/sync-version.js",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.seuapp.studytracker",
+    "productName": "Study Tracker",
+    "asar": true,
+    "compression": "maximum",
+    "files": [
+      "index.html",
+      "main.js",
+      "preload.js",
+      "manifest.json",
+      "service-worker.js",
+      "version.json",
+      "icons/**/*"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "artifactName": "${productName} Setup ${version}.${ext}",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Study Tracker",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    }
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "mammoth": "^1.11.0",
+    "xlsx": "^0.18.5"
+  }
+}

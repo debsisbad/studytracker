@@ -1,0 +1,22 @@
+STUDY TRACKER 61.0.0 — VERSÃO UNIFICADA
+
+1) ELECTRON / WINDOWS
+- Faça backup da pasta atual do projeto.
+- Substitua na raiz: index.html, package.json, main.js e preload.js.
+- Adicione manifest.json, service-worker.js, icons/ e mantenha build/icon.ico.
+- Execute: npm install
+- Teste: npm start
+- Gere instaladores: npm run dist
+- Os arquivos sairão em dist/.
+
+2) GITHUB PAGES
+- Use o MESMO index.html deste pacote.
+- Envie também manifest.json, service-worker.js e icons/.
+- Não envie package.json/main.js/preload.js para o Pages se não quiser; eles não são necessários no navegador.
+
+3) DADOS
+- A sincronização Supabase permanece a mesma.
+- Não apague seu backup XLSX até confirmar PC e celular sincronizados.
+
+IMPORTANTE
+O package.json agora empacota apenas os arquivos necessários. Pastas locais como userData, Backups_Index e dist não entram no instalador.

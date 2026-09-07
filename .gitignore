@@ -1,0 +1,37 @@
+# Dependências
+node_modules/
+
+# Builds / instaladores
+dist/
+out/
+release/
+
+# Dados locais do app
+userData/
+Backups/
+Backups_Index/
+
+# Arquivos temporários de build
+*.buildbak
+*.tmp
+*.temp
+*.log
+
+# Cache
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sistema
+Thumbs.db
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Arquivos locais que não precisam ir para o GitHub
+builder-debug.yml
+builder-effective-config.yml
+builder-effective-config.yaml
