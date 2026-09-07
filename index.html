@@ -386,7 +386,7 @@
 
         @media (max-width: 767px) {
             html { scrollbar-gutter: auto; }
-            body { padding-bottom: calc(82px + env(safe-area-inset-bottom)); }
+            body { padding-bottom: calc(86px + env(safe-area-inset-bottom)); font-size: 17px; }
             .mobile-only { display: block; }
             .desktop-only-mobile-hide { display: none !important; }
             #desktop-overview { display: none !important; }
@@ -396,8 +396,8 @@
             body > .max-w-6xl { padding: 12px 12px 24px !important; }
             header { margin-bottom: 14px !important; gap: 10px !important; align-items: stretch !important; }
             header > div:first-child { align-items: flex-start !important; }
-            header h1 { font-size: 1.45rem !important; line-height: 1.8rem; }
-            #app-subtitle { font-size: .72rem; }
+            header h1 { font-size: 1.75rem !important; line-height: 2.1rem; }
+            #app-subtitle { font-size: .9rem; line-height: 1.25rem; }
             header > div:last-child { width: 100%; gap: 8px !important; justify-content: space-between; flex-wrap: wrap; }
             header > div:last-child > button[onclick="startRandomTest()"] { display: none; }
             header > div:last-child > button[onclick="toggleDarkMode()"] { order: 2; width: 42px; height: 42px; padding: 8px; }
@@ -406,7 +406,7 @@
                 justify-content: space-around; min-width: 0;
             }
             header > div:last-child > div:last-child .h-10 { height: 32px; }
-            header > div:last-child > div:last-child .text-2xl { font-size: 1.15rem; line-height: 1.45rem; }
+            header > div:last-child > div:last-child .text-2xl { font-size: 1.4rem; line-height: 1.7rem; }
             #exam-countdown-mobile { display: block; }
 
             #dashboard-toolbar { display: none !important; }
@@ -424,16 +424,26 @@
                 box-shadow: 0 1px 3px rgba(0,0,0,.06);
             }
             .dark .mobile-study-card { background: #111827; border-color: #374151; }
-            .mobile-section-title { font-size: 1rem; font-weight: 800; color: #312e81; }
+            .mobile-section-title { font-size: 1.18rem; line-height: 1.55rem; font-weight: 800; color: #312e81; }
             .dark .mobile-section-title { color: #c7d2fe; }
-            .mobile-muted { font-size: .72rem; color: #6b7280; }
+            .mobile-muted { font-size: .86rem; line-height: 1.25rem; color: #6b7280; }
             .dark .mobile-muted { color: #94a3b8; }
+
+            /* Fonte mobile ampliada: aumenta também textos gerados com utilitários Tailwind. */
+            #mobile-view-container .text-xs { font-size: .88rem !important; line-height: 1.25rem !important; }
+            #mobile-view-container .text-sm { font-size: 1rem !important; line-height: 1.45rem !important; }
+            #mobile-view-container .text-base { font-size: 1.08rem !important; line-height: 1.55rem !important; }
+            #mobile-view-container [class*="text-[9px]"] { font-size: .72rem !important; line-height: 1rem !important; }
+            #mobile-view-container [class*="text-[10px]"] { font-size: .76rem !important; line-height: 1.05rem !important; }
+            #mobile-view-container [class*="text-[11px]"] { font-size: .8rem !important; line-height: 1.1rem !important; }
+            #exam-countdown-mobile { font-size: .95rem !important; line-height: 1.3rem; }
+            header [class*="text-[9px]"], header [class*="text-[10px]"] { font-size: .72rem !important; line-height: 1rem !important; }
             .mobile-btn {
-                min-height: 44px; border-radius: 12px; padding: 9px 12px; font-size: .75rem; font-weight: 800;
+                min-height: 48px; border-radius: 12px; padding: 10px 13px; font-size: .88rem; line-height: 1.2rem; font-weight: 800;
                 display: inline-flex; align-items: center; justify-content: center; gap: 6px;
             }
-            .mobile-topic-title { font-size: .9rem; line-height: 1.25rem; font-weight: 700; overflow-wrap: anywhere; }
-            .mobile-subject-label { font-size: .64rem; line-height: .9rem; font-weight: 800; text-transform: uppercase; letter-spacing: .035em; color: #6366f1; }
+            .mobile-topic-title { font-size: 1.05rem; line-height: 1.5rem; font-weight: 700; overflow-wrap: anywhere; }
+            .mobile-subject-label { font-size: .76rem; line-height: 1.05rem; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; color: #6366f1; }
             .dark .mobile-subject-label { color: #a5b4fc; }
             .mobile-scroll-row { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
             .mobile-scroll-row::-webkit-scrollbar { display:none; }
@@ -447,9 +457,9 @@
             .dark #mobile-bottom-nav { background: rgba(17,24,39,.96); border-color: #374151; }
             .mobile-nav-btn {
                 min-height: 54px; border-radius: 12px; display:flex; flex-direction:column; align-items:center; justify-content:center;
-                gap: 3px; color:#6b7280; font-size:9px; font-weight:800; position:relative;
+                gap: 4px; color:#6b7280; font-size:11px; line-height: 1rem; font-weight:800; position:relative;
             }
-            .mobile-nav-btn svg { width: 20px; height: 20px; }
+            .mobile-nav-btn svg { width: 22px; height: 22px; }
             .dark .mobile-nav-btn { color:#94a3b8; }
             .mobile-nav-btn.active { color:#4f46e5; background:#eef2ff; }
             .dark .mobile-nav-btn.active { color:#c7d2fe; background:#312e81; }
@@ -2814,12 +2824,13 @@
             syncWindowTitle();
         }
 
-        const APP_VERSION = "1.0";
+        const APP_VERSION = "1.1";
 
-function renderAppVersion() {
-    const el = document.getElementById('app-version');
-    if (el) el.innerText = `V${APP_VERSION}`;
-}
+        function renderAppVersion() {
+            const el = document.getElementById('app-version');
+            if (el) el.innerText = `V${APP_VERSION}`;
+        }
+
         function renderSettings() {
             loadAppConfig();
             renderSubjectOrderSettings();
