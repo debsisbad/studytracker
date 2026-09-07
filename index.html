@@ -2814,22 +2814,12 @@
             syncWindowTitle();
         }
 
-        function renderAppVersion() {
-            const el = document.getElementById('app-version');
-            if (!el) return;
+        const APP_VERSION = "1.0";
 
-            let v = null;
-            try {
-                v = window.studyIO?.getAppVersion?.();
-            } catch { }
-
-            Promise.resolve(v).then(ver => {
-                const s = String(ver || "").trim();
-                const major = s.split(".")[0] || "--";
-                el.innerText = `V${major}`;
-            });
-        }
-
+function renderAppVersion() {
+    const el = document.getElementById('app-version');
+    if (el) el.innerText = `V${APP_VERSION}`;
+}
         function renderSettings() {
             loadAppConfig();
             renderSubjectOrderSettings();
