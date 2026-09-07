@@ -4,19 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Tracker</title>
-<link rel="manifest" href="./manifest.json">
 
-<meta name="theme-color" content="#4f46e5">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Study Tracker">
-
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: "class" };</script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         html {
@@ -375,89 +368,6 @@
             background: #312e81;
             color: #c7d2fe;
         }
-
-
-        /* =============================
-           Mobile experience (<= 767px)
-           ============================= */
-        .mobile-only { display: none; }
-        #mobile-bottom-nav { display: none; }
-        .mobile-card-action { min-height: 44px; }
-
-        @media (max-width: 767px) {
-            html { scrollbar-gutter: auto; }
-            body { padding-bottom: calc(82px + env(safe-area-inset-bottom)); }
-            .mobile-only { display: block; }
-            .desktop-only-mobile-hide { display: none !important; }
-            #desktop-overview { display: none !important; }
-            #table-view-section { display: none !important; }
-            #subject-tabs-wrapper { display: none !important; }
-
-            body > .max-w-6xl { padding: 12px 12px 24px !important; }
-            header { margin-bottom: 14px !important; gap: 10px !important; align-items: stretch !important; }
-            header > div:first-child { align-items: flex-start !important; }
-            header h1 { font-size: 1.45rem !important; line-height: 1.8rem; }
-            #app-subtitle { font-size: .72rem; }
-            header > div:last-child { width: 100%; gap: 8px !important; justify-content: space-between; flex-wrap: wrap; }
-            header > div:last-child > button[onclick="startRandomTest()"] { display: none; }
-            header > div:last-child > button[onclick="toggleDarkMode()"] { order: 2; width: 42px; height: 42px; padding: 8px; }
-            header > div:last-child > div:last-child {
-                order: 1; flex: 1 1 calc(100% - 54px); padding: 10px 12px !important; gap: 10px !important;
-                justify-content: space-around; min-width: 0;
-            }
-            header > div:last-child > div:last-child .h-10 { height: 32px; }
-            header > div:last-child > div:last-child .text-2xl { font-size: 1.15rem; line-height: 1.45rem; }
-            #exam-countdown-mobile { display: block; }
-
-            #dashboard-toolbar { display: none !important; }
-            #dashboard-container { gap: 12px !important; margin-bottom: 88px !important; }
-            #dashboard-container > div { border-radius: 16px; }
-            #dashboard-container .subject-card { min-height: 120px; padding: 14px; }
-            #dashboard-container .subject-card:hover { transform: none; }
-
-            #settings-section { margin-bottom: 88px !important; }
-            #settings-section > div { padding: 16px !important; border-radius: 16px; }
-
-            #mobile-view-container { display: block; margin-bottom: 88px; }
-            .mobile-study-card {
-                background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 14px;
-                box-shadow: 0 1px 3px rgba(0,0,0,.06);
-            }
-            .dark .mobile-study-card { background: #111827; border-color: #374151; }
-            .mobile-section-title { font-size: 1rem; font-weight: 800; color: #312e81; }
-            .dark .mobile-section-title { color: #c7d2fe; }
-            .mobile-muted { font-size: .72rem; color: #6b7280; }
-            .dark .mobile-muted { color: #94a3b8; }
-            .mobile-btn {
-                min-height: 44px; border-radius: 12px; padding: 9px 12px; font-size: .75rem; font-weight: 800;
-                display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-            }
-            .mobile-topic-title { font-size: .9rem; line-height: 1.25rem; font-weight: 700; overflow-wrap: anywhere; }
-            .mobile-subject-label { font-size: .64rem; line-height: .9rem; font-weight: 800; text-transform: uppercase; letter-spacing: .035em; color: #6366f1; }
-            .dark .mobile-subject-label { color: #a5b4fc; }
-            .mobile-scroll-row { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-            .mobile-scroll-row::-webkit-scrollbar { display:none; }
-
-            #mobile-bottom-nav {
-                display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: fixed;
-                left: 0; right: 0; bottom: 0; z-index: 900; padding: 7px 7px calc(7px + env(safe-area-inset-bottom));
-                background: rgba(255,255,255,.96); border-top: 1px solid #e5e7eb; backdrop-filter: blur(14px);
-                box-shadow: 0 -8px 24px rgba(15,23,42,.08);
-            }
-            .dark #mobile-bottom-nav { background: rgba(17,24,39,.96); border-color: #374151; }
-            .mobile-nav-btn {
-                min-height: 54px; border-radius: 12px; display:flex; flex-direction:column; align-items:center; justify-content:center;
-                gap: 3px; color:#6b7280; font-size:9px; font-weight:800; position:relative;
-            }
-            .mobile-nav-btn svg { width: 20px; height: 20px; }
-            .dark .mobile-nav-btn { color:#94a3b8; }
-            .mobile-nav-btn.active { color:#4f46e5; background:#eef2ff; }
-            .dark .mobile-nav-btn.active { color:#c7d2fe; background:#312e81; }
-            .mobile-nav-dot { position:absolute; top:7px; right:22%; width:8px; height:8px; border-radius:999px; background:#ef4444; }
-
-            #custom-modal > div { max-height: 88vh; overflow-y: auto; padding: 18px !important; }
-            input, select, textarea, button { touch-action: manipulation; }
-        }
     </style>
 </head>
 
@@ -520,11 +430,9 @@
             </div>
         </header>
 
-        <div id="exam-countdown-mobile" class="mobile-only w-full mb-3 px-1 text-xs font-bold text-indigo-600 dark:text-indigo-300"></div>
-
         <!-- Painel Central -->
-        <div id="desktop-overview" class="w-full grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <div id="desktop-next-action-panel" class="lg:col-span-2"></div>
+        <div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div id="desktop-next-action-panel" class="lg:col-span-2 h-full"></div>
 
             <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
                 <div class="flex items-center justify-between mb-4">
@@ -560,6 +468,13 @@
                             class="w-full py-2 bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-300 border border-indigo-600 dark:border-indigo-500 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-xs font-medium mb-2">
                         Exportar Backup (XLSX)
                     </button>
+
+                    <button onclick="showStudyCloudPanel()"
+                            class="w-full py-2 bg-white dark:bg-gray-800 text-slate-700 dark:text-slate-200 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-xs font-medium flex items-center justify-center gap-2">
+                        <span data-cloud-sync-dot class="inline-block w-2 h-2 rounded-full bg-gray-400"></span>
+                        <span data-cloud-sync-label>Nuvem: desconectado</span>
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -728,9 +643,6 @@
             </div>
         </div>
 
-        <!-- Conteúdo otimizado para celular -->
-        <div id="mobile-view-container" class="mobile-only w-full hidden"></div>
-
         <!-- Modo Tabela -->
         <div id="table-view-section" class="w-full">
             <div id="subject-tabs-wrapper" class="tabs-nav-wrapper mb-6 w-full">
@@ -761,25 +673,6 @@
 
     </div>
 
-    <nav id="mobile-bottom-nav" aria-label="Navegação principal no celular">
-        <button type="button" class="mobile-nav-btn" data-mobile-view="dashboard" onclick="setViewMode('dashboard')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/></svg><span>Hoje</span>
-        </button>
-        <button type="button" class="mobile-nav-btn" data-mobile-view="cycle" onclick="setViewMode('cycle')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h7"/><path d="m17 15 3 3-3 3"/></svg><span>Ciclo</span>
-        </button>
-        <button type="button" class="mobile-nav-btn" data-mobile-view="history" onclick="setViewMode('history')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg><span>Agenda</span>
-        </button>
-        <button type="button" class="mobile-nav-btn" data-mobile-view="subject" onclick="setViewMode('subject')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V4Z"/></svg><span>Matérias</span>
-        </button>
-        <button type="button" class="mobile-nav-btn" data-mobile-view="more" onclick="showMobileMoreMenu()">
-            <span id="mobile-more-dot" class="mobile-nav-dot hidden"></span>
-            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg><span>Mais</span>
-        </button>
-    </nav>
-
     <script>
 
 
@@ -794,7 +687,7 @@
         function toggleHideDoneTopicsInCycle() {
             hideDoneTopicsInCycle = !hideDoneTopicsInCycle;
             localStorage.setItem('study_cycle_hide_done_topics_v1', JSON.stringify(hideDoneTopicsInCycle));
-            if (isMobileViewport()) renderMobileView(); else renderTopics();
+            renderTopics();
         }
 
         function showSessionModal(k, presetType = 'questions', afterSave = null) {
@@ -1012,7 +905,7 @@
                 localStorage.removeItem('study_cycle_tag_filter_v1');
             }
 
-            if (isMobileViewport()) renderMobileView(); else renderTopics();
+            renderTopics();
         }
 
         function subjectHasCycleTag(subject, tag) {
@@ -1405,18 +1298,10 @@
             if (mode) mode.innerText = learningConfig.mode === 'final' ? 'Modo reta final' : 'Método 25/50 dias';
             if (!countdown) return;
             const exam = parseDateInputToTs(learningConfig.examDate);
-            if (!exam) {
-                countdown.innerText = '';
-                const mobileCountdown = document.getElementById('exam-countdown-mobile');
-                if (mobileCountdown) mobileCountdown.innerText = learningConfig.mode === 'final' ? 'Modo reta final' : 'Método 25/50 dias';
-                return;
-            }
+            if (!exam) { countdown.innerText = ''; return; }
             const today = new Date(); today.setHours(0, 0, 0, 0);
             const days = Math.ceil((exam - today.getTime()) / 86400000);
-            const label = days >= 0 ? `${days} dia${days === 1 ? '' : 's'} para a prova` : 'Prova encerrada';
-            countdown.innerText = label;
-            const mobileCountdown = document.getElementById('exam-countdown-mobile');
-            if (mobileCountdown) mobileCountdown.innerText = `${label} · ${learningConfig.mode === 'final' ? 'Reta final' : '25/50 dias'}`;
+            countdown.innerText = days >= 0 ? `${days} dia${days === 1 ? '' : 's'} para a prova` : 'Prova encerrada';
         }
 
         function normalizeSession(raw) {
@@ -3178,181 +3063,6 @@
             renderChart();
         }
 
-
-        // -----------------------------
-        // Mobile UX
-        // -----------------------------
-        function isMobileViewport() {
-            return window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
-        }
-
-        function syncMobileNavigation() {
-            const mapped = ['dashboard', 'cycle', 'history', 'subject'].includes(viewMode) ? viewMode : 'more';
-            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.mobileView === mapped);
-            });
-            const dot = document.getElementById('mobile-more-dot');
-            if (dot) dot.classList.toggle('hidden', !hasDueErrorNotebookReview());
-        }
-
-        function showMobileMoreMenu() {
-            const modal = document.getElementById('custom-modal');
-            const title = document.getElementById('modal-title');
-            const message = document.getElementById('modal-message');
-            const footer = document.getElementById('modal-footer');
-            if (!modal || !title || !message || !footer) return;
-            const dueErrors = getErrorNotebookItems().filter(item => !item.done && item.dueAt <= new Date().setHours(23,59,59,999)).length;
-            title.innerText = 'Mais';
-            message.innerHTML = `
-              <div class="grid grid-cols-1 gap-2">
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; setViewMode('upcoming')" class="mobile-btn w-full justify-between bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-slate-100">
-                  <span>Caderno de erros</span><span class="${dueErrors ? 'text-red-500' : 'text-gray-400'}">${dueErrors ? dueErrors + ' pendente' + (dueErrors === 1 ? '' : 's') : 'em dia'}</span>
-                </button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; startRandomTest()" class="mobile-btn w-full bg-[#7667a8] text-white">Teste aleatório</button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; setViewMode('settings')" class="mobile-btn w-full bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-slate-100">Configurações</button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; importWithPicker()" class="mobile-btn w-full bg-indigo-600 text-white">Importar XLSX</button>
-                <button type="button" onclick="document.getElementById('custom-modal').style.display='none'; exportToXLSX()" class="mobile-btn w-full bg-white dark:bg-gray-800 border border-indigo-500 text-indigo-600 dark:text-indigo-300">Exportar backup</button>
-              </div>`;
-            footer.innerHTML = '<button type="button" class="mobile-btn bg-gray-100 text-gray-700" onclick="document.getElementById(\'custom-modal\').style.display=\'none\'">Fechar</button>';
-            modal.style.display = 'flex';
-            syncMobileNavigation();
-        }
-
-        function getMobileCycleItems(limit = 30) {
-            const subjectOrder = getSubjectOrderForCycle()
-                .filter(sIdx => !isHiddenInCycle(edital[sIdx]))
-                .filter(sIdx => subjectHasCycleTag(edital[sIdx], cycleTagFilter));
-            const expanded = buildWeightedCycleOrder(subjectOrder);
-            const pointers = {};
-            const orderedTopics = {};
-            expanded.forEach(sIdx => {
-                if (orderedTopics[sIdx]) return;
-                let order = getTopicQueueForSubject(sIdx).slice();
-                order.sort((a,b) => {
-                    if (learningConfig.mode !== 'final' || !isLearningStatusEnabled('fragile')) return 0;
-                    const pa = recentTopicPercent(userProgress[`ST_${sIdx}_${a}`]);
-                    const pb = recentTopicPercent(userProgress[`ST_${sIdx}_${b}`]);
-                    const wa = pa === null ? 101 : pa;
-                    const wb = pb === null ? 101 : pb;
-                    return (wa - wb) || (a - b);
-                });
-                orderedTopics[sIdx] = order;
-                pointers[sIdx] = 0;
-            });
-            const out = [];
-            let guard = 0;
-            while (out.length < limit && guard++ < 500) {
-                let added = false;
-                for (const sIdx of expanded) {
-                    const order = orderedTopics[sIdx] || [];
-                    while (pointers[sIdx] < order.length) {
-                        const tIdx = order[pointers[sIdx]++];
-                        const st = userProgress[`ST_${sIdx}_${tIdx}`];
-                        if (hideDoneTopicsInCycle && st?.q === true) continue;
-                        out.push({sIdx,tIdx,materia:edital[sIdx].materia,topico:edital[sIdx].topicos[tIdx]});
-                        added = true;
-                        break;
-                    }
-                    if (out.length >= limit) break;
-                }
-                if (!added) break;
-            }
-            return out;
-        }
-
-        function nextAgendaIndex(st) {
-            if (!st?.aulaAt) return -1;
-            const days = getAgendaReviewDays(!!st.dominated);
-            const done = normalizeAgendaDone(st.agendaDone);
-            for (let i=0;i<days.length;i++) if (days[i] !== null && !done[i]) return i;
-            return -1;
-        }
-
-        function mobileStatusHtml(st) {
-            const status = learningStatus(st || {});
-            const pct = recentTopicPercent(st || {});
-            return `<div class="flex items-center gap-2 flex-wrap">${status ? `<span class="learning-badge ${status.cls}">${status.label}</span>` : ''}${pct !== null ? `<span class="text-xs font-bold text-gray-600 dark:text-slate-300">${pct}%</span>` : ''}</div>`;
-        }
-
-        function renderMobileView() {
-            const box = document.getElementById('mobile-view-container');
-            if (!box || !isMobileViewport()) return;
-            syncMobileNavigation();
-
-            if (viewMode === 'cycle') {
-                const items = getMobileCycleItems();
-                box.innerHTML = `
-                  <div class="flex items-center justify-between gap-2 mb-3">
-                    <div><div class="mobile-section-title">Ciclo intercalado</div><div class="mobile-muted">A próxima ação primeiro, sem tabela.</div></div>
-                    <button type="button" onclick="startRandomTest()" class="mobile-btn bg-[#7667a8] text-white">Teste</button>
-                  </div>
-                  <div class="mobile-scroll-row flex gap-2 mb-3">${renderCycleTagFilters()}</div>
-                  <label class="mobile-study-card flex items-center justify-between gap-3 mb-3 text-xs font-bold text-gray-700 dark:text-slate-200">
-                    <span>${hideDoneTopicsInCycle ? 'Tópicos concluídos ocultos' : 'Mostrar tópicos concluídos'}</span>
-                    <input type="checkbox" class="checkbox-custom accent-indigo-600" ${hideDoneTopicsInCycle ? 'checked' : ''} onchange="toggleHideDoneTopicsInCycle()" />
-                  </label>
-                  <div class="space-y-3">${items.length ? items.map((item,index) => {
-                    const k=`ST_${item.sIdx}_${item.tIdx}`, st=userProgress[k]||{};
-                    return `<article class="mobile-study-card ${index===0 ? 'ring-2 ring-indigo-400 dark:ring-indigo-600' : ''}">
-                      ${index===0 ? '<div class="text-[10px] font-black uppercase tracking-wider text-indigo-500 mb-2">Próximo do ciclo</div>' : ''}
-                      <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="mobile-subject-label text-left">${escapeHtml(item.materia)}</button>
-                      <div class="mobile-topic-title mt-1 mb-2">${escapeHtml(item.topico)}</div>
-                      ${mobileStatusHtml(st)}
-                      <div class="grid grid-cols-3 gap-2 mt-3">
-                        <button type="button" onclick="toggleConcluido('${k}')" class="mobile-btn ${st.q ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-600 text-white'}">${st.q ? 'Concluído' : 'Estudei'}</button>
-                        <button type="button" onclick="showSessionModal('${k}','questions')" class="mobile-btn bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-slate-200">Questões</button>
-                        <button type="button" onclick="skipCycleItem(null,${item.sIdx},${item.tIdx})" class="mobile-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-slate-300">Pular</button>
-                      </div>
-                    </article>`;
-                  }).join('') : '<div class="mobile-study-card text-sm text-gray-500">Nenhum tópico disponível com o filtro atual.</div>'}</div>`;
-                return;
-            }
-
-            if (viewMode === 'history') {
-                const rows=[];
-                edital.forEach((s,sIdx)=>{ if(isHiddenInAgenda(s)) return; s.topicos.forEach((t,tIdx)=>{ const st=userProgress[`ST_${sIdx}_${tIdx}`]; if(st?.aulaAt) rows.push({s,sIdx,t,tIdx,st,next:getNextPendingAgendaDate(st)}); }); });
-                rows.sort((a,b)=>(a.next??Number.MAX_SAFE_INTEGER)-(b.next??Number.MAX_SAFE_INTEGER));
-                box.innerHTML=`<div class="mb-3"><div class="mobile-section-title">Agenda</div><div class="mobile-muted">Revisões mais próximas aparecem primeiro.</div></div><div class="space-y-3">${rows.length ? rows.map(r=>{
-                    const k=`ST_${r.sIdx}_${r.tIdx}`, idx=nextAgendaIndex(r.st), days=getAgendaReviewDays(!!r.st.dominated), due=idx>=0?addDays(r.st.aulaAt,days[idx]):null;
-                    const overdue=due && new Date(due).setHours(0,0,0,0)<new Date().setHours(0,0,0,0);
-                    return `<article class="mobile-study-card">
-                      <button type="button" onclick="openSubjectByIndex(${r.sIdx})" class="mobile-subject-label text-left">${escapeHtml(r.s.materia)}</button>
-                      <div class="mobile-topic-title mt-1">${escapeHtml(r.t)}</div>
-                      <div class="grid grid-cols-2 gap-2 mt-3 text-xs"><div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-950"><span class="mobile-muted block">Aula</span><b>${fmtTs(r.st.aulaAt)}</b></div><div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-950"><span class="mobile-muted block">Próxima</span><b class="${overdue?'text-red-500':''}">${due?fmtTs(due):'Concluída'}</b></div></div>
-                      ${idx>=0 ? `<button type="button" onclick="toggleAgendaReview('${k}',${idx})" class="mobile-btn w-full mt-3 bg-indigo-600 text-white">Marcar ${idx+1}ª revisão como feita</button>` : '<div class="mt-3 text-xs font-bold text-emerald-600">Todas as revisões previstas concluídas.</div>'}
-                    </article>`;
-                }).join('') : '<div class="mobile-study-card text-sm text-gray-500">Nenhuma revisão cadastrada.</div>'}</div>`;
-                return;
-            }
-
-            if (viewMode === 'upcoming') {
-                const items=getErrorNotebookItems(); const today=new Date(); today.setHours(0,0,0,0);
-                box.innerHTML=`<div class="mb-3"><div class="mobile-section-title">Caderno de erros</div><div class="mobile-muted">Revisões vencidas e de hoje primeiro.</div></div><div class="space-y-3">${items.length ? items.map(item=>{
-                    const due=new Date(item.dueAt); due.setHours(0,0,0,0); const overdue=!item.done&&due<today; const dueToday=!item.done&&due.getTime()===today.getTime();
-                    return `<article class="mobile-study-card ${overdue?'border-red-300 dark:border-red-800':''} ${item.done?'opacity-60':''}">
-                      <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="mobile-subject-label text-left">${escapeHtml(item.materia)}</button>
-                      <div class="mobile-topic-title mt-1">${escapeHtml(item.topico)}</div>
-                      <div class="flex items-center justify-between gap-3 mt-3"><div class="text-xs"><span class="mobile-muted block">Revisão</span><b class="${overdue?'text-red-500':dueToday?'text-amber-500':''}">${fmtTs(item.dueAt)}${overdue?' · atrasada':dueToday?' · hoje':''}</b></div><input type="checkbox" class="checkbox-custom accent-indigo-600" ${item.done?'checked':''} onclick="toggleErrorNotebookReview('${item.storageKey}','${escapeHtmlAttr(item.sessionId)}',${item.days},'${escapeHtmlAttr(item.retryId||'')}')" /></div>
-                    </article>`;
-                }).join('') : '<div class="mobile-study-card text-sm text-gray-500">Nenhum item no caderno de erros.</div>'}</div>`;
-                return;
-            }
-
-            if (viewMode === 'subject') {
-                let sIdx=edital.findIndex(s=>s.materia===currentSubject && !isHiddenEverywhere(s));
-                if(sIdx<0) sIdx=edital.findIndex(s=>!isHiddenEverywhere(s));
-                if(sIdx<0){ box.innerHTML='<div class="mobile-study-card">Nenhuma matéria cadastrada.</div>'; return; }
-                currentSubject=edital[sIdx].materia; const subject=edital[sIdx];
-                const options=getSubjectOrderAlphabetical().map(idx=>`<option value="${escapeHtmlAttr(edital[idx].materia)}" ${idx===sIdx?'selected':''}>${escapeHtml(edital[idx].materia)}</option>`).join('');
-                let topicIndexes=getTopicOrderForSubject(sIdx);
-                if(subjectTopicSortMode==='pct') topicIndexes=topicIndexes.slice().sort((a,b)=>{const pa=recentTopicPercent(userProgress[`ST_${sIdx}_${a}`]);const pb=recentTopicPercent(userProgress[`ST_${sIdx}_${b}`]);return ((pa===null?101:pa)-(pb===null?101:pb))||(a-b);});
-                box.innerHTML=`
-                  <div class="mobile-study-card mb-3"><label class="mobile-muted font-bold block mb-1">Matéria</label><select class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700 text-sm font-bold" onchange="switchSubject(this.value)">${options}</select><div class="flex gap-2 mt-3"><button type="button" onclick="setSubjectTopicSortMode('pct')" class="mobile-btn flex-1 ${subjectTopicSortMode==='pct'?'bg-indigo-600 text-white':'bg-gray-100 dark:bg-gray-800'}">Mais fracos</button><button type="button" onclick="setSubjectTopicSortMode('manual')" class="mobile-btn flex-1 ${subjectTopicSortMode==='manual'?'bg-indigo-600 text-white':'bg-gray-100 dark:bg-gray-800'}">Ordem manual</button></div></div>
-                  <div class="space-y-3">${topicIndexes.map(tIdx=>{const k=`ST_${sIdx}_${tIdx}`,st=userProgress[k]||{},tot=topicQuestionTotals(st);return `<article class="mobile-study-card"><div class="mobile-topic-title">${escapeHtml(subject.topicos[tIdx])}</div><div class="mt-2">${mobileStatusHtml(st)}</div><div class="flex items-center justify-between mt-3 text-xs"><span class="mobile-muted">${tot.questions} questões · ${tot.correct} acertos</span><label class="flex items-center gap-2 font-bold">Estudado <input type="checkbox" class="checkbox-custom accent-indigo-600" ${st.q?'checked':''} onchange="toggleConcluido('${k}')" /></label></div><div class="grid grid-cols-2 gap-2 mt-3"><button type="button" onclick="showSessionModal('${k}','questions')" class="mobile-btn bg-indigo-600 text-white">Registrar questões</button><button type="button" onclick="editTopicQuestionTotals('${k}')" class="mobile-btn bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-slate-200">Editar totais</button></div></article>`;}).join('')}</div>`;
-                return;
-            }
-        }
-
         // -----------------------------
         // View mode
         // -----------------------------
@@ -3374,7 +3084,6 @@
                 }
             });
             updateErrorNotebookNotification();
-            syncMobileNavigation();
         }
 
         function renderCurrentView() {
@@ -3384,14 +3093,12 @@
             const tableSection = document.getElementById('table-view-section');
             const tabsWrapper = document.getElementById('subject-tabs-wrapper');
             const settingsSection = document.getElementById('settings-section');
-            const mobileContainer = document.getElementById('mobile-view-container');
 
             if (dashToolbar) dashToolbar.classList.add('hidden');
             if (dash) dash.classList.add('hidden');
             if (tableSection) tableSection.classList.add('hidden');
             if (tabsWrapper) tabsWrapper.classList.add('hidden');
             if (settingsSection) settingsSection.classList.add('hidden');
-            if (mobileContainer) mobileContainer.classList.add('hidden');
 
             if (viewMode === 'dashboard') {
                 if (dashToolbar) dashToolbar.classList.remove('hidden');
@@ -3403,13 +3110,6 @@
             if (viewMode === 'settings') {
                 if (settingsSection) settingsSection.classList.remove('hidden');
                 renderSettings();
-                syncMobileNavigation();
-                return;
-            }
-
-            if (isMobileViewport()) {
-                if (mobileContainer) mobileContainer.classList.remove('hidden');
-                renderMobileView();
                 return;
             }
 
@@ -3604,11 +3304,11 @@
         function renderNextActionPanel(actions) {
             if (!actions.length) {
                 return `
-                  <div class="col-span-full p-5 rounded-2xl border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/30 flex flex-col items-center justify-center text-center">
+                  <div class="col-span-full h-full p-5 rounded-2xl border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/30 flex flex-col items-center justify-center text-center">
                     <div class="text-[10px] uppercase tracking-wider font-bold text-green-600">Próxima ação</div>
                     <div class="text-lg font-bold text-green-800 dark:text-green-200 mt-1">Nenhuma pendência crítica agora</div>
                     <div class="text-xs text-green-700 dark:text-green-300 mt-1">Continue pelo Ciclo Intercalado ou faça um teste aleatório.</div>
-                    <div class="flex justify-center gap-2 mt-3 flex-wrap">
+                    <div class="flex justify-center gap-2 mt-3">
                       <button type="button" onclick="setViewMode('cycle')" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold">Abrir ciclo</button>
                       <button type="button" onclick="startRandomTest()" class="px-4 py-2 rounded-xl bg-[#7667a8] text-white text-xs font-bold">Teste aleatório</button>
                     </div>
@@ -3618,7 +3318,7 @@
             const primary = actions[0];
             const secondary = actions.slice(1);
             return `
-              <div class="col-span-full p-5 rounded-2xl border border-indigo-200 dark:border-indigo-800 bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-950/50 dark:to-gray-900 shadow-sm">
+              <div class="col-span-full h-full p-5 rounded-2xl border border-indigo-200 dark:border-indigo-800 bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-950/50 dark:to-gray-900 shadow-sm">
                 <div class="flex items-start justify-between gap-4 flex-wrap">
                   <div class="min-w-0 flex-1">
                     <div class="text-[10px] uppercase tracking-wider font-bold text-indigo-500">O que fazer agora?</div>
@@ -3667,7 +3367,7 @@
             const studiedCount = activeKeys.filter(k => userProgress[k]?.q === true).length;
             const coveragePct = activeKeys.length ? Math.round((studiedCount / activeKeys.length) * 100) : 0;
             const decisionActions = getStudyDecisionActions(4);
-            const nextActionPanel = isMobileViewport() ? renderNextActionPanel(decisionActions) : '';
+            const nextActionPanel = '';
             const allSessions = activeKeys.flatMap(k => topicSessions(userProgress[k]));
             const since30 = Date.now() - 30 * 86400000;
             const recentScored = allSessions.filter(s => s.at >= since30 && s.questions > 0);
@@ -3849,8 +3549,8 @@
 
         function switchSubject(subject) {
             currentSubject = subject;
-            if (isMobileViewport()) renderMobileView();
-            else { renderTabs(); renderTopics(); }
+            renderTabs();
+            renderTopics();
         }
 
         // -----------------------------
@@ -4784,7 +4484,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         function setSubjectTopicSortMode(mode) {
             subjectTopicSortMode = mode === 'manual' ? 'manual' : 'pct';
             localStorage.setItem('study_subject_topic_sort_mode', subjectTopicSortMode);
-            if (isMobileViewport()) renderMobileView(); else renderTopics();
+            renderTopics();
         }
 
         // -----------------------------
@@ -5083,40 +4783,31 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         }
 
         async function importWithPicker() {
-            if (window.studyIO?.pickAndReadAny) {
-                const res = await window.studyIO.pickAndReadAny();
-                if (!res || !res.ok) {
-                    if (res && (res.canceled || res.error === "Cancelado")) return;
-                    showModal("Erro", (res && res.error) ? res.error : "Não consegui abrir o arquivo.");
-                    return;
-                }
-                applyRowsToEdital(res.rows || []);
+            if (!window.studyIO || !window.studyIO.pickAndReadAny) {
+                showModal("Erro", "studyIO não está disponível. (Isso só funciona dentro do Electron.)");
                 return;
             }
 
-            // Navegador/celular: XLSX funciona sem Electron.
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.xlsx,.xls';
-            input.onchange = async () => {
-                const file = input.files?.[0];
-                if (!file) return;
-                try {
-                    const buffer = await file.arrayBuffer();
-                    const wb = XLSX.read(buffer, { type: 'array' });
-                    const firstSheet = wb.Sheets[wb.SheetNames[0]];
-                    const rows = XLSX.utils.sheet_to_json(firstSheet, { defval: '' });
-                    applyRowsToEdital(rows);
-                } catch (err) {
-                    console.error(err);
-                    showModal('Erro', 'Não consegui importar esse XLSX no navegador.');
-                }
-            };
-            input.click();
+            const res = await window.studyIO.pickAndReadAny();
+
+            if (!res || !res.ok) {
+                if (res && (res.canceled || res.error === "Cancelado")) return;
+                showModal("Erro", (res && res.error) ? res.error : "Não consegui abrir o arquivo.");
+                return;
+            }
+
+            applyRowsToEdital(res.rows || []);
+
+
         }
 
         async function exportToXLSX() {
             try {
+                if (!window.studyIO || !window.studyIO.saveBackupXlsx) {
+                    showModal("Erro", "studyIO não está disponível. (Isso só funciona dentro do Electron.)");
+                    return;
+                }
+
                 const out = [];
 
                 function findParentInSubject(subject, itemText) {
@@ -5192,18 +4883,14 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                 const bytes = new Uint8Array(wbout);
 
                 const name = makeBackupName();
-                if (window.studyIO?.saveBackupXlsx) {
-                    const res = await window.studyIO.saveBackupXlsx(Array.from(bytes), name);
-                    if (!res || !res.ok) {
-                        showModal("Erro", "Falha ao salvar backup: " + ((res && res.error) || ''));
-                        return;
-                    }
-                    showModal("Backup salvo", `Salvo em:\n${res.path}`);
-                } else {
-                    // Navegador/celular: dispara o download pelo próprio browser.
-                    XLSX.writeFile(wb, name);
-                    showModal('Backup gerado', 'O arquivo XLSX foi enviado para os downloads do navegador.');
+                const res = await window.studyIO.saveBackupXlsx(Array.from(bytes), name);
+
+                if (!res || !res.ok) {
+                    showModal("Erro", "Falha ao salvar backup: " + ((res && res.error) || ''));
+                    return;
                 }
+
+                showModal("Backup salvo", `Salvo em:\n${res.path}`);
             } catch (err) {
                 console.error(err);
                 showModal("Erro", "Falha ao exportar a planilha (.xlsx).");
@@ -5392,6 +5079,382 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         }
         function escapeHtmlAttr(str) { return escapeHtml(str).replaceAll("\n", " "); }
 
+
+        // ----------------------------------------------------
+        // Sincronização em nuvem (Supabase)
+        // ----------------------------------------------------
+        const STUDY_SUPABASE_URL = "https://kcabmgkesruwgwjwpwbh.supabase.co";
+        const STUDY_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_4HVphWBMqgA601mT4zD5ng_8En7TUh5";
+        const STUDY_SYNC_DIRTY_KEY = 'study_sync_dirty_v1';
+        const STUDY_SYNC_LAST_REMOTE_KEY = 'study_sync_last_remote_at_v1';
+        const STUDY_SYNC_DEVICE_KEY = 'study_sync_device_id_v1';
+        const STUDY_SYNC_PREFIX = 'study_';
+
+        let studyCloudClient = null;
+        let studyCloudUser = null;
+        let studyCloudBusy = false;
+        let studyCloudTimer = null;
+        let studyCloudApplying = false;
+        let studyCloudConflictRemote = null;
+        let studyCloudStatus = 'disconnected';
+
+        const _studyStorageSetItem = Storage.prototype.setItem;
+        const _studyStorageRemoveItem = Storage.prototype.removeItem;
+        const _studyStorageClear = Storage.prototype.clear;
+
+        function studyIsSyncMetaKey(key) {
+            return String(key || '').startsWith('study_sync_');
+        }
+
+        function studyShouldSyncKey(key) {
+            const k = String(key || '');
+            return k.startsWith(STUDY_SYNC_PREFIX) && !studyIsSyncMetaKey(k);
+        }
+
+        function studyMarkLocalDirty() {
+            if (studyCloudApplying) return;
+            _studyStorageSetItem.call(localStorage, STUDY_SYNC_DIRTY_KEY, '1');
+            updateCloudSyncUI(studyCloudUser ? 'pending' : 'disconnected');
+            if (studyCloudUser) scheduleCloudSync(1800);
+        }
+
+        Storage.prototype.setItem = function(key, value) {
+            const before = this === localStorage ? this.getItem(key) : null;
+            _studyStorageSetItem.call(this, key, value);
+            if (this === localStorage && studyShouldSyncKey(key) && before !== String(value)) {
+                studyMarkLocalDirty();
+            }
+        };
+
+        Storage.prototype.removeItem = function(key) {
+            const existed = this === localStorage ? this.getItem(key) !== null : false;
+            _studyStorageRemoveItem.call(this, key);
+            if (this === localStorage && existed && studyShouldSyncKey(key)) studyMarkLocalDirty();
+        };
+
+        Storage.prototype.clear = function() {
+            const hadStudyData = this === localStorage && Array.from({length: this.length}, (_, i) => this.key(i)).some(studyShouldSyncKey);
+            _studyStorageClear.call(this);
+            if (hadStudyData) studyMarkLocalDirty();
+        };
+
+        function studyGetDeviceId() {
+            let id = localStorage.getItem(STUDY_SYNC_DEVICE_KEY);
+            if (!id) {
+                id = (crypto?.randomUUID?.() || ('device-' + Date.now() + '-' + Math.random().toString(16).slice(2)));
+                _studyStorageSetItem.call(localStorage, STUDY_SYNC_DEVICE_KEY, id);
+            }
+            return id;
+        }
+
+        function studySnapshotStorage() {
+            const storage = {};
+            const keys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (studyShouldSyncKey(key)) keys.push(key);
+            }
+            keys.sort().forEach(key => { storage[key] = localStorage.getItem(key); });
+            return {
+                schemaVersion: 1,
+                storage,
+                deviceId: studyGetDeviceId(),
+                clientSavedAt: new Date().toISOString()
+            };
+        }
+
+        function studyNormalizedStorage(data) {
+            const src = data?.storage && typeof data.storage === 'object' ? data.storage : {};
+            const out = {};
+            Object.keys(src).sort().forEach(k => { if (studyShouldSyncKey(k)) out[k] = String(src[k]); });
+            return JSON.stringify(out);
+        }
+
+        function studyHasMeaningfulLocalData() {
+            try {
+                const progress = JSON.parse(localStorage.getItem('study_tracker_v3') || '{}');
+                if (progress && Object.keys(progress).length) return true;
+            } catch {}
+            try {
+                const subjects = JSON.parse(localStorage.getItem('study_edital_names_v2') || '[]');
+                if (Array.isArray(subjects) && subjects.length) {
+                    if (subjects.length > 1) return true;
+                    const name = String(subjects[0]?.materia || '').trim().toLowerCase();
+                    if (name && name !== 'materia lorem ipsum') return true;
+                }
+            } catch {}
+            return false;
+        }
+
+        function studyApplyRemoteSnapshot(remoteData, remoteUpdatedAt) {
+            const storage = remoteData?.storage && typeof remoteData.storage === 'object' ? remoteData.storage : {};
+            studyCloudApplying = true;
+            try {
+                const currentStudyKeys = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (studyShouldSyncKey(key)) currentStudyKeys.push(key);
+                }
+                currentStudyKeys.forEach(key => _studyStorageRemoveItem.call(localStorage, key));
+                Object.entries(storage).forEach(([key, value]) => {
+                    if (studyShouldSyncKey(key) && value !== null && value !== undefined) {
+                        _studyStorageSetItem.call(localStorage, key, String(value));
+                    }
+                });
+                _studyStorageSetItem.call(localStorage, STUDY_SYNC_DIRTY_KEY, '0');
+                if (remoteUpdatedAt) _studyStorageSetItem.call(localStorage, STUDY_SYNC_LAST_REMOTE_KEY, remoteUpdatedAt);
+            } finally {
+                studyCloudApplying = false;
+            }
+        }
+
+        function updateCloudSyncUI(status = studyCloudStatus) {
+            studyCloudStatus = status;
+            const labels = {
+                disconnected: 'Nuvem: desconectado',
+                synced: 'Nuvem: sincronizado',
+                pending: 'Nuvem: pendente',
+                syncing: 'Nuvem: sincronizando…',
+                offline: 'Nuvem: offline',
+                error: 'Nuvem: erro'
+            };
+            document.querySelectorAll('[data-cloud-sync-label]').forEach(el => { el.textContent = labels[status] || labels.disconnected; });
+            document.querySelectorAll('[data-cloud-sync-dot]').forEach(el => {
+                el.className = 'inline-block w-2 h-2 rounded-full ' + (
+                    status === 'synced' ? 'bg-emerald-500' :
+                    status === 'pending' ? 'bg-amber-500' :
+                    status === 'syncing' ? 'bg-indigo-500 animate-pulse' :
+                    status === 'offline' ? 'bg-gray-400' :
+                    status === 'error' ? 'bg-red-500' : 'bg-gray-400'
+                );
+            });
+        }
+
+        function scheduleCloudSync(delay = 1500) {
+            clearTimeout(studyCloudTimer);
+            studyCloudTimer = setTimeout(() => syncStudyCloud({interactive:false}), delay);
+        }
+
+        async function studyFetchRemote() {
+            const { data, error } = await studyCloudClient
+                .from('study_tracker_state')
+                .select('data, updated_at')
+                .eq('user_id', studyCloudUser.id)
+                .maybeSingle();
+            if (error) throw error;
+            return data || null;
+        }
+
+        async function studyUploadLocal() {
+            const payload = studySnapshotStorage();
+            const updatedAt = new Date().toISOString();
+            const { data, error } = await studyCloudClient
+                .from('study_tracker_state')
+                .upsert({ user_id: studyCloudUser.id, data: payload, updated_at: updatedAt }, { onConflict: 'user_id' })
+                .select('updated_at')
+                .single();
+            if (error) throw error;
+            _studyStorageSetItem.call(localStorage, STUDY_SYNC_DIRTY_KEY, '0');
+            _studyStorageSetItem.call(localStorage, STUDY_SYNC_LAST_REMOTE_KEY, data?.updated_at || updatedAt);
+            updateCloudSyncUI('synced');
+        }
+
+        function studyShowConflict(remote, firstSync = false) {
+            studyCloudConflictRemote = remote;
+            const modal = document.getElementById('custom-modal');
+            const title = document.getElementById('modal-title');
+            const message = document.getElementById('modal-message');
+            const footer = document.getElementById('modal-footer');
+            if (!modal || !title || !message || !footer) return;
+            title.innerText = firstSync ? 'Primeira sincronização' : 'Conflito de sincronização';
+            message.innerHTML = firstSync
+                ? 'Há dados neste dispositivo e também na nuvem. Escolha qual versão deve prevalecer.<br><br><strong>Usar este dispositivo</strong> envia os dados atuais para a nuvem. <strong>Usar nuvem</strong> substitui os dados locais.'
+                : 'Este dispositivo e a nuvem foram alterados desde a última sincronização. Escolha qual versão deve prevalecer.';
+            footer.innerHTML = `
+                <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-slate-200 text-sm font-bold" onclick="resolveStudyCloudConflict('cloud')">Usar nuvem</button>
+                <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="resolveStudyCloudConflict('local')">Usar este dispositivo</button>`;
+            modal.style.display = 'flex';
+        }
+
+        async function resolveStudyCloudConflict(choice) {
+            const modal = document.getElementById('custom-modal');
+            if (modal) modal.style.display = 'none';
+            const remote = studyCloudConflictRemote;
+            studyCloudConflictRemote = null;
+            try {
+                if (choice === 'cloud' && remote) {
+                    studyApplyRemoteSnapshot(remote.data, remote.updated_at);
+                    updateCloudSyncUI('synced');
+                    location.reload();
+                    return;
+                }
+                if (choice === 'local') await studyUploadLocal();
+            } catch (err) {
+                console.error('Falha ao resolver conflito de sincronização:', err);
+                updateCloudSyncUI('error');
+                showModal('Erro de sincronização', err?.message || 'Não foi possível sincronizar os dados.');
+            }
+        }
+
+        async function syncStudyCloud({interactive = true} = {}) {
+            if (!studyCloudClient || !studyCloudUser || studyCloudBusy) return;
+            if (!navigator.onLine) {
+                updateCloudSyncUI('offline');
+                if (interactive) showModal('Sem internet', 'Os dados continuam salvos neste dispositivo. A sincronização será retomada quando houver conexão.');
+                return;
+            }
+            studyCloudBusy = true;
+            updateCloudSyncUI('syncing');
+            try {
+                const remote = await studyFetchRemote();
+                const dirty = localStorage.getItem(STUDY_SYNC_DIRTY_KEY) === '1';
+                const lastRemote = localStorage.getItem(STUDY_SYNC_LAST_REMOTE_KEY) || '';
+                const localSnapshot = studySnapshotStorage();
+
+                if (!remote) {
+                    await studyUploadLocal();
+                    return;
+                }
+
+                const sameData = studyNormalizedStorage(localSnapshot) === studyNormalizedStorage(remote.data);
+                if (sameData) {
+                    _studyStorageSetItem.call(localStorage, STUDY_SYNC_DIRTY_KEY, '0');
+                    _studyStorageSetItem.call(localStorage, STUDY_SYNC_LAST_REMOTE_KEY, remote.updated_at || '');
+                    updateCloudSyncUI('synced');
+                    return;
+                }
+
+                if (!lastRemote) {
+                    if (!studyHasMeaningfulLocalData()) {
+                        studyApplyRemoteSnapshot(remote.data, remote.updated_at);
+                        updateCloudSyncUI('synced');
+                        location.reload();
+                        return;
+                    }
+                    studyShowConflict(remote, true);
+                    updateCloudSyncUI('pending');
+                    return;
+                }
+
+                const remoteChanged = String(remote.updated_at || '') !== String(lastRemote);
+                if (dirty && remoteChanged) {
+                    studyShowConflict(remote, false);
+                    updateCloudSyncUI('pending');
+                    return;
+                }
+                if (dirty && !remoteChanged) {
+                    await studyUploadLocal();
+                    return;
+                }
+                if (!dirty && remoteChanged) {
+                    studyApplyRemoteSnapshot(remote.data, remote.updated_at);
+                    updateCloudSyncUI('synced');
+                    location.reload();
+                    return;
+                }
+                updateCloudSyncUI('synced');
+            } catch (err) {
+                console.error('Erro de sincronização:', err);
+                updateCloudSyncUI('error');
+                if (interactive) showModal('Erro de sincronização', err?.message || 'Não foi possível acessar a nuvem. Seus dados locais não foram apagados.');
+            } finally {
+                studyCloudBusy = false;
+            }
+        }
+
+        function showStudyCloudPanel() {
+            const modal = document.getElementById('custom-modal');
+            const title = document.getElementById('modal-title');
+            const message = document.getElementById('modal-message');
+            const footer = document.getElementById('modal-footer');
+            if (!modal || !title || !message || !footer) return;
+
+            if (!studyCloudUser) {
+                title.innerText = 'Entrar na nuvem';
+                message.innerHTML = `
+                    <p class="mb-4">Use a mesma conta no PC e no celular para sincronizar seus dados.</p>
+                    <label class="block text-xs font-bold mb-1">E-mail</label>
+                    <input id="study-cloud-email" type="email" autocomplete="email" class="w-full p-3 mb-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700" placeholder="seu@email.com">
+                    <label class="block text-xs font-bold mb-1">Senha</label>
+                    <input id="study-cloud-password" type="password" autocomplete="current-password" class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700" placeholder="Sua senha">
+                    <p class="mt-3 text-xs text-gray-500 dark:text-slate-400">A conta é criada por você no painel do Supabase. A senha não fica salva no código do Study Tracker.</p>`;
+                footer.innerHTML = `
+                    <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm" onclick="document.getElementById('custom-modal').style.display='none'">Cancelar</button>
+                    <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="studyCloudSignIn()">Entrar</button>`;
+            } else {
+                title.innerText = 'Sincronização';
+                const pending = localStorage.getItem(STUDY_SYNC_DIRTY_KEY) === '1';
+                message.innerHTML = `
+                    <p class="mb-2"><strong>${escapeHtml(studyCloudUser.email || 'Conta conectada')}</strong></p>
+                    <p class="text-sm">Status: ${pending ? 'há alterações locais pendentes' : 'dados sincronizados'}.</p>
+                    <p class="mt-3 text-xs text-gray-500 dark:text-slate-400">O Study Tracker continua salvando localmente mesmo sem internet.</p>`;
+                footer.innerHTML = `
+                    <button type="button" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm" onclick="studyCloudSignOut()">Sair</button>
+                    <button type="button" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold" onclick="document.getElementById('custom-modal').style.display='none'; syncStudyCloud({interactive:true})">Sincronizar agora</button>`;
+            }
+            modal.style.display = 'flex';
+        }
+
+        async function studyCloudSignIn() {
+            const email = document.getElementById('study-cloud-email')?.value?.trim();
+            const password = document.getElementById('study-cloud-password')?.value || '';
+            if (!email || !password) {
+                showModal('Dados incompletos', 'Informe e-mail e senha.');
+                return;
+            }
+            try {
+                updateCloudSyncUI('syncing');
+                const { data, error } = await studyCloudClient.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                studyCloudUser = data.user;
+                document.getElementById('custom-modal').style.display = 'none';
+                updateCloudSyncUI('pending');
+                await syncStudyCloud({interactive:true});
+            } catch (err) {
+                updateCloudSyncUI('disconnected');
+                showModal('Não foi possível entrar', err?.message || 'Confira o e-mail e a senha.');
+            }
+        }
+
+        async function studyCloudSignOut() {
+            try { await studyCloudClient?.auth.signOut(); } catch (err) { console.error(err); }
+            studyCloudUser = null;
+            _studyStorageRemoveItem.call(localStorage, STUDY_SYNC_LAST_REMOTE_KEY);
+            updateCloudSyncUI('disconnected');
+            const modal = document.getElementById('custom-modal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        async function initStudyCloudSync() {
+            try {
+                if (!window.supabase?.createClient) {
+                    updateCloudSyncUI('error');
+                    return;
+                }
+                studyCloudClient = window.supabase.createClient(STUDY_SUPABASE_URL, STUDY_SUPABASE_PUBLISHABLE_KEY, {
+                    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+                });
+                const { data } = await studyCloudClient.auth.getSession();
+                studyCloudUser = data?.session?.user || null;
+                updateCloudSyncUI(studyCloudUser ? (localStorage.getItem(STUDY_SYNC_DIRTY_KEY) === '1' ? 'pending' : 'synced') : 'disconnected');
+                studyCloudClient.auth.onAuthStateChange((_event, session) => {
+                    studyCloudUser = session?.user || null;
+                    updateCloudSyncUI(studyCloudUser ? (localStorage.getItem(STUDY_SYNC_DIRTY_KEY) === '1' ? 'pending' : 'synced') : 'disconnected');
+                });
+                if (studyCloudUser) setTimeout(() => syncStudyCloud({interactive:false}), 300);
+            } catch (err) {
+                console.error('Falha ao iniciar Supabase:', err);
+                updateCloudSyncUI('error');
+            }
+        }
+
+        window.addEventListener('online', () => { if (studyCloudUser) syncStudyCloud({interactive:false}); });
+        window.addEventListener('offline', () => updateCloudSyncUI('offline'));
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && studyCloudUser) syncStudyCloud({interactive:false});
+        });
+
+
         // ----------------------------------------------------
         // Expor funções no window
         // ----------------------------------------------------
@@ -5408,7 +5471,6 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         window.openSubject = openSubject;
         window.openSubjectByIndex = openSubjectByIndex;
 
-        window.showMobileMoreMenu = showMobileMoreMenu;
         window.importWithPicker = importWithPicker;
         window.exportToXLSX = exportToXLSX;
         window.resetRevision = resetRevision;
@@ -5432,6 +5494,11 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         window.moveTopicUpInSubject = moveTopicUpInSubject;
         window.moveTopicDownInSubject = moveTopicDownInSubject;
         window.toggleHiddenEverywhere = toggleHiddenEverywhere;
+        window.showStudyCloudPanel = showStudyCloudPanel;
+        window.studyCloudSignIn = studyCloudSignIn;
+        window.studyCloudSignOut = studyCloudSignOut;
+        window.syncStudyCloud = syncStudyCloud;
+        window.resolveStudyCloudConflict = resolveStudyCloudConflict;
         // -----------------------------
         // Init
         // -----------------------------
@@ -5444,6 +5511,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             renderChart();
             renderAppVersion();
             updateLearningHeader();
+            initStudyCloudSync();
 
             edital.forEach((s, i) => {
                 if (!Array.isArray(s.tags)) s.tags = [];
@@ -5464,7 +5532,6 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
 
 
             renderCurrentView();
-            syncMobileNavigation();
 
             const isPlaceholder = edital.length === 1 && edital[0].materia === "Materia lorem ipsum";
             if (isPlaceholder) {
@@ -5475,27 +5542,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             }
         }
 
-        let mobileResizeTimer = null;
-        window.addEventListener('resize', () => {
-            clearTimeout(mobileResizeTimer);
-            mobileResizeTimer = setTimeout(() => {
-                renderCurrentView();
-                syncMobileNavigation();
-            }, 120);
-        });
-
         window.onload = init;
     </script>
-    <script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("./service-worker.js")
-      .catch(error => {
-        console.error("Erro ao registrar Service Worker:", error);
-      });
-  });
-}
-</script>
 </body>
 </html>
