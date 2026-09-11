@@ -726,35 +726,84 @@
            Timer de estudo
         ----------------------------- */
         .study-timer-subject-btn {
-            width: 30px; height: 30px; border-radius: 999px;
-            display: inline-flex; align-items: center; justify-content: center;
-            flex: 0 0 auto; color: #6366f1;
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            color: #6366f1;
             border: 1px solid rgba(99,102,241,.28);
             background: rgba(99,102,241,.08);
             transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
         }
-        .study-timer-subject-btn:hover { transform: scale(1.08); background: rgba(99,102,241,.16); }
-        .dark .study-timer-subject-btn { color:#a5b4fc; border-color:rgba(165,180,252,.25); background:rgba(99,102,241,.12); }
-        .study-timer-subject-btn.study-timer-active-subject {
-            color:#059669; border-color:rgba(16,185,129,.55); background:rgba(16,185,129,.12);
-            box-shadow:0 0 0 2px rgba(16,185,129,.08);
-        }
-        #study-timer-global { min-height:38px; }
-        #study-timer-global-time { font-variant-numeric: tabular-nums; }
-        #study-timer-global.study-timer-global-paused #study-timer-global-state-dot { background:#f59e0b; }
-        .study-timer-mode-card {
-            border:1px solid #d1d5db; border-radius:14px; padding:12px; cursor:pointer; transition:.15s ease;
-        }
-        .dark .study-timer-mode-card { border-color:#374151; background:#030712; }
-        .study-timer-mode-card:has(input:checked) {
-            border-color:#6366f1; background:rgba(99,102,241,.09); box-shadow:0 0 0 1px rgba(99,102,241,.22);
-        }
-        .study-timer-preset.active { background:#4f46e5 !important; color:white !important; border-color:#4f46e5 !important; }
-        @media (max-width:767px) {
-            #study-timer-global { padding:.55rem .7rem; }
-            .study-timer-subject-btn { width:36px; height:36px; }
+
+            .study-timer-subject-btn:hover {
+                transform: scale(1.08);
+                background: rgba(99,102,241,.16);
+            }
+
+        .dark .study-timer-subject-btn {
+            color: #a5b4fc;
+            border-color: rgba(165,180,252,.25);
+            background: rgba(99,102,241,.12);
         }
 
+        .study-timer-subject-btn.study-timer-active-subject {
+            color: #059669;
+            border-color: rgba(16,185,129,.55);
+            background: rgba(16,185,129,.12);
+            box-shadow: 0 0 0 2px rgba(16,185,129,.08);
+        }
+
+        #study-timer-global {
+            min-height: 38px;
+        }
+
+        #study-timer-global-time {
+            font-variant-numeric: tabular-nums;
+        }
+
+        #study-timer-global.study-timer-global-paused #study-timer-global-state-dot {
+            background: #f59e0b;
+        }
+
+        .study-timer-mode-card {
+            border: 1px solid #d1d5db;
+            border-radius: 14px;
+            padding: 12px;
+            cursor: pointer;
+            transition: .15s ease;
+        }
+
+        .dark .study-timer-mode-card {
+            border-color: #374151;
+            background: #030712;
+        }
+
+        .study-timer-mode-card:has(input:checked) {
+            border-color: #6366f1;
+            background: rgba(99,102,241,.09);
+            box-shadow: 0 0 0 1px rgba(99,102,241,.22);
+        }
+
+        .study-timer-preset.active {
+            background: #4f46e5 !important;
+            color: white !important;
+            border-color: #4f46e5 !important;
+        }
+
+        @media (max-width:767px) {
+            #study-timer-global {
+                padding: .55rem .7rem;
+            }
+
+            .study-timer-subject-btn {
+                width: 36px;
+                height: 36px;
+            }
+        }
     </style>
 </head>
 
@@ -794,7 +843,10 @@
                         title="Abrir timer em andamento">
                     <span id="study-timer-global-state-dot" class="w-2 h-2 rounded-full bg-emerald-500 flex-none" aria-hidden="true"></span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 1.5"></path><path d="M9 2h6"></path><path d="M12 5V2"></path>
+                        <circle cx="12" cy="13" r="8"></circle>
+                        <path d="M12 9v4l2.5 1.5"></path>
+                        <path d="M9 2h6"></path>
+                        <path d="M12 5V2"></path>
                     </svg>
                     <span id="study-timer-global-subject" class="hidden xl:inline max-w-28 truncate">Timer</span>
                     <span id="study-timer-global-time" class="font-mono whitespace-nowrap">00:00</span>
@@ -841,51 +893,41 @@
 
 
                         <button onclick="showStudyTimerStats()"
+                                class="w-11 h-11 rounded-full flex items-center justify-center bg-transparent border border-transparent hover:scale-110 transition-transform text-[#4f46e5] dark:text-white"
+                                title="Estatísticas de tempo"
+                                aria-label="Estatísticas de tempo">
 
 
-                                                    class="w-11 h-11 rounded-full flex items-center justify-center bg-transparent border border-transparent hover:scale-110 transition-transform text-[#4f46e5] dark:text-white"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 
 
-                                                    title="Estatísticas de tempo"
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M12 7v5l3 2"></path>
+                                <path d="M7 18h10"></path>
 
 
-                                                    aria-label="Estatísticas de tempo">
+                            </svg>
 
 
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-
-
-                                                    <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path><path d="M7 18h10"></path>
-
-
-                                                </svg>
-
-
-                                            </button>
+                        </button>
 
 
                         <button onclick="setViewMode('settings')"
+                                class="w-11 h-11 rounded-full flex items-center justify-center bg-transparent border border-transparent hover:scale-110 transition-transform text-[#4f46e5] dark:text-white"
+                                title="Configurações"
+                                aria-label="Configurações">
 
 
-                                                    class="w-11 h-11 rounded-full flex items-center justify-center bg-transparent border border-transparent hover:scale-110 transition-transform text-[#4f46e5] dark:text-white"
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 198.76 198.76" class="w-6 h-6">
 
 
-                                                    title="Configurações"
+                                <path fill="currentColor" fill-rule="evenodd" d="M99.38,57.82c22.93,0,41.56,18.62,41.56,41.56s-18.62,41.56-41.56,41.56-41.56-18.62-41.56-41.56,18.62-41.56,41.56-41.56ZM108.08,9.84l2.87,13.95c5.55.85,10.98,2.31,16.21,4.34l9.46-10.65c5.29,2.41,10.34,5.32,15.07,8.7l-4.49,13.51c4.38,3.51,8.36,7.49,11.87,11.87l13.51-4.49c3.38,4.73,6.29,9.78,8.7,15.07l-10.65,9.46c2.04,5.23,3.49,10.66,4.34,16.21l13.95,2.87c.56,5.79.56,11.61,0,17.4l-13.95,2.87c-.85,5.55-2.31,10.98-4.34,16.21l10.65,9.46c-2.41,5.29-5.32,10.34-8.7,15.07l-13.51-4.49c-3.51,4.38-7.49,8.36-11.87,11.87l4.49,13.52c-4.73,3.38-9.78,6.29-15.07,8.7l-9.46-10.65c-5.23,2.04-10.66,3.49-16.21,4.34l-2.87,13.95c-5.79.56-11.61.56-17.4,0l-2.87-13.95c-5.55-.85-10.98-2.31-16.21-4.34l-9.46,10.65c-5.29-2.41-10.34-5.32-15.07-8.7l4.49-13.52c-4.38-3.51-8.36-7.49-11.87-11.87l-13.52,4.49c-3.38-4.73-6.29-9.78-8.7-15.07l10.65-9.46c-2.04-5.23-3.49-10.66-4.34-16.21l-13.95-2.87c-.56-5.79-.56-11.61,0-17.4l13.95-2.87c.85-5.55,2.31-10.98,4.34-16.21l-10.65-9.46c2.41-5.29,5.32-10.34,8.7-15.07l13.52,4.49c3.51-4.38,7.49-8.36,11.87-11.87l-4.49-13.51c4.73-3.38,9.78-6.29,15.07-8.7l9.46,10.65c5.23-2.04,10.66-3.49,16.21-4.34l2.87-13.95c5.79-.56,11.61-.56,17.4,0Z" />
 
 
-                                                    aria-label="Configurações">
+                            </svg>
 
 
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 198.76 198.76" class="w-6 h-6">
-
-
-                                                    <path fill="currentColor" fill-rule="evenodd" d="M99.38,57.82c22.93,0,41.56,18.62,41.56,41.56s-18.62,41.56-41.56,41.56-41.56-18.62-41.56-41.56,18.62-41.56,41.56-41.56ZM108.08,9.84l2.87,13.95c5.55.85,10.98,2.31,16.21,4.34l9.46-10.65c5.29,2.41,10.34,5.32,15.07,8.7l-4.49,13.51c4.38,3.51,8.36,7.49,11.87,11.87l13.51-4.49c3.38,4.73,6.29,9.78,8.7,15.07l-10.65,9.46c2.04,5.23,3.49,10.66,4.34,16.21l13.95,2.87c.56,5.79.56,11.61,0,17.4l-13.95,2.87c-.85,5.55-2.31,10.98-4.34,16.21l10.65,9.46c-2.41,5.29-5.32,10.34-8.7,15.07l-13.51-4.49c-3.51,4.38-7.49,8.36-11.87,11.87l4.49,13.52c-4.73,3.38-9.78,6.29-15.07,8.7l-9.46-10.65c-5.23,2.04-10.66,3.49-16.21,4.34l-2.87,13.95c-5.79.56-11.61.56-17.4,0l-2.87-13.95c-5.55-.85-10.98-2.31-16.21-4.34l-9.46,10.65c-5.29-2.41-10.34-5.32-15.07-8.7l4.49-13.52c-4.38-3.51-8.36-7.49-11.87-11.87l-13.52,4.49c-3.38-4.73-6.29-9.78-8.7-15.07l10.65-9.46c-2.04-5.23-3.49-10.66-4.34-16.21l-13.95-2.87c-.56-5.79-.56-11.61,0-17.4l13.95-2.87c.85-5.55,2.31-10.98,4.34-16.21l-10.65-9.46c2.41-5.29,5.32-10.34,8.7-15.07l13.52,4.49c3.51-4.38,7.49-8.36,11.87-11.87l-4.49-13.51c4.73-3.38,9.78-6.29,15.07-8.7l9.46,10.65c5.23-2.04,10.66-3.49,16.21-4.34l2.87-13.95c5.79-.56,11.61-.56,17.4,0Z" />
-
-
-                                                </svg>
-
-
-                                            </button>
+                        </button>
 
 
                     </div>
@@ -1137,11 +1179,7 @@
         </button>
     </nav>
 
-    <script>
-
-
-
-        // -----------------------------
+    <script>// -----------------------------
         // Cycle: esconder tópicos concluídos (toggle)
         // -----------------------------
         let hideDoneTopicsInCycle = false;
@@ -3128,8 +3166,42 @@
             : localStorage.getItem('study_theme') === 'dark';
 
         function syncWindowTitle() {
-            const title = localStorage.getItem('study_app_title') || 'Study Tracker';
-            document.title = title;
+            const baseTitle = localStorage.getItem('study_app_title') || 'Study Tracker';
+
+            let timer = null;
+            try {
+                timer = JSON.parse(localStorage.getItem('timer_active_v1') || 'null');
+            } catch {
+                timer = null;
+            }
+
+            if (!timer || typeof timer !== 'object') {
+                document.title = baseTitle;
+                return;
+            }
+
+            const now = Date.now();
+            const accumulatedMs = Math.max(0, Number(timer.accumulatedMs) || 0);
+            const runningMs = timer.status === 'running' && timer.runningSince
+                ? Math.max(0, now - Number(timer.runningSince))
+                : 0;
+            const elapsedMs = accumulatedMs + runningMs;
+            const displayMs = timer.mode === 'countdown'
+                ? Math.max(0, (Number(timer.targetMs) || 0) - elapsedMs)
+                : elapsedMs;
+
+            const totalSeconds = Math.max(0, Math.floor(displayMs / 1000));
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            const pad = value => String(value).padStart(2, '0');
+            const clock = hours > 0
+                ? `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
+                : `${pad(minutes)}:${pad(seconds)}`;
+
+            const subject = String(timer.subjectName || 'Estudo').trim() || 'Estudo';
+            const icon = timer.status === 'paused' ? '⏸' : '⏱';
+            document.title = `${icon} ${clock} · ${subject} — ${baseTitle}`;
         }
 
         // -----------------------------
@@ -6021,6 +6093,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             updateStudyTimerGlobal(timer);
             updateStudyTimerModal(timer);
             updateStudyTimerSubjectIcons(timer);
+            syncWindowTitle();
         }
 
         function ensureStudyTimerTicker() {
@@ -6369,6 +6442,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
 
             updateStudyTimerGlobal(null);
             updateStudyTimerSubjectIcons(null);
+            syncWindowTitle();
 
             const modal = document.getElementById('custom-modal');
             if (modal && document.getElementById('study-timer-display')) modal.style.display = 'none';
@@ -7022,15 +7096,12 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             }, 120);
         });
 
-        window.onload = init;
-    </script>
+        window.onload = init;</script>
 
-    <script>
-        if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    <script>if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./service-worker.js').catch(err => console.error('Service Worker:', err));
             });
-        }
-    </script>
+        }</script>
 </body>
 </html>
