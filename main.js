@@ -1,6 +1,6 @@
 // main.js (COM SUPORTE A XLSX OU DOCX)
 
-const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog, Notification } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const XLSX = require("xlsx");
@@ -201,6 +201,28 @@ ipcMain.handle("studyio:getAppVersion", () => {
   return app.getVersion(); // vem do package.json -> "version"
 });
 
+// -----------------------------
+// IPC: Notificação nativa do timer
+// -----------------------------
+ipcMain.handle("studyio:showNotification", (_evt, title, body) => {
+  try {
+    if (!Notification.isSupported()) {
+      return { ok: false, error: "Notificações não são suportadas neste sistema." };
+    }
+
+    const notification = new Notification({
+      title: String(title || "Study Tracker"),
+      body: String(body || ""),
+      icon: path.join(__dirname, "icons", "icon-192.png")
+    });
+
+    notification.show();
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: String(e) };
+  }
+});
+
 
 // -----------------------------
 // Atualização automática via GitHub Releases
@@ -267,6 +289,9 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  // Mantém uma identidade estável para notificações no Windows.
+  app.setAppUserModelId("com.seuapp.studytracker");
+
   createWindow();
   setupAutoUpdater();
 

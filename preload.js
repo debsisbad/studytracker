@@ -14,4 +14,8 @@ contextBridge.exposeInMainWorld("studyIO", {
 
   // Versão do app (package.json version)
   getAppVersion: () => ipcRenderer.invoke("studyio:getAppVersion"),
+
+  // Notificação nativa do Electron
+  showNotification: (title, body) =>
+    ipcRenderer.invoke("studyio:showNotification", title, body),
 });

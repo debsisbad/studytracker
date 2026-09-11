@@ -6102,6 +6102,10 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         }
 
         async function requestStudyTimerNotificationPermission() {
+            // No Electron, a notificação é exibida pelo processo principal e não
+            // depende da permissão da API Notification do navegador.
+            if (window.studyIO?.showNotification) return true;
+
             try {
                 if (!('Notification' in window)) return false;
                 if (Notification.permission === 'granted') return true;
@@ -6115,9 +6119,21 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         }
 
         async function sendStudyTimerNotification(subjectName) {
-            const title = 'Tempo concluído';
-            const body = `${subjectName}: o timer regressivo chegou a 00:00.`;
+            const title = 'Pomodoro concluído';
+            const body = `${subjectName}: seu tempo de estudo terminou.`;
 
+            // Preferência: notificação nativa do Electron/Windows.
+            try {
+                if (window.studyIO?.showNotification) {
+                    const result = await window.studyIO.showNotification(title, body);
+                    if (result?.ok) return true;
+                    console.warn('Notificação nativa indisponível.', result?.error || result);
+                }
+            } catch (err) {
+                console.warn('Falha na notificação nativa do timer.', err);
+            }
+
+            // Fallback para a versão web/PWA.
             try {
                 if ('Notification' in window && Notification.permission === 'granted') {
                     if ('serviceWorker' in navigator) {
@@ -6139,7 +6155,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                 console.warn('Não foi possível exibir a notificação do timer.', err);
             }
 
-            if (document.visibilityState === 'visible') showModal('Tempo concluído', body);
+            if (document.visibilityState === 'visible') showModal(title, body);
             return false;
         }
 
