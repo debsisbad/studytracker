@@ -5891,6 +5891,71 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         let studyTimerTicker = null;
         let studyTimerHeartbeatAt = 0;
         let studyTimerStatsChart = null;
+        let studyTimerAudioContext = null;
+
+        function getStudyTimerAudioContext() {
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContextClass) return null;
+                if (!studyTimerAudioContext) studyTimerAudioContext = new AudioContextClass();
+                return studyTimerAudioContext;
+            } catch (err) {
+                console.warn('Áudio do timer indisponível.', err);
+                return null;
+            }
+        }
+
+        async function primeStudyTimerAudio() {
+            const ctx = getStudyTimerAudioContext();
+            if (!ctx) return false;
+            try {
+                if (ctx.state === 'suspended') await ctx.resume();
+                return ctx.state === 'running';
+            } catch (err) {
+                console.warn('Não foi possível preparar o áudio do timer.', err);
+                return false;
+            }
+        }
+
+        async function playStudyTimerFinishedSound() {
+            const ctx = getStudyTimerAudioContext();
+            if (!ctx) return false;
+
+            try {
+                if (ctx.state === 'suspended') await ctx.resume();
+                if (ctx.state !== 'running') return false;
+
+                const start = ctx.currentTime + 0.02;
+                const tones = [
+                    { delay: 0.00, frequency: 880, duration: 0.16 },
+                    { delay: 0.22, frequency: 1174.66, duration: 0.16 },
+                    { delay: 0.44, frequency: 1567.98, duration: 0.32 }
+                ];
+
+                tones.forEach(({ delay, frequency, duration }) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    const t0 = start + delay;
+                    const t1 = t0 + duration;
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(frequency, t0);
+                    gain.gain.setValueAtTime(0.0001, t0);
+                    gain.gain.exponentialRampToValueAtTime(0.18, t0 + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, t1);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(t0);
+                    osc.stop(t1 + 0.02);
+                });
+
+                return true;
+            } catch (err) {
+                console.warn('Não foi possível tocar o aviso do timer.', err);
+                return false;
+            }
+        }
 
         function getActiveStudyTimer() {
             try {
@@ -6346,6 +6411,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                 }
                 targetMs = minutes * 60000;
                 requestStudyTimerNotificationPermission();
+                primeStudyTimerAudio();
             }
 
             const now = Date.now();
@@ -6463,7 +6529,10 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             const modal = document.getElementById('custom-modal');
             if (modal && document.getElementById('study-timer-display')) modal.style.display = 'none';
 
-            if (options.notify) sendStudyTimerNotification(timer.subjectName);
+            if (options.notify) {
+                playStudyTimerFinishedSound();
+                sendStudyTimerNotification(timer.subjectName);
+            }
             return { timer, durationMs, endedAt };
         }
 
@@ -7058,6 +7127,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         window.resumeStudyTimer = resumeStudyTimer;
         window.resetStudyTimer = resetStudyTimer;
         window.finalizeStudyTimer = finalizeStudyTimer;
+        window.playStudyTimerFinishedSound = playStudyTimerFinishedSound;
         // -----------------------------
         // Init
         // -----------------------------
