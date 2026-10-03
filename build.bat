@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 setlocal
 cd /d "%~dp0"
 
@@ -107,14 +107,11 @@ echo pois ele inclui o Chromium/Node.
 echo.
 
 if exist "%INSTALLER%" (
-  echo Abrindo o instalador...
-  start "" "%INSTALLER%"
+  echo Instalador criado em:
+  echo "%INSTALLER%"
 ) else (
   echo O build terminou, mas nao encontrei:
   echo "%INSTALLER%"
-  echo.
-  echo Abrindo a pasta dist.
-  start "" "%~dp0dist"
   pause
 )
 

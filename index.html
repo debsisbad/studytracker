@@ -4060,11 +4060,38 @@
             return [...byTopic.values()].sort((a, b) => b.score - a.score).slice(0, Math.max(1, limit));
         }
 
+        function openDecisionAction(kind, sIdx, tIdx) {
+            const targetKey = `ST_${sIdx}_${tIdx}`;
+
+            if (kind === 'error') {
+                setViewMode('upcoming');
+            } else if (kind === 'review') {
+                setViewMode('history');
+            } else {
+                const subject = edital[sIdx];
+                if (!subject) return;
+                currentSubject = subject.materia;
+                setViewMode('subject');
+            }
+
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    const target = document.querySelector(`[data-topic-key="${targetKey}"]`);
+                    if (!target) return;
+
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    target.classList.add('ring-2', 'ring-indigo-500', 'ring-inset');
+
+                    setTimeout(() => {
+                        target.classList.remove('ring-2', 'ring-indigo-500', 'ring-inset');
+                    }, 2500);
+                }, 80);
+            });
+        }
+
         function decisionActionOnclick(action) {
             if (!action) return "setViewMode('cycle')";
-            if (action.kind === 'error') return "setViewMode('upcoming')";
-            if (action.kind === 'review') return "setViewMode('history')";
-            return `openSubjectByIndex(${action.sIdx})`;
+            return `openDecisionAction('${action.kind}', ${action.sIdx}, ${action.tIdx})`;
         }
 
         function renderNextActionPanel(actions) {
@@ -4762,7 +4789,7 @@
                     }
 
                     return `
-                    <tr class="topic-row">
+                    <tr class="topic-row" data-topic-key="ST_${item.sIdx}_${item.tIdx}">
 <td class="p-3 text-[10px] uppercase font-bold align-middle">
           <div class="flex items-center gap-2 min-w-[150px]">
             ${renderSubjectTimerButton(item.sIdx)}
@@ -4820,7 +4847,7 @@
                     const dateClass = overdue ? 'text-red-500 font-bold' : (dueToday ? 'text-amber-500 font-bold' : 'text-gray-600 dark:text-slate-300');
                     const dateLabel = overdue ? `${fmtTs(item.dueAt)} · atrasada` : (dueToday ? `${fmtTs(item.dueAt)} · hoje` : fmtTs(item.dueAt));
                     return `
-                    <tr class="topic-row ${item.done ? 'opacity-60' : ''}">
+                    <tr class="topic-row ${item.done ? 'opacity-60' : ''}" data-topic-key="ST_${item.sIdx}_${item.tIdx}">
                       <td class="p-4 text-[10px] uppercase font-bold align-middle">
                         <div class="flex items-center gap-2">
                           ${renderSubjectTimerButton(item.sIdx)}
@@ -4862,7 +4889,7 @@
                 const showRevisionCol = viewMode !== 'cycle';
 
                 return `
-                  <tr class="topic-row ${state.dominated ? 'dominated-row' : ''}">
+                  <tr class="topic-row ${state.dominated ? 'dominated-row' : ''}" data-topic-key="ST_${item.sIdx}_${item.tIdx}">
 
                     <td class="p-4 text-[10px] uppercase font-bold align-middle">
           <div class="flex items-center gap-2">
@@ -6500,6 +6527,69 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             return sessions.filter(s => s.endedAt >= since).reduce((total, s) => total + (Number(s.durationMs) || 0), 0);
         }
 
+        async function exportStudyTimerToXLSX() {
+            try {
+                const sessions = getStudyTimerSessions();
+                if (!sessions.length) {
+                    showModal('Nada para exportar', 'Nenhuma sessão de estudo foi registrada.');
+                    return;
+                }
+
+                const rows = sessions.map(session => {
+                    const start = new Date(session.startedAt);
+                    const end = new Date(session.endedAt);
+                    const totalSeconds = Math.max(0, Math.floor((Number(session.durationMs) || 0) / 1000));
+                    const hours = Math.floor(totalSeconds / 3600);
+                    const minutes = Math.floor((totalSeconds % 3600) / 60);
+                    const seconds = totalSeconds % 60;
+
+                    return {
+                        DATA: start.toLocaleDateString('pt-BR'),
+                        MATERIA: session.subjectName || 'Sem matéria',
+                        INICIO: start.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                        FIM: end.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                        DURACAO: `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`,
+                        MINUTOS: Math.round((Number(session.durationMs) || 0) / 60000),
+                        TIMER: session.mode === 'countdown' ? 'Regressivo' : 'Progressivo'
+                    };
+                });
+
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.json_to_sheet(rows);
+                ws['!cols'] = [
+                    { wch: 12 },
+                    { wch: 48 },
+                    { wch: 10 },
+                    { wch: 10 },
+                    { wch: 14 },
+                    { wch: 10 },
+                    { wch: 14 }
+                ];
+                XLSX.utils.book_append_sheet(wb, ws, 'Tempo de estudo');
+
+                const date = new Date().toISOString().slice(0, 10);
+                const name = `tempo-de-estudo-${date}.xlsx`;
+
+                if (window.studyIO?.saveBackupXlsx) {
+                    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+                    const bytes = new Uint8Array(wbout);
+                    const res = await window.studyIO.saveBackupXlsx(Array.from(bytes), name);
+                    if (!res || !res.ok) {
+                        showModal('Erro', 'Falha ao salvar a planilha: ' + ((res && res.error) || ''));
+                        return;
+                    }
+                    showModal('Planilha salva', `Salvo em:
+${res.path}`);
+                } else {
+                    XLSX.writeFile(wb, name);
+                    showModal('Planilha gerada', 'O arquivo XLSX foi enviado para os downloads do navegador.');
+                }
+            } catch (err) {
+                console.error(err);
+                showModal('Erro', 'Não foi possível exportar o tempo de estudo.');
+            }
+        }
+
         function showStudyTimerStats() {
             const modal = document.getElementById('custom-modal');
             const title = document.getElementById('modal-title');
@@ -6554,12 +6644,19 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                 </div>`;
 
             footer.innerHTML = '';
+
+            const exportButton = document.createElement('button');
+            exportButton.type = 'button';
+            exportButton.textContent = 'Exportar XLSX';
+            exportButton.className = 'px-5 py-2 rounded-xl text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white';
+            exportButton.onclick = exportStudyTimerToXLSX;
+
             const close = document.createElement('button');
             close.type = 'button';
             close.textContent = 'Fechar';
             close.className = 'px-5 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white';
             close.onclick = closeStudyTimerModal;
-            footer.appendChild(close);
+            footer.append(exportButton, close);
             modal.style.display = 'flex';
 
             requestAnimationFrame(() => {
@@ -7323,6 +7420,8 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
         window.openStudyTimerForSubject = openStudyTimerForSubject;
         window.openActiveStudyTimer = openActiveStudyTimer;
         window.showStudyTimerStats = showStudyTimerStats;
+        window.exportStudyTimerToXLSX = exportStudyTimerToXLSX;
+        window.openDecisionAction = openDecisionAction;
         window.updateStudyTimerModeOptions = updateStudyTimerModeOptions;
         window.setStudyTimerDurationPreset = setStudyTimerDurationPreset;
         window.startStudyTimer = startStudyTimer;
