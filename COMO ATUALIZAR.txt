@@ -1,0 +1,7 @@
+Muda o que for mudar no index
+Abre o build
+vai pro GitHub desktop, da nome e commit to main, depois push
+Vai pro GitHub site e repositorios>realeases
+Abre a pasta dist
+mudao nome dos arquivos pra Study-Tracker-Setup-x.0.0
+Passa todos os arquivos da pasta pro release
