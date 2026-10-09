@@ -1281,6 +1281,19 @@
                     errorReviewDone: {}
                 });
                 const st = userProgress[k];
+
+                // Se houver um total manual cadastrado, ele funciona como uma base acumulada.
+                // Novas sessões devem somar a essa base; caso contrário, o modal
+                // "Questões do tópico" continuaria mostrando o mesmo valor antigo.
+                if (st.questionStatsOverride && typeof st.questionStatsOverride === 'object' && questions > 0) {
+                    const previousQuestions = Math.max(0, Math.round(Number(st.questionStatsOverride.questions) || 0));
+                    const previousCorrect = Math.max(0, Math.min(previousQuestions, Math.round(Number(st.questionStatsOverride.correct) || 0)));
+                    st.questionStatsOverride = {
+                        questions: previousQuestions + questions,
+                        correct: previousCorrect + correct
+                    };
+                }
+
                 st.sessions.push(session);
                 st.q = true;
                 if (!st.aulaAt) st.aulaAt = now;
