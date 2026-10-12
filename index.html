@@ -1081,7 +1081,7 @@
 
                     <div id="settings-order-list" class="space-y-2 overflow-x-auto"></div>
 
-                    <div class="flex gap-2 mt-3">
+                    <div class="flex flex-wrap gap-2 mt-3">
                         <button type="button"
                                 onclick="autoFillOrderFromCurrent()"
                                 class="text-xs font-bold px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-slate-200">
@@ -1091,7 +1091,13 @@
                         <button type="button"
                                 onclick="saveSubjectOrderFromUI()"
                                 class="text-xs font-bold px-3 py-2 rounded-lg bg-indigo-600 text-white">
-                            Salvar ordem e pesos
+                            Salvar ordem, questões e pesos
+                        </button>
+
+                        <button type="button"
+                                onclick="resetAllSubjectWeightsAndQuestions()"
+                                class="text-xs font-bold px-3 py-2 rounded-lg bg-white dark:bg-gray-800 text-red-600 dark:text-red-300 border border-red-300 dark:border-red-700 hover:bg-red-50 dark:hover:bg-red-950/30">
+                            Remover questões e pesos
                         </button>
                     </div>
                 </div>
@@ -3601,6 +3607,31 @@
             renderSubjectOrderSettings(); // reordena a lista dentro das configs
         }
 
+        function resetAllSubjectWeightsAndQuestions() {
+            showModal(
+                'Remover questões e pesos',
+                'Isso vai zerar a quantidade de questões de todas as matérias e restaurar todos os pesos para 1. A ordem das matérias não será alterada. Deseja continuar?',
+                [
+                    { label: 'Cancelar', primary: false },
+                    {
+                        label: 'Remover',
+                        primary: true,
+                        onClick: () => {
+                            edital.forEach(subject => {
+                                subject.examQuestions = 0;
+                                subject.weight = 1;
+                            });
+
+                            subjectQueue = null;
+                            saveSubjectQueue();
+                            save();
+                            renderSubjectOrderSettings();
+                        }
+                    }
+                ]
+            );
+        }
+
         function autoFillOrderFromCurrent() {
             // preenche 1..N conforme ordem atual do array
             edital.forEach((s, i) => s.order = Math.min(100, i + 1));
@@ -3635,6 +3666,13 @@
             learningConfig.statusBuildingEnabled = statusBuilding?.checked !== false;
             learningConfig.statusStrongEnabled = statusStrong?.checked !== false;
             learningConfig.statusSeenEnabled = statusSeen?.checked !== false;
+
+            // Também salva os campos da seção "Ordem e peso das matérias".
+            // Antes, o botão Salvar das configurações redesenhava a tela sem
+            // persistir ORDEM / QUESTÕES / PESO, fazendo o valor voltar ao anterior.
+            captureSubjectSettingsDraft();
+            localStorage.setItem('study_edital_names_v2', JSON.stringify(edital));
+
             saveLearningConfig();
             loadAppConfig();
             syncWindowTitle();
@@ -3642,7 +3680,7 @@
             renderChart();
             renderCurrentView();
 
-            showModal('Salvo', 'Configurações e método de estudo atualizados.');
+            showModal('Salvo', 'Configurações, ordem, questões e pesos atualizados.');
         }
 
         function resetAppConfig() {
