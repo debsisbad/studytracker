@@ -1949,6 +1949,17 @@
             };
         }
 
+        function getErrorNotebookReviewCount(session) {
+            if (!session) return 0;
+            const scheduledDone = (session.errorReviewDays || [])
+                .filter(days => session.errorReviewDone?.[days] === true)
+                .length;
+            const retryDone = (session.errorReviewRetries || [])
+                .filter(retry => retry?.done === true)
+                .length;
+            return scheduledDone + retryDone;
+        }
+
         function getErrorNotebookItems() {
             const items = [];
             edital.forEach((subject, sIdx) => {
@@ -1969,6 +1980,7 @@
                                 dueAt: addDays(session.at, days),
                                 done: session.errorReviewDone?.[days] === true,
                                 corrected: session.errorCorrected === true,
+                                reviewCount: getErrorNotebookReviewCount(session),
                                 retryId: ''
                             });
                         });
@@ -1985,6 +1997,7 @@
                                 dueAt: retry.dueAt,
                                 done: retry.done === true,
                                 corrected: session.errorCorrected === true,
+                                reviewCount: getErrorNotebookReviewCount(session),
                                 retryId: retry.id
                             });
                         });
@@ -2037,6 +2050,10 @@
             const footer = document.getElementById('modal-footer');
             if (!modal || !title || !message || !footer || !subject || !topic) return;
 
+            const session = userProgress[storageKey]?.sessions?.find(item => normalizeSession(item).id === sessionId);
+            const completedReviews = getErrorNotebookReviewCount(session ? normalizeSession(session) : null);
+            const defaultNextDays = completedReviews >= 1 ? 25 : 10;
+
             title.innerText = 'Resultado da revisão';
             message.innerHTML = `
                 <div class="space-y-4">
@@ -2054,9 +2071,9 @@
                   </div>
                   <label id="error-next-review-field" class="text-xs font-bold text-gray-600 dark:text-slate-300 block">Próxima revisão
                     <select id="error-result-next-days" class="mt-1 w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-950 border dark:border-gray-700 text-sm">
-                      <option value="3">Daqui a 3 dias</option>
-                      <option value="10" selected>Daqui a 10 dias</option>
-                      <option value="25">Daqui a 25 dias</option>
+                      <option value="3" ${defaultNextDays === 3 ? 'selected' : ''}>Daqui a 3 dias</option>
+                      <option value="10" ${defaultNextDays === 10 ? 'selected' : ''}>Daqui a 10 dias</option>
+                      <option value="25" ${defaultNextDays === 25 ? 'selected' : ''}>Daqui a 25 dias</option>
                     </select>
                   </label>
                   <label class="flex items-center gap-2 p-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-slate-200">
@@ -3997,6 +4014,7 @@
                                 <button type="button" onclick="openSubjectByIndex(${item.sIdx})" class="mobile-subject-label text-left min-w-0 flex-1">${escapeHtml(item.materia)}</button>
                               </div>
                               <div class="mobile-topic-title mt-1">${escapeHtml(item.topico)}</div>
+                              <div class="mt-2 text-[10px] font-bold text-gray-500 dark:text-slate-400">${item.reviewCount || 0} ${item.reviewCount === 1 ? 'revisão feita' : 'revisões feitas'}</div>
                               <div class="flex items-center justify-between gap-3 mt-3"><div class="text-xs"><span class="mobile-muted block">Revisão</span><b class="${overdue ? 'text-red-500' : dueToday ? 'text-amber-500' : ''}">${fmtTs(item.dueAt)}${overdue ? ' · atrasada' : dueToday ? ' · hoje' : ''}</b></div><input type="checkbox" class="checkbox-custom accent-indigo-600" ${item.done ? 'checked' : ''} onclick="toggleErrorNotebookReview('${item.storageKey}','${escapeHtmlAttr(item.sessionId)}',${item.days},'${escapeHtmlAttr(item.retryId || '')}')" /></div>
                             </article>`;
                 }).join('') : '<div class="mobile-study-card text-sm text-gray-500">Nenhum item no caderno de erros.</div>'}</div>`;
@@ -5062,6 +5080,7 @@
                             <div class="flex items-center gap-2">
                               <span class="topic-title-clamp min-w-0 font-medium text-gray-700 dark:text-slate-200 flex-1" title="${escapeHtmlAttr(item.topico)}">${escapeHtml(item.topico)}</span>
                               <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-200">${item.days} DIAS</span>
+                              <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-slate-300">${item.reviewCount || 0} ${item.reviewCount === 1 ? 'REVISÃO FEITA' : 'REVISÕES FEITAS'}</span>
                               ${item.corrected ? `<span class="text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300">ERRO CORRIGIDO</span>` : ''}
                               <button type="button" onclick="copyTopicReference(${item.sIdx}, ${item.tIdx}, this)" class="shrink-0 p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-slate-300 hover:text-indigo-600" title="Copiar matéria e tópico" aria-label="Copiar matéria e tópico">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -6406,7 +6425,12 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                 return;
             }
 
-            showStudyTimerModal(sIdx);
+            if (active) {
+                openActiveStudyTimer();
+                return;
+            }
+
+            startStudyTimer(sIdx);
         }
 
         function openActiveStudyTimer() {
@@ -6454,49 +6478,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             footer.classList.add('flex-wrap');
 
             if (!active) {
-                message.innerHTML = `
-                        <div class="space-y-4">
-                            <p class="text-sm text-gray-600 dark:text-slate-300">Escolha como quer contar o tempo de <b>${escapeHtml(subject.materia)}</b>.</p>
-                            <div class="grid grid-cols-2 gap-3">
-                                <label class="study-timer-mode-card">
-                                    <div class="flex items-center gap-2">
-                                        <input type="radio" name="study-timer-mode" value="countup" checked onchange="updateStudyTimerModeOptions()" class="accent-indigo-600">
-                                        <div><div class="text-sm font-bold text-gray-800 dark:text-slate-100">Progressivo</div><div class="text-[11px] text-gray-500 dark:text-slate-400">Começa em 00:00</div></div>
-                                    </div>
-                                </label>
-                                <label class="study-timer-mode-card">
-                                    <div class="flex items-center gap-2">
-                                        <input type="radio" name="study-timer-mode" value="countdown" onchange="updateStudyTimerModeOptions()" class="accent-indigo-600">
-                                        <div><div class="text-sm font-bold text-gray-800 dark:text-slate-100">Regressivo</div><div class="text-[11px] text-gray-500 dark:text-slate-400">Você escolhe a duração</div></div>
-                                    </div>
-                                </label>
-                            </div>
-                            <div id="study-timer-countdown-options" class="hidden space-y-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-700">
-                                <div class="text-xs font-bold text-gray-600 dark:text-slate-300">Atalhos</div>
-                                <div class="grid grid-cols-5 gap-2">
-                                    ${[25, 30, 45, 50, 60].map(m => `<button type="button" onclick="setStudyTimerDurationPreset(${m}, this)" class="study-timer-preset px-2 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs font-bold">${m}</button>`).join('')}
-                                </div>
-                                <label class="block text-xs font-bold text-gray-600 dark:text-slate-300">
-                                    Minutos
-                                    <input id="study-timer-minutes" type="number" min="1" max="720" value="50" class="mt-1 w-full px-3 py-2.5 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm outline-none focus:ring-2 focus:ring-indigo-500">
-                                </label>
-                            </div>
-                        </div>`;
-
-                const cancel = document.createElement('button');
-                cancel.type = 'button';
-                cancel.textContent = 'Cancelar';
-                cancel.className = 'px-4 py-2 rounded-xl text-sm font-semibold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-slate-200';
-                cancel.onclick = closeStudyTimerModal;
-
-                const start = document.createElement('button');
-                start.type = 'button';
-                start.textContent = 'Iniciar';
-                start.className = 'px-5 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white';
-                start.onclick = () => startStudyTimer(sIdx);
-
-                footer.append(cancel, start);
-                modal.style.display = 'flex';
+                startStudyTimer(sIdx);
                 return;
             }
 
@@ -6554,18 +6536,8 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             const subject = edital?.[sIdx];
             if (!subject) return;
 
-            const mode = document.querySelector('input[name="study-timer-mode"]:checked')?.value === 'countdown' ? 'countdown' : 'countup';
-            let targetMs = null;
-
-            if (mode === 'countdown') {
-                const minutes = Math.round(Number(document.getElementById('study-timer-minutes')?.value) || 0);
-                if (!Number.isFinite(minutes) || minutes < 1 || minutes > 720) {
-                    showModal('Tempo inválido', 'Informe uma duração entre 1 e 720 minutos.');
-                    return;
-                }
-                targetMs = minutes * 60000;
-                requestStudyTimerNotificationPermission();
-            }
+            const mode = 'countup';
+            const targetMs = null;
 
             const now = Date.now();
             saveActiveStudyTimer({
@@ -6584,7 +6556,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
 
             studyTimerHeartbeatAt = now;
             ensureStudyTimerTicker();
-            showStudyTimerModal(sIdx);
+            closeStudyTimerModal();
             refreshStudyTimerUI();
         }
 
@@ -6618,9 +6590,7 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
             if (!timer) return;
             showModal(
                 'Zerar timer',
-                timer.mode === 'countdown'
-                    ? 'O timer voltará para a duração inicial. O tempo atual não será salvo.'
-                    : 'O timer voltará para 00:00. O tempo atual não será salvo.',
+                'O timer voltará para 00:00 e ficará pausado. O tempo atual não será salvo.',
                 [
                     { label: 'Cancelar', primary: false },
                     {
@@ -6631,7 +6601,8 @@ Para domínio provável: 3 testes sem consulta, em dias diferentes, com média m
                             if (!fresh) return;
                             const now = Date.now();
                             fresh.accumulatedMs = 0;
-                            fresh.runningSince = fresh.status === 'running' ? now : null;
+                            fresh.status = 'paused';
+                            fresh.runningSince = null;
                             fresh.startedAt = now;
                             fresh.lastHeartbeatAt = now;
                             fresh.ownerPageId = STUDY_TIMER_PAGE_ID;

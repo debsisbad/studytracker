@@ -68,7 +68,7 @@ echo Gerando SOMENTE o instalador do Windows...
 echo Nao sera criado executavel portable.
 echo.
 
-call npm run dist
+call npm run dist -- --config.artifactName=Study-Tracker-Setup-${version}.${ext}
 if errorlevel 1 (
   echo.
   echo ========================================
@@ -93,7 +93,7 @@ if exist "%~dp0dist\builder-debug.yml" del /q "%~dp0dist\builder-debug.yml"
 if exist "%~dp0dist\builder-effective-config.yaml" del /q "%~dp0dist\builder-effective-config.yaml"
 if exist "%~dp0dist\builder-effective-config.yml" del /q "%~dp0dist\builder-effective-config.yml"
 
-set "INSTALLER=%~dp0dist\Study Tracker Setup %NEW_VERSION%.exe"
+set "INSTALLER=%~dp0dist\Study-Tracker-Setup-%NEW_VERSION%.exe"
 
 echo.
 echo ========================================
