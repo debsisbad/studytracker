@@ -3975,7 +3975,7 @@
                               <div class="mobile-topic-title mt-1 mb-2">${escapeHtml(item.topico)}</div>
                               ${mobileStatusHtml(st)}
                               <div class="grid grid-cols-3 gap-2 mt-3">
-                                <button type="button" onclick="toggleConcluido('${k}')" class="mobile-btn ${st.q ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-600 text-white'}">${st.q ? 'Concluído' : 'Estudei'}</button>
+                                <button type="button" onclick="toggleCycleTopic('${k}')" class="mobile-btn ${st.q ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-600 text-white'}">${st.q ? 'Concluído' : 'Estudei'}</button>
                                 <button type="button" onclick="showSessionModal('${k}','questions')" class="mobile-btn bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-slate-200">Questões</button>
                                 <button type="button" onclick="skipCycleItem(null,${item.sIdx},${item.tIdx})" class="mobile-btn bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-slate-300">Pular</button>
                               </div>
@@ -5184,8 +5184,8 @@
                               type="checkbox"
                               class="checkbox-custom accent-indigo-600"
                               ${state.q ? 'checked' : ''}
-                              onclick="toggleConcluido('${storageKey}')"
-                              title="Marcar como concluído (define a data da aula)"
+                              onclick="${viewMode === 'cycle' ? `toggleCycleTopic('${storageKey}')` : `toggleConcluido('${storageKey}')`}"
+                              title="${viewMode === 'cycle' && !state.q ? 'Registrar sessão e marcar como concluído' : 'Marcar como concluído (define a data da aula)'}"
                             />
                           </td>
                         ` : ''}
@@ -5343,6 +5343,19 @@
 
         window.editAulaDate = editAulaDate;
 
+
+        function toggleCycleTopic(k) {
+            ensure(k);
+
+            // No Ciclo, marcar um tópico abre o registro da sessão.
+            // Desmarcar um tópico já concluído continua usando o comportamento normal.
+            if (userProgress[k]?.q) {
+                toggleConcluido(k);
+                return;
+            }
+
+            showSessionModal(k, 'first');
+        }
 
         function toggleConcluido(k) {
             ensure(k);
@@ -7669,6 +7682,7 @@ ${res.path}`);
         window.startRandomTest = startRandomTest;
         window.toggleCardPriority = toggleCardPriority;
 
+        window.toggleCycleTopic = toggleCycleTopic;
         window.toggleConcluido = toggleConcluido;
 
         window.toggleAgendaReview = toggleAgendaReview;
