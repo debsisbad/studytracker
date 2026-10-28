@@ -5088,9 +5088,9 @@
                             </div>
                           </td>
                           <td class="p-4 text-center text-xs font-mono">
-                            <span class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 cursor-default" title="Data de inclusão no caderno de erros">
-                              ${fmtTs(item.includedAt)}
-                            </span>
+                            <span class="rev-badge border bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 cursor-default text-sm font-bold" style="border-color: #191E3E;" title="Data de inclusão no caderno de erros">
+  ${item.includedAt ? new Date(item.includedAt).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) : '-'}
+</span>
                           </td>
                           <td class="p-4 text-center text-xs ${dateClass}">${dateLabel}</td>
                           <td class="p-4 text-center">
