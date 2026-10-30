@@ -1,4 +1,4 @@
-const CACHE_NAME = "study-tracker-v87.0.0";
+const CACHE_NAME = "study-tracker-v88.0.0";
 
 const APP_FILES = [
   "/studytracker/",

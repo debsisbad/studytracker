@@ -1267,9 +1267,16 @@
             saveBtn.type = 'button'; saveBtn.innerText = 'Salvar sessão';
             saveBtn.className = 'px-5 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white';
             saveBtn.onclick = () => {
-                const questions = Math.max(0, Number(document.getElementById('session-questions')?.value) || 0);
-                const correct = Math.max(0, Number(document.getElementById('session-correct')?.value) || 0);
-                if (correct > questions) { showModal('Erro', 'Os acertos não podem ser maiores que a quantidade de questões.'); return; }
+                const qInput = document.getElementById('session-questions');
+                const cInput = document.getElementById('session-correct');
+
+                const questions = qInput && qInput.value !== '' ? Math.max(0, parseInt(qInput.value, 10) || 0) : 0;
+                const correct = cInput && cInput.value !== '' ? Math.max(0, parseInt(cInput.value, 10) || 0) : 0;
+
+                if (correct > questions) {
+                    showModal('Erro', 'Os acertos não podem ser maiores que a quantidade de questões.');
+                    return;
+                }
                 const now = Date.now();
                 const errorReviewDays = document.getElementById('include-error-notebook')?.checked ? [3] : [];
                 const session = normalizeSession({
