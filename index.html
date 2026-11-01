@@ -1332,8 +1332,7 @@
                 const pct = recentTopicPercent(st);
                 if (pct !== null) st.pct = pct;
                 const ev = masteryEvidence(st);
-                
-}
+                if (isLearningStatusEnabled('strong') && ev.probable) st.dominated = true;
                 if (typeof afterSave === 'function') afterSave(session);
                 moveTopicToEnd(info.sIdx, info.tIdx);
                 moveSubjectToEnd(info.sIdx);
