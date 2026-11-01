@@ -911,6 +911,17 @@
 
                         </button>
 
+                        <button type="button" onclick="showStudyChangeHistory()"
+                                class="w-11 h-11 rounded-full flex items-center justify-center bg-transparent border border-transparent hover:scale-110 transition-transform text-[#4f46e5] dark:text-white"
+                                title="Histórico de alterações"
+                                aria-label="Histórico de alterações">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M3 12a9 9 0 1 0 2.64-6.36L3 8"></path>
+                                <path d="M3 3v5h5"></path>
+                                <path d="M12 7v5l3 2"></path>
+                            </svg>
+                        </button>
+
 
                         <button onclick="setViewMode('settings')"
                                 class="w-11 h-11 rounded-full flex items-center justify-center bg-transparent border border-transparent hover:scale-110 transition-transform text-[#4f46e5] dark:text-white"
@@ -3773,6 +3784,7 @@
             updateStats();
             renderChart();
             renderCurrentView();
+            recordStudyChangeHistory('Configurações');
 
             showModal('Salvo', 'Configurações, ordem, questões e pesos atualizados.');
         }
@@ -3785,6 +3797,7 @@
             syncWindowTitle();
 
             loadAppConfig();
+            recordStudyChangeHistory('Configurações');
             showModal('Ok', 'Configurações restauradas para o padrão.');
         }
 
@@ -3830,6 +3843,7 @@
                             updateStats();
                             renderChart();
                             setViewMode('dashboard');
+                            recordStudyChangeHistory('Configurações');
 
                             showModal("Pronto", "Dados zerados. Você pode importar sua planilha novamente.");
                         }
@@ -3854,6 +3868,7 @@
             localStorage.setItem('study_theme', isDarkMode ? 'dark' : 'light');
             updateThemeIcons();
             renderChart();
+            recordStudyChangeHistory('Configurações');
         }
 
 
@@ -4110,11 +4125,401 @@
             renderTopics();
         }
         // -----------------------------
+        // Histórico de alterações + desfazer
+        // -----------------------------
+        const STUDY_CHANGE_HISTORY_KEY = 'st_change_history_v1';
+        const STUDY_CHANGE_HISTORY_LIMIT = 30;
+        const STUDY_CHANGE_HISTORY_STORAGE_KEYS = [
+            'study_topic_queue_v1',
+            'study_subject_queue_v1',
+            'study_subject_touch_v1',
+            'study_learning_config_v1',
+            'study_app_title',
+            'study_app_subtitle',
+            'study_theme'
+        ];
+        let studyChangeHistoryLastSnapshot = null;
+
+        function studyHistoryClone(value) {
+            if (value === undefined) return undefined;
+            try { return JSON.parse(JSON.stringify(value)); }
+            catch { return value; }
+        }
+
+        function studyHistoryEqual(a, b) {
+            return JSON.stringify(a) === JSON.stringify(b);
+        }
+
+        function readStudyChangeHistory() {
+            try {
+                const rows = JSON.parse(localStorage.getItem(STUDY_CHANGE_HISTORY_KEY) || '[]');
+                return Array.isArray(rows) ? rows : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function writeStudyChangeHistory(rows) {
+            let candidates = rows.slice(-STUDY_CHANGE_HISTORY_LIMIT);
+            // Se o histórico ficar grande, descarta os registros mais antigos
+            // até caber no localStorage. Nunca deixa o histórico impedir um save normal.
+            while (candidates.length) {
+                try {
+                    localStorage.setItem(STUDY_CHANGE_HISTORY_KEY, JSON.stringify(candidates));
+                    return;
+                } catch (err) {
+                    candidates.shift();
+                }
+            }
+            try { localStorage.setItem(STUDY_CHANGE_HISTORY_KEY, '[]'); }
+            catch (err) { console.warn('Não foi possível salvar o histórico de alterações:', err); }
+        }
+
+        function captureStudyChangeSnapshot() {
+            const storage = {};
+            STUDY_CHANGE_HISTORY_STORAGE_KEYS.forEach(key => {
+                storage[key] = localStorage.getItem(key);
+            });
+            return {
+                progress: studyHistoryClone(userProgress || {}),
+                edital: studyHistoryClone(edital || []),
+                storage
+            };
+        }
+
+        function getStudyChangeArea() {
+            const labels = {
+                history: 'Agenda',
+                upcoming: 'Caderno de erros',
+                cycle: 'Ciclo Intercalado',
+                subject: 'Matérias',
+                settings: 'Configurações',
+                dashboard: 'Dashboard'
+            };
+            return labels[viewMode] || 'Study Tracker';
+        }
+
+        function getStudyChangeTopicLabel(storageKey, snapshot) {
+            const info = parseStorageKey(storageKey);
+            if (!info) return '';
+            const subject = snapshot?.edital?.[info.sIdx] || edital?.[info.sIdx];
+            const topic = subject?.topicos?.[info.tIdx];
+            if (!subject && !topic) return '';
+            return [subject?.materia, topic].filter(Boolean).join(' · ');
+        }
+
+        function describeStudyProgressChange(change, area, snapshot) {
+            const before = change.beforeExists ? change.beforeValue : null;
+            const after = change.afterExists ? change.afterValue : null;
+            const label = getStudyChangeTopicLabel(change.key, snapshot);
+            const suffix = label ? ` — ${label}` : '';
+
+            if (area === 'Agenda') return `Revisão da Agenda atualizada${suffix}`;
+            if (area === 'Caderno de erros') return `Caderno de erros atualizado${suffix}`;
+
+            if (before?.q !== after?.q && after?.q === true) return `Tópico marcado como concluído${suffix}`;
+            if (before?.q !== after?.q && after?.q !== true) return `Tópico desmarcado${suffix}`;
+
+            const beforeSessions = Array.isArray(before?.sessions) ? before.sessions.length : 0;
+            const afterSessions = Array.isArray(after?.sessions) ? after.sessions.length : 0;
+            if (afterSessions > beforeSessions) return `Sessão de estudo registrada${suffix}`;
+            if (afterSessions < beforeSessions) return `Sessão de estudo removida${suffix}`;
+
+            if (!studyHistoryEqual(before?.agendaDone, after?.agendaDone)) return `Revisões da Agenda alteradas${suffix}`;
+            if (
+                !studyHistoryEqual(before?.errorReviewDone, after?.errorReviewDone) ||
+                !studyHistoryEqual(before?.errorReviewResults, after?.errorReviewResults) ||
+                !studyHistoryEqual(before?.errorReviewRetries, after?.errorReviewRetries)
+            ) return `Revisão do Caderno de erros atualizada${suffix}`;
+
+            return `Progresso do tópico atualizado${suffix}`;
+        }
+
+        function buildStudyChangeSummary(diff, area, afterSnapshot) {
+            const progressChanges = diff.progressChanges || [];
+            if (progressChanges.length === 1) {
+                return describeStudyProgressChange(progressChanges[0], area, afterSnapshot);
+            }
+            if (progressChanges.length > 1) {
+                return `${progressChanges.length} tópicos atualizados`;
+            }
+            if (diff.editalChange) return 'Matérias, tópicos ou dados do edital alterados';
+            if (area === 'Configurações') return 'Configurações atualizadas';
+            return 'Dados do Study Tracker atualizados';
+        }
+
+        function buildStudyChangeDetails(diff, area, afterSnapshot) {
+            const details = (diff.progressChanges || [])
+                .slice(0, 8)
+                .map(change => describeStudyProgressChange(change, area, afterSnapshot));
+            if (diff.progressChanges?.length > 8) {
+                details.push(`E mais ${diff.progressChanges.length - 8} tópico(s).`);
+            }
+            if (diff.editalChange) details.push('Estrutura de matérias/tópicos alterada.');
+            (diff.storageChanges || []).forEach(change => {
+                const labels = {
+                    study_learning_config_v1: 'Preferências de estudo alteradas',
+                    study_app_title: 'Título do aplicativo alterado',
+                    study_app_subtitle: 'Subtítulo do aplicativo alterado',
+                    study_theme: 'Tema visual alterado',
+                    study_topic_queue_v1: 'Fila de tópicos alterada',
+                    study_subject_queue_v1: 'Fila de matérias alterada',
+                    study_subject_touch_v1: 'Ordem recente das matérias atualizada'
+                };
+                const label = labels[change.key];
+                if (label && !details.includes(label)) details.push(label);
+            });
+            return details;
+        }
+
+        function diffStudyChangeSnapshots(before, after) {
+            const progressChanges = [];
+            const progressKeys = new Set([
+                ...Object.keys(before?.progress || {}),
+                ...Object.keys(after?.progress || {})
+            ]);
+
+            progressKeys.forEach(key => {
+                const beforeExists = Object.prototype.hasOwnProperty.call(before?.progress || {}, key);
+                const afterExists = Object.prototype.hasOwnProperty.call(after?.progress || {}, key);
+                const beforeValue = beforeExists ? before.progress[key] : null;
+                const afterValue = afterExists ? after.progress[key] : null;
+                if (beforeExists !== afterExists || !studyHistoryEqual(beforeValue, afterValue)) {
+                    progressChanges.push({
+                        key,
+                        beforeExists,
+                        beforeValue: studyHistoryClone(beforeValue),
+                        afterExists,
+                        afterValue: studyHistoryClone(afterValue)
+                    });
+                }
+            });
+
+            const editalChanged = !studyHistoryEqual(before?.edital, after?.edital);
+            const storageChanges = [];
+            STUDY_CHANGE_HISTORY_STORAGE_KEYS.forEach(key => {
+                const beforeValue = before?.storage?.[key] ?? null;
+                const afterValue = after?.storage?.[key] ?? null;
+                if (beforeValue !== afterValue) {
+                    storageChanges.push({ key, beforeValue, afterValue });
+                }
+            });
+
+            if (!progressChanges.length && !editalChanged && !storageChanges.length) return null;
+
+            return {
+                progressChanges,
+                editalChange: editalChanged ? {
+                    beforeValue: studyHistoryClone(before.edital),
+                    afterValue: studyHistoryClone(after.edital)
+                } : null,
+                storageChanges
+            };
+        }
+
+        function recordStudyChangeHistory(areaOverride = '') {
+            const afterSnapshot = captureStudyChangeSnapshot();
+
+            // O primeiro save após abrir o app apenas cria a referência inicial.
+            if (!studyChangeHistoryLastSnapshot) {
+                studyChangeHistoryLastSnapshot = afterSnapshot;
+                return;
+            }
+
+            const beforeSnapshot = studyChangeHistoryLastSnapshot;
+            const diff = diffStudyChangeSnapshots(beforeSnapshot, afterSnapshot);
+            studyChangeHistoryLastSnapshot = afterSnapshot;
+            if (!diff) return;
+
+            const area = areaOverride || getStudyChangeArea();
+            const now = Date.now();
+            const history = readStudyChangeHistory();
+            history.push({
+                id: `CH_${now}_${Math.random().toString(36).slice(2, 8)}`,
+                at: now,
+                area,
+                summary: buildStudyChangeSummary(diff, area, afterSnapshot),
+                details: buildStudyChangeDetails(diff, area, afterSnapshot),
+                changes: diff,
+                undoneAt: null
+            });
+            writeStudyChangeHistory(history);
+        }
+
+        function getLatestUndoableStudyChange(history = readStudyChangeHistory()) {
+            for (let i = history.length - 1; i >= 0; i--) {
+                if (!history[i].undoneAt) return history[i];
+            }
+            return null;
+        }
+
+        function showStudyChangeHistory() {
+            const modal = document.getElementById('custom-modal');
+            const title = document.getElementById('modal-title');
+            const message = document.getElementById('modal-message');
+            const footer = document.getElementById('modal-footer');
+            if (!modal || !title || !message || !footer) return;
+
+            const history = readStudyChangeHistory().slice().reverse();
+            const latestUndoable = getLatestUndoableStudyChange();
+            title.innerText = 'Histórico de alterações';
+
+            const content = history.length
+                ? history.map(item => {
+                    const isLatestUndoable = latestUndoable?.id === item.id;
+                    const date = new Date(item.at).toLocaleString('pt-BR', {
+                        day: '2-digit', month: '2-digit', year: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+                    const status = item.undoneAt
+                        ? `<span class="text-[10px] font-bold text-gray-500">DESFEITA em ${new Date(item.undoneAt).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>`
+                        : '';
+                    const undoButton = item.undoneAt
+                        ? ''
+                        : `<button type="button" onclick="requestUndoStudyChange('${escapeHtmlAttr(item.id)}')" ${isLatestUndoable ? '' : 'disabled title="Desfaça primeiro as alterações mais recentes"'} class="px-3 py-1.5 rounded-lg text-xs font-bold ${isLatestUndoable ? 'bg-rose-600 hover:bg-rose-700 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-400 cursor-not-allowed'}">Desfazer</button>`;
+                    const details = (Array.isArray(item.details) ? item.details : [])
+                        .map(detail => `<li class="text-xs text-gray-600 dark:text-slate-300">${escapeHtml(detail)}</li>`)
+                        .join('');
+                    return `<article class="rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 p-3">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                                        <span class="text-[10px] font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-300">${escapeHtml(item.area || 'Study Tracker')}</span>
+                                        <span class="text-[10px] text-gray-500 dark:text-slate-400">${date}</span>
+                                    </div>
+                                    <div class="text-sm font-semibold text-gray-800 dark:text-slate-100">${escapeHtml(item.summary || 'Alteração registrada')}</div>
+                                    ${details ? `<ul class="mt-1 space-y-1 list-disc pl-4">${details}</ul>` : ''}
+                                    ${status}
+                                </div>
+                                ${undoButton}
+                            </div>
+                        </article>`;
+                }).join('')
+                : `<div class="rounded-xl border border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-sm text-gray-500 dark:text-slate-400">As alterações feitas a partir desta versão aparecerão aqui.</div>`;
+
+            message.innerHTML = `<div class="space-y-2 max-h-[62vh] overflow-y-auto pr-1">${content}</div>`;
+            message.className = 'text-gray-600 dark:text-slate-300 mb-4 text-sm leading-relaxed';
+            footer.innerHTML = '';
+            const close = document.createElement('button');
+            close.type = 'button';
+            close.textContent = 'Fechar';
+            close.className = 'px-5 py-2 rounded-xl text-sm font-semibold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-slate-100';
+            close.onclick = () => {
+                modal.style.display = 'none';
+                const currentPanel = modal.querySelector(':scope > div');
+                if (currentPanel) {
+                    currentPanel.classList.remove('max-w-2xl');
+                    currentPanel.classList.add('max-w-sm');
+                    currentPanel.style.maxHeight = '';
+                    currentPanel.style.overflowY = '';
+                }
+            };
+            footer.appendChild(close);
+
+            const panel = modal.querySelector(':scope > div');
+            if (panel) {
+                panel.classList.remove('max-w-sm');
+                panel.classList.add('max-w-2xl');
+                panel.style.maxHeight = '88vh';
+                panel.style.overflowY = 'hidden';
+            }
+            modal.style.display = 'flex';
+        }
+
+        function requestUndoStudyChange(id) {
+            const history = readStudyChangeHistory();
+            const latest = getLatestUndoableStudyChange(history);
+            if (!latest || latest.id !== id) {
+                showModal('Desfazer alteração', 'Para manter os dados consistentes, só é possível desfazer a alteração mais recente primeiro.');
+                return;
+            }
+            showModal(
+                'Desfazer alteração?',
+                `Deseja desfazer esta alteração?\n\n${latest.area}: ${latest.summary}`,
+                [
+                    { label: 'Cancelar', primary: false },
+                    { label: 'Desfazer', primary: true, onClick: () => undoStudyChange(id) }
+                ]
+            );
+        }
+
+        function undoStudyChange(id) {
+            const history = readStudyChangeHistory();
+            const latest = getLatestUndoableStudyChange(history);
+            if (!latest || latest.id !== id) {
+                showModal('Não foi possível desfazer', 'Desfaça primeiro as alterações mais recentes.');
+                return;
+            }
+
+            const changes = latest.changes || {};
+            const current = captureStudyChangeSnapshot();
+
+            // Confere se o estado atual ainda corresponde ao resultado desta alteração.
+            for (const change of (changes.progressChanges || [])) {
+                const exists = Object.prototype.hasOwnProperty.call(current.progress || {}, change.key);
+                const value = exists ? current.progress[change.key] : null;
+                if (exists !== change.afterExists || !studyHistoryEqual(value, change.afterValue)) {
+                    showModal('Não foi possível desfazer', 'Os dados deste tópico foram alterados depois deste registro. Nenhuma informação foi modificada.');
+                    return;
+                }
+            }
+            if (changes.editalChange && !studyHistoryEqual(current.edital, changes.editalChange.afterValue)) {
+                showModal('Não foi possível desfazer', 'A estrutura das matérias mudou depois deste registro. Nenhuma informação foi modificada.');
+                return;
+            }
+            for (const change of (changes.storageChanges || [])) {
+                if ((current.storage?.[change.key] ?? null) !== change.afterValue) {
+                    showModal('Não foi possível desfazer', 'As configurações ou filas mudaram depois deste registro. Nenhuma informação foi modificada.');
+                    return;
+                }
+            }
+
+            (changes.progressChanges || []).forEach(change => {
+                if (change.beforeExists) userProgress[change.key] = studyHistoryClone(change.beforeValue);
+                else delete userProgress[change.key];
+            });
+            if (changes.editalChange) edital = studyHistoryClone(changes.editalChange.beforeValue);
+
+            (changes.storageChanges || []).forEach(change => {
+                if (change.beforeValue === null) localStorage.removeItem(change.key);
+                else localStorage.setItem(change.key, change.beforeValue);
+            });
+
+            // Recarrega variáveis em memória relacionadas aos dados restaurados.
+            try { topicQueue = JSON.parse(localStorage.getItem('study_topic_queue_v1') || '{}') || {}; } catch { topicQueue = {}; }
+            try { subjectQueue = JSON.parse(localStorage.getItem('study_subject_queue_v1') || 'null'); } catch { subjectQueue = null; }
+            try { subjectTouch = JSON.parse(localStorage.getItem('study_subject_touch_v1') || '{}') || {}; } catch { subjectTouch = {}; }
+            try { learningConfig = { ...defaultLearningConfig, ...(JSON.parse(localStorage.getItem('study_learning_config_v1') || '{}') || {}) }; }
+            catch { learningConfig = { ...defaultLearningConfig }; }
+            isDarkMode = localStorage.getItem('study_theme') !== 'light';
+            viewMode = localStorage.getItem('study_view_mode') || viewMode;
+            if (!edital.some(subject => subject.materia === currentSubject)) {
+                currentSubject = edital[0]?.materia || '';
+            }
+
+            localStorage.setItem('study_tracker_v3', JSON.stringify(userProgress));
+            localStorage.setItem('study_edital_names_v2', JSON.stringify(edital));
+            updateThemeIcons();
+            loadAppConfig();
+            syncWindowTitle();
+            updateStats();
+            renderChart();
+            updateViewButtons();
+            renderCurrentView();
+
+            latest.undoneAt = Date.now();
+            writeStudyChangeHistory(history);
+            studyChangeHistoryLastSnapshot = captureStudyChangeSnapshot();
+            showStudyChangeHistory();
+        }
+
+        // -----------------------------
         // Save
         // -----------------------------
         function save() {
             localStorage.setItem('study_tracker_v3', JSON.stringify(userProgress));
             localStorage.setItem('study_edital_names_v2', JSON.stringify(edital));
+            recordStudyChangeHistory();
             updateStats();
             renderChart();
             renderCurrentView();
@@ -7760,6 +8165,8 @@ ${res.path}`);
         window.openStudyTimerForSubject = openStudyTimerForSubject;
         window.openActiveStudyTimer = openActiveStudyTimer;
         window.showStudyTimerStats = showStudyTimerStats;
+        window.showStudyChangeHistory = showStudyChangeHistory;
+        window.requestUndoStudyChange = requestUndoStudyChange;
         window.setStudyTimerStatsPeriod = setStudyTimerStatsPeriod;
         window.exportStudyTimerToXLSX = exportStudyTimerToXLSX;
         window.openDecisionAction = openDecisionAction;
