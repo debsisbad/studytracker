@@ -7320,7 +7320,7 @@ ${res.path}`);
                 }
                 const [year, month, day] = dateValue.split('-').map(Number);
                 const studyDate = new Date(year, month - 1, day, 12, 0, 0, 0);
-                if (studyDate.getFullYear() !== year || studyDate.getMonth() !== month - 1 || studyDate.getDate() !== day || studyDate.getTime() > Date.now()) {
+                if (studyDate.getFullYear() !== year || studyDate.getMonth() !== month - 1 || studyDate.getDate() !== day || dateValue > studyTimerLocalDateInputValue()) {
                     showModal('Data inválida', 'Escolha uma data válida, até hoje.');
                     return;
                 }
